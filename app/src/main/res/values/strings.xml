@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">数据采集</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="username_password_is_not_empty">用户名和密码不能为空</string>
+    <string name="logining">正在登录</string>
+    <string name="please_waiting">请稍后...</string>
+    <string name="commercial_house_sell">商品房出售</string>
+    <string name="house_sell">房屋买卖</string>
+    <string name="shop_rent">商铺出租</string>
+    <string name="house_rent">房屋出租</string>
+    <string name="login">登录</string>
+    <string name="username">用户名</string>
+    <string name="password">密码</string>
+    <string name="action_sign_in_short">登录</string>
+    <string name="action_sign_in">登录</string>
+    <string name="register">注册</string>
+    <string name="title_activity_drawer">DrawerActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+</resources>

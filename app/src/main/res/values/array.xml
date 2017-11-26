@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="array_nearby_street_type">
+        <item>十字路口</item>
+        <item>丁字路口</item>
+        <item>环形路口</item>
+        <item>人形立交</item>
+    </string-array>
+
+    <string-array name="array_land_shape">
+        <item>长方形</item>
+        <item>梯形</item>
+        <item>多边形</item>
+        <item>正三角行</item>
+        <item>倒三角形</item>
+    </string-array>
+
+    <string-array name="array_land_developing_situation">
+        <item>生地</item>
+        <item>三通一平</item>
+        <item>五通一平</item>
+        <item>六通一平</item>
+        <item>七通一平</item>
+    </string-array>
+
+    <string-array name="array_building_direction">
+        <item>东</item>
+        <item>南</item>
+        <item>西</item>
+        <item>北</item>
+        <item>东南</item>
+        <item>西北</item>
+        <item>东北</item>
+        <item>西南</item>
+    </string-array>
+
+    <string-array name="array_nearby_street_situation" >
+        <item>沿街</item>
+        <item>离街</item>
+        <item>拐角</item>
+    </string-array>
+
+    <string-array name="array_bool" >
+        <item>是</item>
+        <item>否</item>
+    </string-array>
+
+    <string-array name="array_nearby_land_type" >
+        <item>商业用地</item>
+        <item>住宅用地</item>
+        <item>工业用地</item>
+        <item>办公用地</item>
+        <item>文教、卫生用地</item>
+        <item>交通用地</item>
+        <item>其他应用</item>
+    </string-array>
+
+    <string-array name="array_usage">
+        <item>商业用地</item>
+        <item>住宅用地</item>
+        <item>工业用地</item>
+        <item>其他用地</item>
+    </string-array>
+
+    <string-array name="array_decoration_type">
+        <item>豪华</item>
+        <item>较好</item>
+        <item>一般</item>
+        <item>无装修</item>
+    </string-array>
+
+    <string-array name="array_structure_type">
+        <item>钢</item>
+        <item>钢、钢混</item>
+        <item>钢混</item>
+        <item>混和</item>
+        <item>砖木</item>
+        <item>其它</item>
+    </string-array>
+
+    <string-array name="array_quality_level">
+        <item>完好</item>
+        <item>基本完好</item>
+        <item>一般损坏</item>
+        <item>严重损坏</item>
+        <item>危房</item>
+    </string-array>
+
+    <string-array name="array_light_air_type">
+        <item>好</item>
+        <item>较好</item>
+        <item>一般</item>
+        <item>较差</item>
+        <item>差</item>
+    </string-array>
+
+    <string-array name="array_trade_type">
+        <item>一次性付款</item>
+        <item>按揭</item>
+    </string-array>
+
+</resources>

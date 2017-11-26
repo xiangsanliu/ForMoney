@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="sellRentModel"
+            type="org.chengjian.java.feidian.collectdata.beans.SellRentModel"/>
+        <variable
+            name="editable"
+            type="org.chengjian.java.feidian.collectdata.beans.Editable"/>
+    </data>
+    <LinearLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/button_building_situation"
+            style="@style/TextAppearance.AppCompat.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:elevation="6dp"
+            android:foreground="?selectableItemBackground"
+            android:gravity="center"
+            android:padding="16dp"
+            android:text="建筑情况"
+            android:textColor="#fff" />
+
+        <net.cachapa.expandablelayout.ExpandableLayout
+            android:id="@+id/el_building_situation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:el_duration="500"
+            app:el_expanded="false">
+
+            <LinearLayout
+                android:layout_margin="8dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.design.widget.TextInputLayout
+                    android:hint="楼宇编号"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <android.support.design.widget.TextInputEditText
+                        android:enabled='@{editable.isEditable=="true" ?  true: false}'
+                        android:text="@={sellRentModel.buildingNum}"
+                        android:id="@+id/et_building_num"
+                        android:inputType="number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:hint="楼宇名称"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <android.support.design.widget.TextInputEditText
+                        android:enabled='@{editable.isEditable=="true" ?  true: false}'
+                        android:text="@={sellRentModel.buildingName}"
+                        android:id="@+id/et_building_name"
+                        android:inputType="text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </android.support.design.widget.TextInputLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal">
+                    <fr.ganfra.materialspinner.MaterialSpinner
+                        android:layout_weight="1"
+                        app:ms_hintTextSize="18sp"
+                        app:ms_hint="装修标准"
+                        android:id="@+id/sp_decoration_type"
+                        android:entries="@array/array_decoration_type"
+                        android:layout_marginEnd="4dp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"/>
+                    <fr.ganfra.materialspinner.MaterialSpinner
+                        app:ms_hint="房屋结构"
+                        android:layout_marginStart="4dp"
+                        app:ms_hintTextSize="18sp"
+                        android:id="@+id/sp_structure_type"
+                        android:entries="@array/array_structure_type"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal">
+                    <fr.ganfra.materialspinner.MaterialSpinner
+                        android:layout_weight="1"
+                        app:ms_hint="质量等级"
+                        app:ms_hintTextSize="18sp"
+                        android:id="@+id/sp_quality_level"
+                        android:layout_marginEnd="4dp"
+                        android:entries="@array/array_quality_level"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                    <fr.ganfra.materialspinner.MaterialSpinner
+                        android:layout_weight="1"
+                        app:ms_hint="采光通风状况"
+                        app:ms_hintTextSize="18sp"
+                        android:id="@+id/sp_light_air_type"
+                        android:layout_marginStart="4dp"
+                        android:entries="@array/array_light_air_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:hint="房屋总建筑面积"
+                    android:layout_height="wrap_content">
+                    <android.support.design.widget.TextInputEditText
+                        android:enabled='@{editable.isEditable=="true" ?  true: false}'
+                        android:inputType="text"
+                        android:text='@{"" + sellRentModel.buildingArea}'
+                        android:id="@+id/et_building_area"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:hint="总占地面积"
+                    android:layout_height="wrap_content">
+                    <android.support.design.widget.TextInputEditText
+                        android:enabled='@{editable.isEditable=="true" ?  true: false}'
+                        android:text='@{"" + sellRentModel.coverArea}'
+                        android:id="@+id/et_cover_area"
+                        android:inputType="text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:hint="楼层数"
+                    android:layout_height="wrap_content">
+                    <android.support.design.widget.TextInputEditText
+                        android:enabled='@{editable.isEditable=="true" ?  true: false}'
+                        android:text='@{"" + sellRentModel.floorNum}'
+                        android:id="@+id/et_floor_num"
+                        android:inputType="number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:hint="已使用年限"
+                    android:layout_height="wrap_content">
+                    <android.support.design.widget.TextInputEditText
+                        android:enabled='@{editable.isEditable=="true" ?  true: false}'
+                        android:text='@{"" + sellRentModel.yearUsed}'
+                        android:id="@+id/et_year_used"
+                        android:inputType="number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </android.support.design.widget.TextInputLayout>
+
+            </LinearLayout>
+
+        </net.cachapa.expandablelayout.ExpandableLayout>
+    </LinearLayout>
+
+</layout>
