@@ -2,6 +2,7 @@ package org.chengjian.java.feidian.collectdata.mvp.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.LocaleList;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.PagerAdapter;
@@ -18,6 +19,8 @@ import android.view.MenuItem;
 
 import org.chengjian.java.feidian.collectdata.R;
 import org.chengjian.java.feidian.collectdata.adapters.base.FragmentsAdapter;
+import org.chengjian.java.feidian.collectdata.beans.CommercialHouseTradeModel;
+import org.chengjian.java.feidian.collectdata.mvp.model.LocalDbModel;
 import org.chengjian.java.feidian.collectdata.mvp.model.ResultMessage;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.MainPresenter;
 import org.chengjian.java.feidian.collectdata.mvp.ui.activities.base.TabPagerActivity;
@@ -42,6 +45,8 @@ public class DrawerActivity extends TabPagerActivity
 
     @BindView(R.id.btn_add_item)
     FloatingActionButton btnAddItem;
+    LocalDbModel localDbModel;
+
 
     private FragmentsAdapter mAdapter;
     private MainPresenter mainPresenter;
@@ -66,6 +71,12 @@ public class DrawerActivity extends TabPagerActivity
         mAdapter = new FragmentsAdapter(this.getSupportFragmentManager());
         mAdapter.setFragmentList(fragmentList, titleList);
         return mAdapter;
+    }
+
+
+    private void test() {
+        Log.d("test", "test()");
+        localDbModel.querytest();
     }
 
 
@@ -94,6 +105,8 @@ public class DrawerActivity extends TabPagerActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         configureTabPager();
+        localDbModel = LocalDbModel.getInstance(this);
+//        test();
     }
 
 
@@ -169,7 +182,8 @@ public class DrawerActivity extends TabPagerActivity
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_add_item:
-                mainPresenter.createTable();
+//                mainPresenter.createTable();
+                test();
                 break;
             default:
                 break;

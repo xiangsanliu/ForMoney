@@ -9,6 +9,8 @@ import android.view.View;
 
 import org.chengjian.java.feidian.collectdata.R;
 import org.chengjian.java.feidian.collectdata.adapters.base.FragmentsAdapter;
+import org.chengjian.java.feidian.collectdata.beans.CommercialHouseTradeModel;
+import org.chengjian.java.feidian.collectdata.mvp.model.LocalDbModel;
 import org.chengjian.java.feidian.collectdata.mvp.model.ResultMessage;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.MainPresenter;
 import org.chengjian.java.feidian.collectdata.mvp.ui.activities.base.TabPagerActivity;
@@ -52,6 +54,7 @@ public class MainActivity extends TabPagerActivity implements MainView {
         mainPresenter.onCreate(savedInstanceState);
         configureTabPager();
     }
+
 
     @Override
     protected void setCurrentItem(int position) {

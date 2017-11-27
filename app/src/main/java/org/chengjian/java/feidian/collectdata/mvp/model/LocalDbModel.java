@@ -3,8 +3,15 @@ package org.chengjian.java.feidian.collectdata.mvp.model;
 import android.content.Context;
 import android.util.Log;
 
+import com.alibaba.fastjson.JSON;
+
+import org.chengjian.java.feidian.collectdata.beans.CitySellRent;
+import org.chengjian.java.feidian.collectdata.beans.CitySellRentDao;
+import org.chengjian.java.feidian.collectdata.beans.CommercialHouseTradeModel;
+import org.chengjian.java.feidian.collectdata.beans.CommercialHouseTradeModelDao;
 import org.chengjian.java.feidian.collectdata.beans.DaoMaster;
 import org.chengjian.java.feidian.collectdata.beans.DaoSession;
+import org.chengjian.java.feidian.collectdata.beans.HouseRentModel;
 import org.chengjian.java.feidian.collectdata.beans.RentInfo2Model;
 import org.chengjian.java.feidian.collectdata.beans.RentInfo2ModelDao;
 import org.chengjian.java.feidian.collectdata.beans.RentInfo4Model;
@@ -16,6 +23,7 @@ import org.chengjian.java.feidian.collectdata.beans.TradeInfo1ModelDao;
 import org.chengjian.java.feidian.collectdata.beans.TradeInfo3Model;
 import org.chengjian.java.feidian.collectdata.beans.TradeInfo3ModelDao;
 import org.chengjian.java.feidian.collectdata.shared.Constants;
+import org.chengjian.java.feidian.collectdata.shared.TestTask;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -211,4 +219,19 @@ public class LocalDbModel extends BaseModel {
         sellRentModels = sellRentModelDao.queryBuilder().build().list();
         return sellRentModels;
     }
+
+    public void querytest() {
+        CitySellRent citySellRent = new CitySellRent();
+        CommercialHouseTradeModel commercialHouseTradeModel = new CommercialHouseTradeModel();
+        Long id = System.currentTimeMillis();
+        commercialHouseTradeModel.setId(id);
+        citySellRent.setId(id);
+        citySellRent.setUserId((long) 1);
+        System.out.println(JSON.toJSONString(citySellRent));
+        daoSession.getCitySellRentDao().insert(citySellRent);
+        TestTask testTask = new TestTask();
+        testTask.execute(JSON.toJSONString(citySellRent), "xiang");
+    }
+
+
 }

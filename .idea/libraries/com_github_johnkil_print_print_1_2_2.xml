@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="com.github.johnkil.print:print-1.2.2">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/print-1.2.2.aar/2a4268519c5bc63662f45e8d86a4c572/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/print-1.2.2.aar/2a4268519c5bc63662f45e8d86a4c572/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/print-1.2.2.aar/63ce54e2b483a35c2ab5818e18aa615a/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/print-1.2.2.aar/63ce54e2b483a35c2ab5818e18aa615a/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
