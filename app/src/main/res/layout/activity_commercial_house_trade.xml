@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="citySellRent"
+            type="org.chengjian.java.feidian.collectdata.beans.CitySellRent" />
+
+        <variable
+            name="commercialHouseTradeModel"
+            type="org.chengjian.java.feidian.collectdata.beans.CommercialHouseTradeModel" />
+        <variable
+            name="editable"
+            type="org.chengjian.java.feidian.collectdata.beans.Editable"/>
+    </data>
+
+    <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#d7dbe6"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:title="商品房出售调查"
+            app:titleTextColor="@color/colorTitle">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="?actionBarSize"
+                android:layout_gravity="end">
+
+                <at.markushi.ui.CircleButton
+                    android:id="@+id/button_edit"
+                    android:layout_width="?actionBarSize"
+                    android:layout_height="?actionBarSize"
+                    android:src="@drawable/ic_edit_white_24dp"
+                    android:visibility='@{editable.isEditable=="true" ?  View.GONE: View.VISIBLE}'
+                    app:cb_color="@color/colorPrimary" />
+
+                <at.markushi.ui.CircleButton
+                    android:id="@+id/button_delete"
+                    android:layout_width="?actionBarSize"
+                    android:layout_height="?actionBarSize"
+                    android:src="@drawable/ic_delete_white_24dp"
+                    android:visibility='@{editable.isEditable=="true" ?  View.GONE: View.VISIBLE}'
+                    app:cb_color="@color/colorPrimary" />
+
+                <at.markushi.ui.CircleButton
+                    android:id="@+id/button_save"
+                    android:layout_width="?actionBarSize"
+                    android:layout_height="?actionBarSize"
+                    android:src="@drawable/ic_check_white_24dp"
+                    android:visibility='@{editable.isEditable=="true" ?  View.VISIBLE: View.GONE}'
+                    app:cb_color="@color/colorPrimary" />
+            </LinearLayout>
+        </android.support.v7.widget.Toolbar>
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <include
+                    android:id="@+id/child_base"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    layout="@layout/child_base"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <include
+                    android:id="@+id/child_chs_land_situation"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    layout="@layout/child_chs_land_situation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <include
+                    android:id="@+id/child_chs_building_situation"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    layout="@layout/child_chs_building_situation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+        </android.support.v4.widget.NestedScrollView>
+    </LinearLayout>
+
+</layout>
+
