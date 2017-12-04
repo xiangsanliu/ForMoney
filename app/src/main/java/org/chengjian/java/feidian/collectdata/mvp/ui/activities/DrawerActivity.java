@@ -1,6 +1,7 @@
 package org.chengjian.java.feidian.collectdata.mvp.ui.activities;
 
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.os.LocaleList;
 import android.support.design.widget.FloatingActionButton;
@@ -16,6 +17,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.amap.api.maps2d.AMap;
+import com.amap.api.maps2d.MapView;
+import com.amap.api.maps2d.model.MyLocationStyle;
 
 import org.chengjian.java.feidian.collectdata.R;
 import org.chengjian.java.feidian.collectdata.adapters.base.FragmentsAdapter;
@@ -106,6 +111,16 @@ public class DrawerActivity extends TabPagerActivity
         navigationView.setNavigationItemSelectedListener(this);
         configureTabPager();
         localDbModel = LocalDbModel.getInstance(this);
+        MapView mapView = (MapView) findViewById(R.id.map);
+        mapView.onCreate(savedInstanceState);
+        AMap aMap = mapView.getMap();
+        MyLocationStyle myLocationStyle = new MyLocationStyle();
+        myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATE);
+        myLocationStyle.interval(2000);
+        aMap.setMyLocationStyle(myLocationStyle);
+        aMap.getUiSettings().setMyLocationButtonEnabled(true);
+        aMap.setMyLocationEnabled(true);
+
 //        test();
     }
 

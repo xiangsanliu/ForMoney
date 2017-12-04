@@ -7,7 +7,7 @@ android {
     defaultConfig {
         applicationId "org.chengjian.feidian.collectdata"
         minSdkVersion 21
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -26,12 +26,13 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    compile files('libs/smoothcompoundbuttonlibrary.jar')
-    compile files('libs/AMap2DMap_5.2.0_AMapLocation_3.6.1_20171012.jar')
+//    compile fileTree(include: ['*.jar'], dir: 'libs')
+//    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+//        exclude group: 'com.android.support', module: 'support-annotations'
+//    })
+//    compile files('libs/smoothcompoundbuttonlibrary.jar')
+    compile group: 'com.amap.api', name: 'map2d', version: '5.2.0'
+    compile 'com.amap.api:location:3.6.1'
     compile('com.github.ganfra:material-spinner:2.0.0') {
         exclude group: 'com.android.support'
     }
