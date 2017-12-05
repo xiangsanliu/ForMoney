@@ -67,6 +67,7 @@
         </android.support.v7.widget.Toolbar>
 
         <android.support.v4.widget.NestedScrollView
+            android:id="@+id/scroll_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
@@ -101,6 +102,15 @@
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="8dp"
                     layout="@layout/child_chs_building_situation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <include
+                    android:id="@+id/child_chs_trade_situation"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    layout="@layout/child_chs_trade_situation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 

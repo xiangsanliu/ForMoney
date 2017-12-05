@@ -16,4 +16,6 @@ public class Constants {
     public static final int HOUSE_RENT_TALBE = 3;
 
     public static final String BASE_RUL = "http://115.159.44.192:8080/";
+
+    public static Long userId = 123456L;
 }

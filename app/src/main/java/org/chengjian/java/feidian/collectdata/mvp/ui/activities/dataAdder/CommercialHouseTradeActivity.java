@@ -39,6 +39,7 @@ public class CommercialHouseTradeActivity extends DetailBaseActivity implements 
         binding.childBase.buttonExtra.setOnClickListener(this);
         binding.childChsBuildingSituation.buttonBuildingSituation.setOnClickListener(this);
         binding.childChsLandSituation.buttonLandSituation.setOnClickListener(this);
+        binding.childChsTradeSituation.buttonTradeSituation.setOnClickListener(this);
     }
 
     @Override
@@ -67,22 +68,32 @@ public class CommercialHouseTradeActivity extends DetailBaseActivity implements 
 
     @Override
     public void onClick(View v) {
+
         switch (v.getId()) {
             case R.id.button_extra:
                 changeELState(binding.childBase.elExtra);
                 binding.childChsBuildingSituation.elBuildingSituation.collapse();
                 binding.childChsLandSituation.elLandSituation.collapse();
+                binding.childChsTradeSituation.elTradeSituation.collapse();
                 break;
             case R.id.button_building_situation:
                 changeELState(binding.childChsBuildingSituation.elBuildingSituation);
                 binding.childBase.elExtra.collapse();
                 binding.childChsLandSituation.elLandSituation.collapse();
+                binding.childChsTradeSituation.elTradeSituation.collapse();
                 break;
             case R.id.button_land_situation:
                 changeELState(binding.childChsLandSituation.elLandSituation);
                 binding.childChsBuildingSituation.elBuildingSituation.collapse();
                 binding.childBase.elExtra.collapse();
+                binding.childChsTradeSituation.elTradeSituation.collapse();
                 break;
+            case R.id.button_trade_situation:
+                changeELState(binding.childChsTradeSituation.elTradeSituation);
+                binding.childChsBuildingSituation.elBuildingSituation.collapse();
+                binding.childChsLandSituation.elLandSituation.collapse();
+                binding.childBase.elExtra.collapse();
+
         }
     }
 }
