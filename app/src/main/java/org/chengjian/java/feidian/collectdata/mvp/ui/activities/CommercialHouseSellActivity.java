@@ -34,15 +34,15 @@ public class CommercialHouseSellActivity extends DetailBaseActivity implements V
         dbModel = LocalDbModel.getInstance(this);
     }
 
-    private void initViews(SellRentModel sellRentModel) {
-        if (sellRentModel.getResearcher() == null || sellRentModel.getResearcher().length()<=0 ) {
-            editable.isEditable.set("true");
-        } else {
-            editable.isEditable.set("false");
-        }
-        binding.setSellRentModel(sellRentModel);
-        binding.setEditable(editable);
-    }
+//    private void initViews(SellRentModel sellRentModel) {
+//        if (sellRentModel.getResearcher() == null || sellRentModel.getResearcher().length()<=0 ) {
+//            editable.isEditable.set("true");
+//        } else {
+//            editable.isEditable.set("false");
+//        }
+//        binding.setSellRentModel(sellRentModel);
+//        binding.setEditable(editable);
+//    }
 
     @Override
     protected int getLayoutId() {
@@ -52,7 +52,7 @@ public class CommercialHouseSellActivity extends DetailBaseActivity implements V
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void onEventMainThread(SellRentModel sellRentModel) {
         this.sellRentModel = sellRentModel;
-        initViews(sellRentModel);
+//        initViews(sellRentModel);
         initExpandableLayout();
         initSpinner();
     }
@@ -108,7 +108,7 @@ public class CommercialHouseSellActivity extends DetailBaseActivity implements V
 
     @Override
     public void save() {
-        editable.isEditable.set("false");
+//        editable.isEditable.set("false");
         getSpinner();
         dbModel.getDaoSession().getSellRentModelDao().update(binding.getSellRentModel());
         dbModel.getDaoSession().getTradeInfo1ModelDao().update(binding.childTrade.getTradeModel());
@@ -138,7 +138,7 @@ public class CommercialHouseSellActivity extends DetailBaseActivity implements V
                 changeELState(binding.childTrade.elTradeSituation);
                 break;
             case R.id.button_edit:
-                editable.isEditable.set("true");
+//                editable.isEditable.set("true");
                 binding.childExtra.etReasearcher.requestFocus();
                 binding.childExtra.elExtra.expand();
                 showInputMethod();

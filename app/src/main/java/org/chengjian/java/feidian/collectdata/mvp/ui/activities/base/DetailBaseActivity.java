@@ -15,6 +15,7 @@ import android.widget.EditText;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
 
+import org.chengjian.java.feidian.collectdata.beans.CitySellRent;
 import org.chengjian.java.feidian.collectdata.beans.Editable;
 import org.chengjian.java.feidian.collectdata.beans.SellRentModel;
 import org.greenrobot.eventbus.EventBus;
@@ -30,7 +31,8 @@ import java.util.Calendar;
 public abstract class DetailBaseActivity extends BaseActivity {
 
     public SellRentModel sellRentModel;
-    public Editable editable = new Editable();
+    public CitySellRent citySellRent;
+    public Editable editable;
     public ViewDataBinding binding;
 
     @Override
@@ -122,23 +124,6 @@ public abstract class DetailBaseActivity extends BaseActivity {
                     }
                 });
         builder.create().show();
-    }
-
-
-    public int getScreenWidth() {
-        WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
-
-        return wm.getDefaultDisplay().getWidth();
-
-    }
-
-    public int pixelToDp(int pixel) {
-        WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
-        DisplayMetrics dm = new DisplayMetrics();
-        wm.getDefaultDisplay().getMetrics(dm);
-        int width = dm.widthPixels;// 屏幕宽度（像素）
-        float density = dm.density;//屏幕密度（0.75 / 1.0 / 1.5）
-        return (int) (width/density);
     }
 
 }

@@ -11,9 +11,12 @@ import android.widget.LinearLayout;
 import net.cachapa.expandablelayout.ExpandableLayout;
 
 import org.chengjian.java.feidian.collectdata.R;
+import org.chengjian.java.feidian.collectdata.beans.CitySellRent;
+import org.chengjian.java.feidian.collectdata.beans.CommercialHouseTradeModel;
 import org.chengjian.java.feidian.collectdata.beans.SellRentModel;
 import org.chengjian.java.feidian.collectdata.databinding.ActivityCommercialHouseTradeBinding;
 import org.chengjian.java.feidian.collectdata.databinding.ChildBaseBinding;
+import org.chengjian.java.feidian.collectdata.mvp.model.StickyMessage;
 import org.chengjian.java.feidian.collectdata.mvp.ui.activities.base.DetailBaseActivity;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -21,17 +24,17 @@ import org.greenrobot.eventbus.ThreadMode;
 public class CommercialHouseTradeActivity extends DetailBaseActivity implements View.OnClickListener {
 
     ActivityCommercialHouseTradeBinding binding;
+    private CommercialHouseTradeModel model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_commercial_house_trade);
-        initExpandableLayout();
+        binding = DataBindingUtil.setContentView(this, getLayoutId());
     }
 
     @Override
     protected int getLayoutId() {
-        return 0;
+        return R.layout.activity_commercial_house_trade;
     }
 
     @Override
@@ -46,9 +49,21 @@ public class CommercialHouseTradeActivity extends DetailBaseActivity implements 
     public void initSpinner() {
     }
 
+    private void initView(StickyMessage message) {
+        this.model = message.getCommercialHouseTradeModel();
+        this.citySellRent = message.getCitySellRent();
+        this.editable = message.getEditable();
+        binding.setCitySellRent(citySellRent);
+        binding.setCommercialHouseTradeModel(model);
+        binding.setEditable(editable);
+
+    }
+
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
-    public void onEventMainThread(SellRentModel sellRentModel) {
-        this.sellRentModel = sellRentModel;
+    public void onEventMainThread(StickyMessage stickyMessage) {
+        initView(stickyMessage);
+        initExpandableLayout();
+        initSpinner();
     }
 
     @Override
