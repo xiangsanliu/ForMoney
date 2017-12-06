@@ -10,7 +10,15 @@ import android.databinding.ObservableField;
  */
 
 public class Editable extends BaseObservable {
-    public final ObservableField<Boolean> isEditable = new ObservableField<>() ;
+//    public final ObservableField<Boolean> isEditable = new ObservableField<>() ;
 
+    public Boolean isEditable;
 
+    public Boolean getEditable() {
+        return isEditable;
+    }
+
+    public void setEditable(Boolean editable) {
+        isEditable = editable;
+    }
 }

@@ -14,11 +14,15 @@ import org.chengjian.java.feidian.collectdata.beans.ShopRentModel;
 public class StickyMessage {
 
     private CitySellRent citySellRent;
-    private CommercialHouseTradeModel commercialHouseTradeModel;
-    private HouseTradeModel houseTradeModel;
-    private HouseRentModel houseRentModel;
-    private ShopRentModel shopRentModel;
-    private Editable editable;
+    private Boolean isEditable;
+
+    public Boolean getEditable() {
+        return isEditable;
+    }
+
+    public void setEditable(Boolean editable) {
+        isEditable = editable;
+    }
 
     public CitySellRent getCitySellRent() {
         return citySellRent;
@@ -26,45 +30,5 @@ public class StickyMessage {
 
     public void setCitySellRent(CitySellRent citySellRent) {
         this.citySellRent = citySellRent;
-    }
-
-    public CommercialHouseTradeModel getCommercialHouseTradeModel() {
-        return commercialHouseTradeModel;
-    }
-
-    public void setCommercialHouseTradeModel(CommercialHouseTradeModel commercialHouseTradeModel) {
-        this.commercialHouseTradeModel = commercialHouseTradeModel;
-    }
-
-    public HouseTradeModel getHouseTradeModel() {
-        return houseTradeModel;
-    }
-
-    public void setHouseTradeModel(HouseTradeModel houseTradeModel) {
-        this.houseTradeModel = houseTradeModel;
-    }
-
-    public HouseRentModel getHouseRentModel() {
-        return houseRentModel;
-    }
-
-    public void setHouseRentModel(HouseRentModel houseRentModel) {
-        this.houseRentModel = houseRentModel;
-    }
-
-    public ShopRentModel getShopRentModel() {
-        return shopRentModel;
-    }
-
-    public void setShopRentModel(ShopRentModel shopRentModel) {
-        this.shopRentModel = shopRentModel;
-    }
-
-    public Editable getEditable() {
-        return editable;
-    }
-
-    public void setEditable(Editable editable) {
-        this.editable = editable;
     }
 }

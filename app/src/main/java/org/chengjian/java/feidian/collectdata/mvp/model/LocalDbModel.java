@@ -58,7 +58,7 @@ public class LocalDbModel extends BaseModel {
         List<SellRentModel> rentData = getAllSellRentData();
         List<SellRentModel> result = new ArrayList<>();
         for (SellRentModel sellRentModel : rentData) {
-            if (sellRentModel.getModelType() == Constants.COMMERCIAL_HOUSE_SELL_TABLE) {
+            if (sellRentModel.getModelType() == Constants.COMMERCIAL_HOUSE_TRADE) {
                 result.add(sellRentModel);
             }
         }
@@ -132,7 +132,7 @@ public class LocalDbModel extends BaseModel {
         List<SellRentModel> rentData = getAllSellRentData();
         List<SellRentModel> result = new ArrayList<>();
         for (SellRentModel sellRentModel : rentData) {
-            if (sellRentModel.getModelType() == Constants.SHOP_RENT_TABLE) {
+            if (sellRentModel.getModelType() == Constants.SHOP_RENT) {
                 result.add(sellRentModel);
             }
         }
@@ -144,7 +144,7 @@ public class LocalDbModel extends BaseModel {
         List<SellRentModel> rentData = getAllSellRentData();
         List<SellRentModel> result = new ArrayList<>();
         for (SellRentModel sellRentModel : rentData) {
-            if (sellRentModel.getModelType() == Constants.HOUSE_SELL_TABLE) {
+            if (sellRentModel.getModelType() == Constants.HOUSE_SELL) {
                 result.add(sellRentModel);
             }
         }
@@ -156,7 +156,7 @@ public class LocalDbModel extends BaseModel {
         List<SellRentModel> rentData = getAllSellRentData();
         List<SellRentModel> result = new ArrayList<>();
         for (SellRentModel sellRentModel : rentData) {
-            if (sellRentModel.getModelType() == Constants.HOUSE_RENT_TALBE) {
+            if (sellRentModel.getModelType() == Constants.HOUSE_RENT) {
                 result.add(sellRentModel);
             }
         }
@@ -166,16 +166,16 @@ public class LocalDbModel extends BaseModel {
     @Override
     public void saveSellRentModel(SellRentModel sellRentModel, Long id) {
         switch (sellRentModel.getModelType()) {
-            case Constants.COMMERCIAL_HOUSE_SELL_TABLE:
+            case Constants.COMMERCIAL_HOUSE_TRADE:
                 sellRentModel.setTi1ForeignKey(id);
                 break;
-            case Constants.HOUSE_RENT_TALBE:
+            case Constants.HOUSE_RENT:
                 sellRentModel.setRi4ForeignKey(id);
                 break;
-            case Constants.HOUSE_SELL_TABLE:
+            case Constants.HOUSE_SELL:
                 sellRentModel.setTi3ForeignKey(id);
                 break;
-            case Constants.SHOP_RENT_TABLE:
+            case Constants.SHOP_RENT:
                 sellRentModel.setRi2ForeignKey(id);
                 break;
         }

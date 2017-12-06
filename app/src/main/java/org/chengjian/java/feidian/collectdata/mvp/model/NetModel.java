@@ -42,12 +42,12 @@ public class NetModel {
 
     public List<CitySellRent> getCitySellRents() throws IOException {
         okHttpClient = new OkHttpClient();
-        RequestBody body = new FormBody.Builder()
-                .add("userId", Constants.userId+"")
-                .build();
+//        RequestBody body = new FormBody.Builder()
+//                .add("userId", Constants.userId+"")
+//                .build();
         Request request = new Request.Builder()
-                .post(body)
-                .url(Constants.BASE_RUL+"get/citysellrents")
+//                .post(body)
+                .url(Constants.BASE_RUL+"city/get/citysellrents?userId="+Constants.userId)
                 .build();
         String response = okHttpClient.newCall(request).execute().body().string();
         return JSON.parseArray(response, CitySellRent.class);

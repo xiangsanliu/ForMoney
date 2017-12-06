@@ -30,6 +30,7 @@ public class CommercialHouseTradeActivity extends DetailBaseActivity implements 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, getLayoutId());
+        initExpandableLayout();
     }
 
     @Override
@@ -50,19 +51,17 @@ public class CommercialHouseTradeActivity extends DetailBaseActivity implements 
     }
 
     private void initView(StickyMessage message) {
-        this.model = message.getCommercialHouseTradeModel();
         this.citySellRent = message.getCitySellRent();
-        this.editable = message.getEditable();
+        this.isEditable = message.getEditable();
         binding.setCitySellRent(citySellRent);
         binding.setCommercialHouseTradeModel(model);
-        binding.setEditable(editable);
+        binding.setEditable(isEditable);
 
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void onEventMainThread(StickyMessage stickyMessage) {
         initView(stickyMessage);
-        initExpandableLayout();
         initSpinner();
     }
 

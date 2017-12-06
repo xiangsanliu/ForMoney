@@ -8,8 +8,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import org.chengjian.java.feidian.collectdata.R;
-import org.chengjian.java.feidian.collectdata.beans.SellRentModel;
+import org.chengjian.java.feidian.collectdata.beans.CitySellRent;
 import org.chengjian.java.feidian.collectdata.mvp.ui.activities.CommercialHouseSellActivity;
+import org.chengjian.java.feidian.collectdata.mvp.ui.activities.dataAdder.CommercialHouseTradeActivity;
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
@@ -19,7 +20,7 @@ import java.util.List;
  * StormPhoenix is a intelligent Android developer.
  */
 
-public class CommercialHouseSellAdapter extends BaseRecyclerAdapter<SellRentModel, CommercialHouseSellAdapter.CommercialHouseSellViewHolder> {
+public class CommercialHouseTradeAdapter extends BaseRecyclerAdapter<CitySellRent, CommercialHouseTradeAdapter.CommercialHouseSellViewHolder> {
 
     @Override
     protected CommercialHouseSellViewHolder createViewHolder(View itemView) {
@@ -31,15 +32,15 @@ public class CommercialHouseSellAdapter extends BaseRecyclerAdapter<SellRentMode
         return R.layout.item_list;
     }
 
-    public CommercialHouseSellAdapter(Context context) {
+    public CommercialHouseTradeAdapter(Context context) {
         super(context);
     }
 
-    public CommercialHouseSellAdapter(Context context, List<SellRentModel> list) {
+    public CommercialHouseTradeAdapter(Context context, List<CitySellRent> list) {
         super(context, list);
     }
 
-    public class CommercialHouseSellViewHolder extends BaseRecyclerAdapter.ViewHolder<SellRentModel> {
+    public class CommercialHouseSellViewHolder extends BaseRecyclerAdapter.ViewHolder<CitySellRent> {
         TextView reasearchPerson;
         TextView reasearchTime;
         TextView place;
@@ -54,7 +55,7 @@ public class CommercialHouseSellAdapter extends BaseRecyclerAdapter<SellRentMode
         }
 
         @Override
-        protected void bind(final SellRentModel data) {
+        protected void bind(final CitySellRent data) {
             reasearchPerson.setText(data.getResearcher());
             reasearchTime.setText(data.getResearcherTime());
 
@@ -68,7 +69,7 @@ public class CommercialHouseSellAdapter extends BaseRecyclerAdapter<SellRentMode
                 @Override
                 public void onClick(View v) {
                     EventBus.getDefault().postSticky(data);
-                    mContext.startActivity(new Intent(mContext, CommercialHouseSellActivity.class));
+                    mContext.startActivity(new Intent(mContext, CommercialHouseTradeActivity.class));
                 }
             });
         }

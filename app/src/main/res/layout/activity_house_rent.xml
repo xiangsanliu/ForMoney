@@ -10,7 +10,7 @@
         <variable name="sellRentModel" type="SellRentModel"/>
         <variable
             name="editable"
-            type="org.chengjian.java.feidian.collectdata.beans.Editable"/>
+            type="Boolean"/>
     </data>
 
     <android.support.design.widget.CoordinatorLayout
@@ -43,7 +43,7 @@
                         android:layout_width="?actionBarSize"
                         android:layout_height="?actionBarSize"
                         android:src="@drawable/ic_edit_white_24dp"
-                        android:visibility='@{editable.idEditable ?  View.GONE: View.VISIBLE}'
+                        android:visibility='@{editable ?  View.GONE: View.VISIBLE}'
                         app:cb_color="@color/colorPrimary" />
 
                     <at.markushi.ui.CircleButton
@@ -51,7 +51,7 @@
                         android:layout_width="?actionBarSize"
                         android:layout_height="?actionBarSize"
                         android:src="@drawable/ic_delete_white_24dp"
-                        android:visibility='@{editable.idEditable ?  View.GONE: View.VISIBLE}'
+                        android:visibility='@{editable ?  View.GONE: View.VISIBLE}'
                         app:cb_color="@color/colorPrimary" />
 
                     <at.markushi.ui.CircleButton
@@ -59,7 +59,7 @@
                         android:layout_width="?actionBarSize"
                         android:layout_height="?actionBarSize"
                         android:src="@drawable/ic_check_white_24dp"
-                        android:visibility='@{editable.idEditable ?  View.VISIBLE: View.GONE}'
+                        android:visibility='@{editable ?  View.VISIBLE: View.GONE}'
                         app:cb_color="@color/colorPrimary" />
                 </LinearLayout>
 

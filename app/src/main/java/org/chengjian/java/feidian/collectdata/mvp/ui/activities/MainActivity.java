@@ -14,7 +14,7 @@ import org.chengjian.java.feidian.collectdata.mvp.model.LocalDbModel;
 import org.chengjian.java.feidian.collectdata.mvp.model.ResultMessage;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.MainPresenter;
 import org.chengjian.java.feidian.collectdata.mvp.ui.activities.base.TabPagerActivity;
-import org.chengjian.java.feidian.collectdata.mvp.ui.fragments.CommercialHouseSellFragment;
+import org.chengjian.java.feidian.collectdata.mvp.ui.fragments.CommercialHouseTradeFragment;
 import org.chengjian.java.feidian.collectdata.mvp.ui.fragments.HouseRentFragment;
 import org.chengjian.java.feidian.collectdata.mvp.ui.fragments.HouseSellFragment;
 import org.chengjian.java.feidian.collectdata.mvp.ui.fragments.ShopRentFragment;
@@ -71,7 +71,7 @@ public class MainActivity extends TabPagerActivity implements MainView {
                 getString(R.string.house_rent)
         };
         fragmentList = new ArrayList<>();
-        currentFragment = new CommercialHouseSellFragment();
+        currentFragment = new CommercialHouseTradeFragment();
         fragmentList.add(currentFragment);
         fragmentList.add(new HouseSellFragment());
         fragmentList.add(new ShopRentFragment());

@@ -23,7 +23,7 @@ import org.chengjian.java.feidian.collectdata.mvp.ui.activities.HouseRentActivit
 import org.chengjian.java.feidian.collectdata.mvp.ui.activities.HouseSellActivity;
 import org.chengjian.java.feidian.collectdata.mvp.ui.activities.ShopRentActivity;
 import org.chengjian.java.feidian.collectdata.mvp.ui.activities.dataAdder.CommercialHouseTradeActivity;
-import org.chengjian.java.feidian.collectdata.mvp.ui.fragments.CommercialHouseSellFragment;
+import org.chengjian.java.feidian.collectdata.mvp.ui.fragments.CommercialHouseTradeFragment;
 import org.chengjian.java.feidian.collectdata.mvp.ui.fragments.HouseRentFragment;
 import org.chengjian.java.feidian.collectdata.mvp.ui.fragments.HouseSellFragment;
 import org.chengjian.java.feidian.collectdata.mvp.ui.fragments.base.ListFragment;
@@ -60,33 +60,28 @@ public class MainPresenter extends BasePresenter<MainView> {
         StickyMessage stickyMessage = new StickyMessage();
         Intent intent = null;
         Long id = System.currentTimeMillis();
-        stickyMessage.setCitySellRent(initCitySellRent(id, Constants.COMMERCIAL_HOUSE_TRADE));
-        stickyMessage.setCommercialHouseTradeModel(initCommercialHouseTradeModel(id));
-        stickyMessage.setEditable(initEditable());
+        stickyMessage.setEditable(true);
 
-//        if (currentFragment instanceof CommercialHouseSellFragment) {
-//            model.setModelType(Constants.COMMERCIAL_HOUSE_SELL_TABLE);
-//            dbModel.saveSellRentModel(model, dbModel.saveTradeInfo1Model(new TradeInfo1Model()));
-//            intent = new Intent(mContext, CommercialHouseSellActivity.class);
-//        } else if (currentFragment instanceof HouseRentFragment) {
-//            model.setModelType(Constants.HOUSE_RENT_TALBE);
-//            dbModel.saveSellRentModel(model, dbModel.saveRentInfo4Model(new RentInfo4Model()));
+        if (currentFragment instanceof CommercialHouseTradeFragment) {
+            stickyMessage.setCitySellRent(initCitySellRent(id, Constants.COMMERCIAL_HOUSE_TRADE));
+            intent = new Intent(mContext, CommercialHouseTradeActivity.class);
+        } else if (currentFragment instanceof HouseRentFragment) {
+            stickyMessage.setCitySellRent(initCitySellRent(id, Constants.HOUSE_RENT));
 //            intent = new Intent(mContext, HouseRentActivity.class);
-//        } else if (currentFragment instanceof HouseSellFragment) {
-//            model.setModelType(Constants.HOUSE_SELL_TABLE);
-//            dbModel.saveSellRentModel(model, dbModel.saveTradeInfo3Model(new TradeInfo3Model()));
+        } else if (currentFragment instanceof HouseSellFragment) {
+            stickyMessage.setCitySellRent(initCitySellRent(id, Constants.HOUSE_SELL));
 //            intent = new Intent(mContext, HouseSellActivity.class);
-//        } else {
-//            model.setModelType(Constants.SHOP_RENT_TABLE);
-//            dbModel.saveSellRentModel(model, dbModel.saveRentInfo2Model(new RentInfo2Model()));
+        } else {
+            stickyMessage.setCitySellRent(initCitySellRent(id, Constants.SHOP_RENT));
 //            intent = new Intent(mContext, ShopRentActivity.class);
-//        }
-
-        intent = new Intent(mContext, CommercialHouseTradeActivity.class);
+        }
+//
 
         EventBus.getDefault().postSticky(stickyMessage);
 
-        mContext.startActivityForResult(intent, 0);
+        if (intent !=  null) {
+            mContext.startActivityForResult(intent, 0);
+        }
     }
 
     @SuppressLint("SimpleDateFormat")
@@ -97,18 +92,6 @@ public class MainPresenter extends BasePresenter<MainView> {
         model.setUserId(Constants.userId);
         model.setModelType(modelType);
         return model;
-    }
-
-    private Editable initEditable() {
-        Editable editable = new Editable();
-        editable.isEditable.set(true);
-        return editable;
-    }
-
-    private CommercialHouseTradeModel initCommercialHouseTradeModel(Long id) {
-        CommercialHouseTradeModel commercialHouseTradeModel = new CommercialHouseTradeModel();
-        commercialHouseTradeModel.setId(id);
-        return commercialHouseTradeModel;
     }
 
 }

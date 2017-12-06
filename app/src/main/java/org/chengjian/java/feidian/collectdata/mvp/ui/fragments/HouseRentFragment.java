@@ -3,7 +3,6 @@ package org.chengjian.java.feidian.collectdata.mvp.ui.fragments;
 import org.chengjian.java.feidian.collectdata.adapters.base.BaseRecyclerAdapter;
 import org.chengjian.java.feidian.collectdata.adapters.base.HouseRentAdapter;
 import org.chengjian.java.feidian.collectdata.beans.SellRentModel;
-import org.chengjian.java.feidian.collectdata.mvp.presenter.CommercialHouseSellPresenter;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.HouseRentPresenter;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.base.ListItemPresenter;
 import org.chengjian.java.feidian.collectdata.mvp.ui.fragments.base.ListWithPresenterFragment;

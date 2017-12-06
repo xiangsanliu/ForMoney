@@ -32,7 +32,7 @@ public abstract class DetailBaseActivity extends BaseActivity {
 
     public SellRentModel sellRentModel;
     public CitySellRent citySellRent;
-    public Editable editable;
+    public Boolean isEditable;
     public ViewDataBinding binding;
 
     @Override
@@ -84,7 +84,7 @@ public abstract class DetailBaseActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        if (editable.isEditable.get().equals("true")) {
+        if (isEditable) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this)
                     .setNegativeButton("取消", new DialogInterface.OnClickListener() {
                         @Override

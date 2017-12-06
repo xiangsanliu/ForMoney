@@ -29,7 +29,7 @@ import org.chengjian.java.feidian.collectdata.mvp.model.LocalDbModel;
 import org.chengjian.java.feidian.collectdata.mvp.model.ResultMessage;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.MainPresenter;
 import org.chengjian.java.feidian.collectdata.mvp.ui.activities.base.TabPagerActivity;
-import org.chengjian.java.feidian.collectdata.mvp.ui.fragments.CommercialHouseSellFragment;
+import org.chengjian.java.feidian.collectdata.mvp.ui.fragments.CommercialHouseTradeFragment;
 import org.chengjian.java.feidian.collectdata.mvp.ui.fragments.HouseRentFragment;
 import org.chengjian.java.feidian.collectdata.mvp.ui.fragments.HouseSellFragment;
 import org.chengjian.java.feidian.collectdata.mvp.ui.fragments.ShopRentFragment;
@@ -67,7 +67,7 @@ public class DrawerActivity extends TabPagerActivity
                 getString(R.string.house_rent)
         };
         fragmentList = new ArrayList<>();
-        currentFragment = new CommercialHouseSellFragment();
+        currentFragment = new CommercialHouseTradeFragment();
         fragmentList.add(currentFragment);
         fragmentList.add(new HouseSellFragment());
         fragmentList.add(new ShopRentFragment());
@@ -111,15 +111,6 @@ public class DrawerActivity extends TabPagerActivity
         navigationView.setNavigationItemSelectedListener(this);
         configureTabPager();
         localDbModel = LocalDbModel.getInstance(this);
-        MapView mapView = (MapView) findViewById(R.id.map);
-        mapView.onCreate(savedInstanceState);
-        AMap aMap = mapView.getMap();
-        MyLocationStyle myLocationStyle = new MyLocationStyle();
-        myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATE);
-        myLocationStyle.interval(2000);
-        aMap.setMyLocationStyle(myLocationStyle);
-        aMap.getUiSettings().setMyLocationButtonEnabled(true);
-        aMap.setMyLocationEnabled(true);
 
 //        test();
     }

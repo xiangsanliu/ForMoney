@@ -15,7 +15,7 @@ public class Constants {
     // 住房出租表
     public static final int HOUSE_RENT = 3;
 
-    public static final String BASE_RUL = "http://115.159.44.192:8080/";
+    public static final String BASE_RUL = "http://xiangtest.free.ngrok.cc/";
 
     public static Long userId = 123456L;
 }
