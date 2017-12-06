@@ -1,161 +1,139 @@
 package org.chengjian.java.feidian.collectdata.mvp.ui.activities;
 
-import android.app.DatePickerDialog;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.DatePicker;
 
 import org.chengjian.java.feidian.collectdata.R;
-import org.chengjian.java.feidian.collectdata.adapters.base.BaseRecyclerAdapter;
-import org.chengjian.java.feidian.collectdata.beans.SellRentModel;
-import org.chengjian.java.feidian.collectdata.databinding.ActivityCommercialHouseSellBinding;
-import org.chengjian.java.feidian.collectdata.mvp.model.BaseModel;
-import org.chengjian.java.feidian.collectdata.mvp.model.LocalDbModel;
-import org.chengjian.java.feidian.collectdata.mvp.model.ResultMessage;
+import org.chengjian.java.feidian.collectdata.beans.CommercialHouseTradeModel;
+import org.chengjian.java.feidian.collectdata.databinding.ActivityCommercialHouseTradeBinding;
+import org.chengjian.java.feidian.collectdata.mvp.model.StickyMessage;
+import org.chengjian.java.feidian.collectdata.mvp.presenter.detail.DetailCHSPresenter;
 import org.chengjian.java.feidian.collectdata.mvp.ui.activities.base.DetailBaseActivity;
-import org.greenrobot.eventbus.EventBus;
+import org.chengjian.java.feidian.collectdata.mvp.view.base.DetailCHSView;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.util.Calendar;
 
-public class CommercialHouseSellActivity extends DetailBaseActivity implements View.OnClickListener {
+public class CommercialHouseSellActivity extends DetailBaseActivity implements View.OnClickListener, DetailCHSView {
 
-    ActivityCommercialHouseSellBinding binding;
-    BaseModel dbModel;
+
+    ActivityCommercialHouseTradeBinding binding;
+    private CommercialHouseTradeModel model;
+    private DetailCHSPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, getLayoutId());
-        dbModel = LocalDbModel.getInstance(this);
+        initExpandableLayout();
+        presenter = new DetailCHSPresenter(this);
+        presenter.attachView(this);
     }
-
-//    private void initViews(SellRentModel sellRentModel) {
-//        if (sellRentModel.getResearcher() == null || sellRentModel.getResearcher().length()<=0 ) {
-//            editable.isEditable.set("true");
-//        } else {
-//            editable.isEditable.set("false");
-//        }
-//        binding.setSellRentModel(sellRentModel);
-//        binding.setEditable(editable);
-//    }
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_commercial_house_sell;
+        return R.layout.activity_commercial_house_trade;
+    }
+
+    @Override
+    protected void initExpandableLayout() {
+        binding.childBase.buttonExtra.setOnClickListener(this);
+        binding.childChsBuildingSituation.buttonBuildingSituation.setOnClickListener(this);
+        binding.childChsLandSituation.buttonLandSituation.setOnClickListener(this);
+        binding.childChsTradeSituation.buttonTradeSituation.setOnClickListener(this);
+    }
+
+    @Override
+    public void initSpinner() {
+    }
+
+    private void initView(StickyMessage message) {
+        this.citySellRent = message.getCitySellRent();
+        this.isEditable = message.getEditable();
+        binding.setCitySellRent(citySellRent);
+        binding.setEditable(isEditable);
+        Log.d("xiang", isEditable+"");
+        if (!isEditable) {
+            presenter.loadModel(citySellRent.getId());
+        } else {
+            model = new CommercialHouseTradeModel();
+            model.setId(citySellRent.getId());
+            initCommercialHouseTradeModel(model);
+        }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
-    public void onEventMainThread(SellRentModel sellRentModel) {
-        this.sellRentModel = sellRentModel;
-//        initViews(sellRentModel);
+    public void onEventMainThread(StickyMessage stickyMessage) {
+        initView(stickyMessage);
         initExpandableLayout();
         initSpinner();
     }
 
     @Override
-    protected void initExpandableLayout() {
-        binding.childExtra.buttonExtra.setOnClickListener(this);
-        binding.childLandSituation.buttonLandSituation.setOnClickListener(this);
-        binding.childBuildingSituation.buttonBuildingSituation.setOnClickListener(this);
-        binding.childTrade.buttonTradeSituation.setOnClickListener(this);
-        binding.buttonDelete.setOnClickListener(this);
-        binding.buttonEdit.setOnClickListener(this);
-        binding.buttonSave.setOnClickListener(this);
-        binding.childLandSituation.etAuthorizedTime.setOnClickListener(this);
-        binding.childTrade.etTradeTime.setOnClickListener(this);
-    }
-
-    @Override
-    public void initSpinner() {
-        binding.childLandSituation.spCrossroadSituation.setSelection(sellRentModel.getCrossRoadSituation());
-        binding.childLandSituation.spLandShape.setSelection(sellRentModel.getLandShape());
-        binding.childLandSituation.spLandDevelopingSituation.setSelection(sellRentModel.getLandShape());
-        binding.childLandSituation.spBuildingDirection.setSelection(sellRentModel.getBuildingDirection());
-        binding.childLandSituation.spNearbyStreetSituation.setSelection(sellRentModel.getNearbyStreetSituation());
-        binding.childLandSituation.spIsGore.setSelection(sellRentModel.getIsGore() ? 1 : 0);
-        binding.childLandSituation.spNearbyLandType.setSelection(sellRentModel.getNearbyLandType());
-        binding.childLandSituation.spUsagePlaned.setSelection(sellRentModel.getUsagePlaned());
-        binding.childLandSituation.spUsageActucal.setSelection(sellRentModel.getUsageActual());
-        binding.childBuildingSituation.spDecorationType.setSelection(sellRentModel.getDecorationType());
-        binding.childBuildingSituation.spStructureType.setSelection(sellRentModel.getStructureType());
-        binding.childBuildingSituation.spQualityLevel.setSelection(sellRentModel.getQualityLevel());
-        binding.childBuildingSituation.spLightAirType.setSelection(sellRentModel.getLightAirType());
-        binding.childTrade.spTradeType.setSelection(sellRentModel.getTradeInfo1Model().getTradeType());
-    }
-
-    @Override
     public void getSpinner() {
-        SellRentModel sellRentModel = binding.getSellRentModel();
-        sellRentModel.setCrossRoadSituation(binding.childLandSituation.spCrossroadSituation.getSelectedItemPosition());
-        sellRentModel.setLandShape(binding.childLandSituation.spLandShape.getSelectedItemPosition());
-        sellRentModel.setLandDevelopingSituation(binding.childLandSituation.spLandDevelopingSituation.getSelectedItemPosition());
-        sellRentModel.setBuildingDirection(binding.childLandSituation.spBuildingDirection.getSelectedItemPosition());
-        sellRentModel.setNearbyStreetSituation(binding.childLandSituation.spNearbyStreetSituation.getSelectedItemPosition());
-        sellRentModel.setIsGore(binding.childLandSituation.spIsGore.getSelectedItemPosition() == 1);
-        sellRentModel.setUsagePlaned(binding.childLandSituation.spUsagePlaned.getSelectedItemPosition());
-        sellRentModel.setUsageActual(binding.childLandSituation.spUsageActucal.getSelectedItemPosition());
-        sellRentModel.setDecorationType(binding.childBuildingSituation.spDecorationType.getSelectedItemPosition());
-        sellRentModel.setStructureType(binding.childBuildingSituation.spStructureType.getSelectedItemPosition());
-        sellRentModel.setQualityLevel(binding.childBuildingSituation.spQualityLevel.getSelectedItemPosition());
-        sellRentModel.setLightAirType(binding.childBuildingSituation.spLightAirType.getSelectedItemPosition());
-        sellRentModel.getTradeInfo1Model().setTradeType(binding.childTrade.spTradeType.getSelectedItemPosition());
+
     }
 
     @Override
     public void save() {
-//        editable.isEditable.set("false");
-        getSpinner();
-        dbModel.getDaoSession().getSellRentModelDao().update(binding.getSellRentModel());
-        dbModel.getDaoSession().getTradeInfo1ModelDao().update(binding.childTrade.getTradeModel());
-        EventBus.getDefault().post(new ResultMessage(true));
+
     }
 
     @Override
     public void delete() {
-        dbModel.getDaoSession().getSellRentModelDao().delete(sellRentModel);
-        EventBus.getDefault().postSticky(new ResultMessage(true));
-        finish();
+
     }
 
     @Override
     public void onClick(View v) {
+
         switch (v.getId()) {
             case R.id.button_extra:
-                changeELState(binding.childExtra.elExtra);
-                break;
-            case R.id.button_land_situation:
-                changeELState(binding.childLandSituation.elLandSituation);
+                changeELState(binding.childBase.elExtra);
+                binding.childChsBuildingSituation.elBuildingSituation.collapse();
+                binding.childChsLandSituation.elLandSituation.collapse();
+                binding.childChsTradeSituation.elTradeSituation.collapse();
                 break;
             case R.id.button_building_situation:
-                changeELState(binding.childBuildingSituation.elBuildingSituation);
+                changeELState(binding.childChsBuildingSituation.elBuildingSituation);
+                binding.childBase.elExtra.collapse();
+                binding.childChsLandSituation.elLandSituation.collapse();
+                binding.childChsTradeSituation.elTradeSituation.collapse();
+                break;
+            case R.id.button_land_situation:
+                changeELState(binding.childChsLandSituation.elLandSituation);
+                binding.childChsBuildingSituation.elBuildingSituation.collapse();
+                binding.childBase.elExtra.collapse();
+                binding.childChsTradeSituation.elTradeSituation.collapse();
                 break;
             case R.id.button_trade_situation:
-                changeELState(binding.childTrade.elTradeSituation);
-                break;
-            case R.id.button_edit:
-//                editable.isEditable.set("true");
-                binding.childExtra.etReasearcher.requestFocus();
-                binding.childExtra.elExtra.expand();
-                showInputMethod();
-                break;
-            case R.id.button_save:
-                save();
-                break;
-            case R.id.button_delete:
-                showDeleteConfirm();
-                break;
-            case R.id.et_authorized_time:
-                setTime(binding.childLandSituation.etAuthorizedTime);
-                break;
-            case R.id.et_trade_time:
-                setTime(binding.childTrade.etTradeTime);
-                break;
+                changeELState(binding.childChsTradeSituation.elTradeSituation);
+                binding.childChsBuildingSituation.elBuildingSituation.collapse();
+                binding.childChsLandSituation.elLandSituation.collapse();
+                binding.childBase.elExtra.collapse();
+
         }
     }
 
+    @Override
+    public void showProgress() {
+
+    }
+
+    @Override
+    public void hideProgress() {
+
+    }
+
+    @Override
+    public void showMessage(String message) {
+
+    }
+
+    @Override
+    public void initCommercialHouseTradeModel(CommercialHouseTradeModel model) {
+        binding.setCommercialHouseTradeModel(model);
+    }
 }

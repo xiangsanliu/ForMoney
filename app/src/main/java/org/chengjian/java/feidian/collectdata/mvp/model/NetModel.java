@@ -9,6 +9,7 @@ import net.cachapa.expandablelayout.ExpandableLayout;
 import org.chengjian.java.feidian.collectdata.beans.CitySellRent;
 import org.chengjian.java.feidian.collectdata.beans.CommercialHouseTradeModel;
 import org.chengjian.java.feidian.collectdata.shared.Constants;
+import org.chengjian.java.feidian.collectdata.shared.rx.RetrofitService;
 
 import java.io.IOException;
 import java.util.List;
@@ -17,6 +18,10 @@ import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
+import rx.Observable;
 
 /**
  * Created by xiang on 2017/12/5.
@@ -26,10 +31,15 @@ public class NetModel {
 
     private static NetModel netModel;
 
-    OkHttpClient okHttpClient;
+    private RetrofitService service;
 
     private NetModel() {
-        okHttpClient = new OkHttpClient();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Constants.BASE_RUL)
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        service = retrofit.create(RetrofitService.class);
     }
 
     public static NetModel newInstance() {
@@ -40,18 +50,14 @@ public class NetModel {
         }
     }
 
-    public List<CitySellRent> getCitySellRents() throws IOException {
-        okHttpClient = new OkHttpClient();
-//        RequestBody body = new FormBody.Builder()
-//                .add("userId", Constants.userId+"")
-//                .build();
-        Request request = new Request.Builder()
-//                .post(body)
-                .url(Constants.BASE_RUL+"city/get/citysellrents?userId="+Constants.userId)
-                .build();
-        String response = okHttpClient.newCall(request).execute().body().string();
-        return JSON.parseArray(response, CitySellRent.class);
+    public Observable<List<CitySellRent>> getCitySellRents(Long userId){
+        return service.getCitySellRents(userId);
     }
+
+    public Observable<CommercialHouseTradeModel> getCommercialHouseTradeModel(Long id) {
+        return service.getCommercialHouseTradeModel(id);
+    }
+
 
 //    public CommercialHouseTradeModel getCommercialHouseTradeModelById(Long id) {
 //

@@ -27,6 +27,7 @@ import rx.Subscriber;
 
 public class CommercialHouseTradePresenter extends ListItemPresenter<CitySellRent, List<CitySellRent>, ListItemView<CitySellRent>> {
 
+
     public CommercialHouseTradePresenter(Context context) {
         super(context);
     }
@@ -38,12 +39,6 @@ public class CommercialHouseTradePresenter extends ListItemPresenter<CitySellRen
 
     @Override
     protected Observable<List<CitySellRent>> load(int page) {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constants.BASE_RUL)
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        RetrofitService service = retrofit.create(RetrofitService.class);
-        return service.getCitySellRents(Constants.userId);
+        return NetModel.newInstance().getCitySellRents(Constants.userId);
     }
 }

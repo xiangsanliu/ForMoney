@@ -1,6 +1,7 @@
 package org.chengjian.java.feidian.collectdata.shared.rx;
 
 import org.chengjian.java.feidian.collectdata.beans.CitySellRent;
+import org.chengjian.java.feidian.collectdata.beans.CommercialHouseTradeModel;
 
 import java.util.List;
 
@@ -17,6 +18,7 @@ public interface RetrofitService {
     @GET("/city/get/citysellrents")
     Observable<List<CitySellRent>> getCitySellRents(@Query("userId") Long userId);
 
-
+    @GET("/city/get/commercial")
+    Observable<CommercialHouseTradeModel> getCommercialHouseTradeModel(@Query("id") Long id);
 
 }

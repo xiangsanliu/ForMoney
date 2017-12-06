@@ -59,7 +59,7 @@ public class CitySellRent {
 
     private int qualityLevel;       //质量等级
 
-    private float buindingArea;     //建筑面积
+    private float buildingArea;     //建筑面积
 
     private float houseArea;             //房屋建筑面积
 
@@ -79,7 +79,7 @@ public class CitySellRent {
     @NotNull
     private int modelType;
 
-    @Generated(hash = 2021521674)
+    @Generated(hash = 1307042505)
     public CitySellRent(Long id, String landLoacation, String landRange,
             String nearbyStreetName, int crossRoadSituation, int landShape,
             String landLength, String landWidth, int landDevelopingSituation,
@@ -87,7 +87,7 @@ public class CitySellRent {
             float widthToStreet, float depthToStreet, boolean gore,
             float buildingPlotRate, String authorizedTime,
             float landServiceableLife, String houseLocation, int structureType,
-            int qualityLevel, float buindingArea, float houseArea, String detail,
+            int qualityLevel, float buildingArea, float houseArea, String detail,
             float longitude, float latitude, String researcher,
             String researcherTime, @NotNull Long userId, int modelType) {
         this.id = id;
@@ -111,7 +111,7 @@ public class CitySellRent {
         this.houseLocation = houseLocation;
         this.structureType = structureType;
         this.qualityLevel = qualityLevel;
-        this.buindingArea = buindingArea;
+        this.buildingArea = buildingArea;
         this.houseArea = houseArea;
         this.detail = detail;
         this.longitude = longitude;
@@ -127,7 +127,7 @@ public class CitySellRent {
     }
 
     public Long getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(Long id) {
@@ -135,7 +135,7 @@ public class CitySellRent {
     }
 
     public String getLandLoacation() {
-        return this.landLoacation;
+        return landLoacation;
     }
 
     public void setLandLoacation(String landLoacation) {
@@ -143,7 +143,7 @@ public class CitySellRent {
     }
 
     public String getLandRange() {
-        return this.landRange;
+        return landRange;
     }
 
     public void setLandRange(String landRange) {
@@ -151,7 +151,7 @@ public class CitySellRent {
     }
 
     public String getNearbyStreetName() {
-        return this.nearbyStreetName;
+        return nearbyStreetName;
     }
 
     public void setNearbyStreetName(String nearbyStreetName) {
@@ -159,7 +159,7 @@ public class CitySellRent {
     }
 
     public int getCrossRoadSituation() {
-        return this.crossRoadSituation;
+        return crossRoadSituation;
     }
 
     public void setCrossRoadSituation(int crossRoadSituation) {
@@ -167,7 +167,7 @@ public class CitySellRent {
     }
 
     public int getLandShape() {
-        return this.landShape;
+        return landShape;
     }
 
     public void setLandShape(int landShape) {
@@ -175,7 +175,7 @@ public class CitySellRent {
     }
 
     public String getLandLength() {
-        return this.landLength;
+        return landLength;
     }
 
     public void setLandLength(String landLength) {
@@ -183,7 +183,7 @@ public class CitySellRent {
     }
 
     public String getLandWidth() {
-        return this.landWidth;
+        return landWidth;
     }
 
     public void setLandWidth(String landWidth) {
@@ -191,7 +191,7 @@ public class CitySellRent {
     }
 
     public int getLandDevelopingSituation() {
-        return this.landDevelopingSituation;
+        return landDevelopingSituation;
     }
 
     public void setLandDevelopingSituation(int landDevelopingSituation) {
@@ -199,7 +199,7 @@ public class CitySellRent {
     }
 
     public int getBuildingDirection() {
-        return this.buildingDirection;
+        return buildingDirection;
     }
 
     public void setBuildingDirection(int buildingDirection) {
@@ -207,7 +207,7 @@ public class CitySellRent {
     }
 
     public int getNearbyStreetSituation() {
-        return this.nearbyStreetSituation;
+        return nearbyStreetSituation;
     }
 
     public void setNearbyStreetSituation(int nearbyStreetSituation) {
@@ -215,7 +215,7 @@ public class CitySellRent {
     }
 
     public float getDistToCornor() {
-        return this.distToCornor;
+        return distToCornor;
     }
 
     public void setDistToCornor(float distToCornor) {
@@ -223,7 +223,7 @@ public class CitySellRent {
     }
 
     public float getWidthToStreet() {
-        return this.widthToStreet;
+        return widthToStreet;
     }
 
     public void setWidthToStreet(float widthToStreet) {
@@ -231,15 +231,15 @@ public class CitySellRent {
     }
 
     public float getDepthToStreet() {
-        return this.depthToStreet;
+        return depthToStreet;
     }
 
     public void setDepthToStreet(float depthToStreet) {
         this.depthToStreet = depthToStreet;
     }
 
-    public boolean getGore() {
-        return this.gore;
+    public boolean isGore() {
+        return gore;
     }
 
     public void setGore(boolean gore) {
@@ -247,7 +247,7 @@ public class CitySellRent {
     }
 
     public float getBuildingPlotRate() {
-        return this.buildingPlotRate;
+        return buildingPlotRate;
     }
 
     public void setBuildingPlotRate(float buildingPlotRate) {
@@ -255,7 +255,7 @@ public class CitySellRent {
     }
 
     public String getAuthorizedTime() {
-        return this.authorizedTime;
+        return authorizedTime;
     }
 
     public void setAuthorizedTime(String authorizedTime) {
@@ -263,7 +263,7 @@ public class CitySellRent {
     }
 
     public float getLandServiceableLife() {
-        return this.landServiceableLife;
+        return landServiceableLife;
     }
 
     public void setLandServiceableLife(float landServiceableLife) {
@@ -271,7 +271,7 @@ public class CitySellRent {
     }
 
     public String getHouseLocation() {
-        return this.houseLocation;
+        return houseLocation;
     }
 
     public void setHouseLocation(String houseLocation) {
@@ -279,7 +279,7 @@ public class CitySellRent {
     }
 
     public int getStructureType() {
-        return this.structureType;
+        return structureType;
     }
 
     public void setStructureType(int structureType) {
@@ -287,23 +287,23 @@ public class CitySellRent {
     }
 
     public int getQualityLevel() {
-        return this.qualityLevel;
+        return qualityLevel;
     }
 
     public void setQualityLevel(int qualityLevel) {
         this.qualityLevel = qualityLevel;
     }
 
-    public float getBuindingArea() {
-        return this.buindingArea;
+    public float getBuildingArea() {
+        return buildingArea;
     }
 
-    public void setBuindingArea(float buindingArea) {
-        this.buindingArea = buindingArea;
+    public void setBuildingArea(float buildingArea) {
+        this.buildingArea = buildingArea;
     }
 
     public float getHouseArea() {
-        return this.houseArea;
+        return houseArea;
     }
 
     public void setHouseArea(float houseArea) {
@@ -311,7 +311,7 @@ public class CitySellRent {
     }
 
     public String getDetail() {
-        return this.detail;
+        return detail;
     }
 
     public void setDetail(String detail) {
@@ -319,7 +319,7 @@ public class CitySellRent {
     }
 
     public float getLongitude() {
-        return this.longitude;
+        return longitude;
     }
 
     public void setLongitude(float longitude) {
@@ -327,7 +327,7 @@ public class CitySellRent {
     }
 
     public float getLatitude() {
-        return this.latitude;
+        return latitude;
     }
 
     public void setLatitude(float latitude) {
@@ -335,7 +335,7 @@ public class CitySellRent {
     }
 
     public String getResearcher() {
-        return this.researcher;
+        return researcher;
     }
 
     public void setResearcher(String researcher) {
@@ -343,7 +343,7 @@ public class CitySellRent {
     }
 
     public String getResearcherTime() {
-        return this.researcherTime;
+        return researcherTime;
     }
 
     public void setResearcherTime(String researcherTime) {
@@ -351,7 +351,7 @@ public class CitySellRent {
     }
 
     public Long getUserId() {
-        return this.userId;
+        return userId;
     }
 
     public void setUserId(Long userId) {
@@ -359,10 +359,14 @@ public class CitySellRent {
     }
 
     public int getModelType() {
-        return this.modelType;
+        return modelType;
     }
 
     public void setModelType(int modelType) {
         this.modelType = modelType;
+    }
+
+    public boolean getGore() {
+        return this.gore;
     }
 }

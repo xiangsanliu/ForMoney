@@ -9,8 +9,8 @@ import android.widget.TextView;
 
 import org.chengjian.java.feidian.collectdata.R;
 import org.chengjian.java.feidian.collectdata.beans.CitySellRent;
+import org.chengjian.java.feidian.collectdata.mvp.model.StickyMessage;
 import org.chengjian.java.feidian.collectdata.mvp.ui.activities.CommercialHouseSellActivity;
-import org.chengjian.java.feidian.collectdata.mvp.ui.activities.dataAdder.CommercialHouseTradeActivity;
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
@@ -68,8 +68,8 @@ public class CommercialHouseTradeAdapter extends BaseRecyclerAdapter<CitySellRen
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    EventBus.getDefault().postSticky(data);
-                    mContext.startActivity(new Intent(mContext, CommercialHouseTradeActivity.class));
+                    EventBus.getDefault().postSticky(new StickyMessage(data, false));
+                    mContext.startActivity(new Intent(mContext, CommercialHouseSellActivity.class));
                 }
             });
         }

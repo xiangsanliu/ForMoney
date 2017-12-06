@@ -13,6 +13,14 @@ import org.chengjian.java.feidian.collectdata.beans.ShopRentModel;
 
 public class StickyMessage {
 
+    public StickyMessage(CitySellRent citySellRent, Boolean isEditable) {
+        this.citySellRent = citySellRent;
+        this.isEditable = isEditable;
+    }
+
+    public StickyMessage() {
+    }
+
     private CitySellRent citySellRent;
     private Boolean isEditable;
 

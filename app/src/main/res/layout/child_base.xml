@@ -6,6 +6,9 @@
 
     <data>
         <variable
+            name="citySellRent"
+            type="org.chengjian.java.feidian.collectdata.beans.CitySellRent"/>
+        <variable
             name="editable"
             type="Boolean"/>
     </data>
@@ -50,6 +53,7 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
+                            android:text="@={citySellRent.researcher}"
                             android:maxLines="1"
                             android:id="@+id/et_reasearcher"
                             android:layout_width=   "match_parent"
@@ -63,6 +67,7 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
+                            android:text="@={citySellRent.researcherTime}"
                             android:maxLines="1"
                             android:id="@+id/et_reasearch_time"
                             android:layout_width="match_parent"
@@ -76,6 +81,7 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
+                            android:text="@={citySellRent.detail}"
                             android:id="@+id/et_detail"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"

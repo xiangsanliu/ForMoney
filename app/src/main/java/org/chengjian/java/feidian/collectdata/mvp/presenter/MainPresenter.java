@@ -19,10 +19,6 @@ import org.chengjian.java.feidian.collectdata.mvp.model.LocalDbModel;
 import org.chengjian.java.feidian.collectdata.mvp.model.StickyMessage;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.base.BasePresenter;
 import org.chengjian.java.feidian.collectdata.mvp.ui.activities.CommercialHouseSellActivity;
-import org.chengjian.java.feidian.collectdata.mvp.ui.activities.HouseRentActivity;
-import org.chengjian.java.feidian.collectdata.mvp.ui.activities.HouseSellActivity;
-import org.chengjian.java.feidian.collectdata.mvp.ui.activities.ShopRentActivity;
-import org.chengjian.java.feidian.collectdata.mvp.ui.activities.dataAdder.CommercialHouseTradeActivity;
 import org.chengjian.java.feidian.collectdata.mvp.ui.fragments.CommercialHouseTradeFragment;
 import org.chengjian.java.feidian.collectdata.mvp.ui.fragments.HouseRentFragment;
 import org.chengjian.java.feidian.collectdata.mvp.ui.fragments.HouseSellFragment;
@@ -64,7 +60,7 @@ public class MainPresenter extends BasePresenter<MainView> {
 
         if (currentFragment instanceof CommercialHouseTradeFragment) {
             stickyMessage.setCitySellRent(initCitySellRent(id, Constants.COMMERCIAL_HOUSE_TRADE));
-            intent = new Intent(mContext, CommercialHouseTradeActivity.class);
+            intent = new Intent(mContext, CommercialHouseSellActivity.class);
         } else if (currentFragment instanceof HouseRentFragment) {
             stickyMessage.setCitySellRent(initCitySellRent(id, Constants.HOUSE_RENT));
 //            intent = new Intent(mContext, HouseRentActivity.class);
