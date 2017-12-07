@@ -229,8 +229,6 @@ public class LocalDbModel extends BaseModel {
         citySellRent.setUserId((long) 1);
         System.out.println(JSON.toJSONString(citySellRent));
         daoSession.getCitySellRentDao().insert(citySellRent);
-        TestTask testTask = new TestTask();
-        testTask.execute(JSON.toJSONString(citySellRent), "xiang");
     }
 
 

@@ -43,7 +43,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:el_duration="500"
-                app:el_expanded="true">
+                app:el_expanded="false">
 
                 <LinearLayout
                     android:layout_marginStart="8dp"
@@ -99,7 +99,7 @@
                             android:layout_height="wrap_content">
                             <android.support.design.widget.TextInputEditText
                                 android:enabled='@{editable}'
-                                android:text='@{commercialHouseTradeModel.loanYear}'
+                                android:text='@{""+commercialHouseTradeModel.loanYear}'
                                 android:id="@+id/et_load_year"
                                 android:inputType="text"
                                 android:layout_width="match_parent"

@@ -189,7 +189,6 @@ public class DrawerActivity extends TabPagerActivity
         switch (view.getId()) {
             case R.id.btn_add_item:
                 mainPresenter.createTable();
-                test();
                 break;
             default:
                 break;

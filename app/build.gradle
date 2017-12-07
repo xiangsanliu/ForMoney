@@ -31,7 +31,7 @@ dependencies {
 //        exclude group: 'com.android.support', module: 'support-annotations'
 //    })
 //    compile files('libs/smoothcompoundbuttonlibrary.jar')
-    compile group: 'com.amap.api', name: 'map2d', version: '5.2.0'
+    compile 'com.amap.api:map2d:5.2.0'
     compile 'com.amap.api:location:3.6.1'
     compile('com.github.ganfra:material-spinner:2.0.0') {
         exclude group: 'com.android.support'

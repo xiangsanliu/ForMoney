@@ -1,19 +1,31 @@
 package org.chengjian.java.feidian.collectdata.mvp.ui.activities;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationClientOption;
+import com.amap.api.location.AMapLocationListener;
+import com.amap.api.maps2d.AMap;
+
 import org.chengjian.java.feidian.collectdata.R;
 import org.chengjian.java.feidian.collectdata.beans.CommercialHouseTradeModel;
 import org.chengjian.java.feidian.collectdata.databinding.ActivityCommercialHouseTradeBinding;
+import org.chengjian.java.feidian.collectdata.mvp.model.ResultMessage;
 import org.chengjian.java.feidian.collectdata.mvp.model.StickyMessage;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.detail.DetailCHSPresenter;
 import org.chengjian.java.feidian.collectdata.mvp.ui.activities.base.DetailBaseActivity;
 import org.chengjian.java.feidian.collectdata.mvp.view.base.DetailCHSView;
+import org.chengjian.java.feidian.collectdata.shared.Constants;
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.Map;
 
 
 public class CommercialHouseSellActivity extends DetailBaseActivity implements View.OnClickListener, DetailCHSView {
@@ -22,6 +34,7 @@ public class CommercialHouseSellActivity extends DetailBaseActivity implements V
     ActivityCommercialHouseTradeBinding binding;
     private CommercialHouseTradeModel model;
     private DetailCHSPresenter presenter;
+    private boolean isNew;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,10 +56,28 @@ public class CommercialHouseSellActivity extends DetailBaseActivity implements V
         binding.childChsBuildingSituation.buttonBuildingSituation.setOnClickListener(this);
         binding.childChsLandSituation.buttonLandSituation.setOnClickListener(this);
         binding.childChsTradeSituation.buttonTradeSituation.setOnClickListener(this);
+        binding.buttonDelete.setOnClickListener(this);
+        binding.buttonEdit.setOnClickListener(this);
+        binding.buttonSave.setOnClickListener(this);
+        binding.childChsLandSituation.etAuthorizedTime.setOnClickListener(this);
+        binding.childChsTradeSituation.etTradeTime.setOnClickListener(this);
+        binding.childBase.locate.setOnClickListener(this);
     }
 
     @Override
     public void initSpinner() {
+        binding.childChsLandSituation.spBuildingDirection.setSelection(citySellRent.getBuildingDirection());
+        binding.childChsLandSituation.spCrossroadSituation.setSelection(citySellRent.getCrossRoadSituation());
+        binding.childChsLandSituation.spIsGore.setSelection(citySellRent.isGore()?0:1);
+        binding.childChsLandSituation.spLandDevelopingSituation.setSelection(citySellRent.getLandDevelopingSituation());
+        binding.childChsLandSituation.spLandShape.setSelection(citySellRent.getLandShape());
+        binding.childChsLandSituation.spNearbyStreetSituation.setSelection(citySellRent.getNearbyStreetSituation());
+        binding.childChsLandSituation.spUsageActucal.setSelection(model.getUseageActual());
+        binding.childChsLandSituation.spUsagePlaned.setSelection(model.getUseagePlande());
+        binding.childChsBuildingSituation.spQualityLevel.setSelection(citySellRent.getQualityLevel());
+        binding.childChsBuildingSituation.spStructureType.setSelection(citySellRent.getStructureType());
+        binding.childChsTradeSituation.spTradeType.setSelection(model.getTradeType());
+
     }
 
     private void initView(StickyMessage message) {
@@ -54,12 +85,13 @@ public class CommercialHouseSellActivity extends DetailBaseActivity implements V
         this.isEditable = message.getEditable();
         binding.setCitySellRent(citySellRent);
         binding.setEditable(isEditable);
-        Log.d("xiang", isEditable+"");
         if (!isEditable) {
             presenter.loadModel(citySellRent.getId());
+            isNew = false;
         } else {
             model = new CommercialHouseTradeModel();
             model.setId(citySellRent.getId());
+            isNew = false;
             initCommercialHouseTradeModel(model);
         }
     }
@@ -68,22 +100,39 @@ public class CommercialHouseSellActivity extends DetailBaseActivity implements V
     public void onEventMainThread(StickyMessage stickyMessage) {
         initView(stickyMessage);
         initExpandableLayout();
-        initSpinner();
     }
+
 
     @Override
     public void getSpinner() {
+        citySellRent.setBuildingDirection(binding.childChsLandSituation.spBuildingDirection.getSelectedItemPosition());
+        citySellRent.setCrossRoadSituation(binding.childChsLandSituation.spCrossroadSituation.getSelectedItemPosition());
+        citySellRent.setGore(binding.childChsLandSituation.spIsGore.getSelectedItemPosition() == 0);
+        citySellRent.setLandDevelopingSituation(binding.childChsLandSituation.spLandDevelopingSituation.getSelectedItemPosition());
+        citySellRent.setLandShape(binding.childChsLandSituation.spLandShape.getSelectedItemPosition());
+        citySellRent.setNearbyStreetSituation(binding.childChsLandSituation.spNearbyStreetSituation.getSelectedItemPosition());
+        model.setUseageActual(binding.childChsLandSituation.spUsageActucal.getSelectedItemPosition());
+        model.setUseagePlande(binding.childChsLandSituation.spUsagePlaned.getSelectedItemPosition());
+        citySellRent.setQualityLevel(binding.childChsBuildingSituation.spQualityLevel.getSelectedItemPosition());
+        citySellRent.setStructureType(binding.childChsBuildingSituation.spStructureType.getSelectedItemPosition());
+        model.setTradeType(binding.childChsTradeSituation.spTradeType.getSelectedItemPosition());
 
     }
 
     @Override
     public void save() {
-
+        Long id = System.currentTimeMillis();
+        citySellRent.setId(id);
+        model.setId(id);
+        getSpinner();
+        System.out.println("landdev"+citySellRent.getLandDevelopingSituation());
+        presenter.save(citySellRent, model);
     }
 
     @Override
     public void delete() {
-
+        presenter.deleteCity(citySellRent.getId());
+        EventBus.getDefault().postSticky(new ResultMessage(true));
     }
 
     @Override
@@ -113,7 +162,32 @@ public class CommercialHouseSellActivity extends DetailBaseActivity implements V
                 binding.childChsBuildingSituation.elBuildingSituation.collapse();
                 binding.childChsLandSituation.elLandSituation.collapse();
                 binding.childBase.elExtra.collapse();
-
+                break;
+            case R.id.button_edit:
+                binding.setEditable(true);
+                binding.childBase.etReasearcher.requestFocus();
+                binding.childBase.elExtra.expand();
+                break;
+            case R.id.button_delete:
+                delete();
+                finish();
+                break;
+            case R.id.button_save:
+                isEditable = false;
+                binding.setEditable(false);
+                delete();
+                save();
+                binding.setEditable(false);
+                break;
+            case R.id.et_authorized_time:
+                setTime(binding.childChsLandSituation.etAuthorizedTime);
+                break;
+            case R.id.et_trade_time:
+                setTime(binding.childChsTradeSituation.etTradeTime);
+                break;
+            case R.id.locate:
+//                startActivityForResult(new Intent(this, MapActivity.class), RESULT_OK);
+                locate();
         }
     }
 
@@ -124,7 +198,7 @@ public class CommercialHouseSellActivity extends DetailBaseActivity implements V
 
     @Override
     public void hideProgress() {
-
+        presenter.dismissProgress();
     }
 
     @Override
@@ -132,8 +206,33 @@ public class CommercialHouseSellActivity extends DetailBaseActivity implements V
 
     }
 
+    private void locate() {
+        AMapLocationClient aMapLocationClient;
+        AMapLocationClientOption aMapLocationClientOption = new AMapLocationClientOption();
+        aMapLocationClientOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
+        aMapLocationClientOption.setNeedAddress(true);
+        aMapLocationClientOption.setOnceLocation(true);
+        aMapLocationClient = new AMapLocationClient(getApplicationContext());
+        aMapLocationClient.setLocationListener(new AMapLocationListener() {
+            @Override
+            public void onLocationChanged(AMapLocation aMapLocation) {
+                System.out.println(aMapLocation.getAddress());
+                System.out.println(aMapLocation.getLongitude());
+                System.out.println(aMapLocation.getLatitude());
+                binding.childBase.longitude.setText(String.valueOf(aMapLocation.getLongitude()));
+                binding.childBase.latitude.setText(String.valueOf(aMapLocation.getLatitude()));
+                binding.childChsLandSituation.etLandLocation.setText(aMapLocation.getAddress());
+
+            }
+        });
+        aMapLocationClient.setLocationOption(aMapLocationClientOption);
+        aMapLocationClient.startLocation();
+    }
+
     @Override
     public void initCommercialHouseTradeModel(CommercialHouseTradeModel model) {
         binding.setCommercialHouseTradeModel(model);
+        this.model = model;
+        initSpinner();
     }
 }

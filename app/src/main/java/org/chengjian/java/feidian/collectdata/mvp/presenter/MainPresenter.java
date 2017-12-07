@@ -7,13 +7,6 @@ import android.os.Bundle;
 import android.util.Log;
 
 import org.chengjian.java.feidian.collectdata.beans.CitySellRent;
-import org.chengjian.java.feidian.collectdata.beans.CommercialHouseTradeModel;
-import org.chengjian.java.feidian.collectdata.beans.Editable;
-import org.chengjian.java.feidian.collectdata.beans.RentInfo2Model;
-import org.chengjian.java.feidian.collectdata.beans.RentInfo4Model;
-import org.chengjian.java.feidian.collectdata.beans.SellRentModel;
-import org.chengjian.java.feidian.collectdata.beans.TradeInfo1Model;
-import org.chengjian.java.feidian.collectdata.beans.TradeInfo3Model;
 import org.chengjian.java.feidian.collectdata.mvp.model.BaseModel;
 import org.chengjian.java.feidian.collectdata.mvp.model.LocalDbModel;
 import org.chengjian.java.feidian.collectdata.mvp.model.StickyMessage;

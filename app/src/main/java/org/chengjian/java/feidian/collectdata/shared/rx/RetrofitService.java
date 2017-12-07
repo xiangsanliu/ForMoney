@@ -21,4 +21,13 @@ public interface RetrofitService {
     @GET("/city/get/commercial")
     Observable<CommercialHouseTradeModel> getCommercialHouseTradeModel(@Query("id") Long id);
 
+    @GET("/city/delete/city")
+    Observable<String> deleteCitySellRent(@Query("id") Long id);
+
+    @GET("/city/save/city")
+    Observable<String> saveCitySellRent(@Query("content") String content) ;
+
+    @GET("/city/save/commercial")
+    Observable<String> saveCommercial(@Query("content") String content);
+
 }
