@@ -24,26 +24,15 @@ import rx.schedulers.Schedulers;
 
 public class DetailCHSPresenter extends DetailBasePresenter<DetailCHSView> {
 
-    private NetModel netModel;
-    private Activity activity;
-
-    private ProgressDialog progressDialog;
-
     public DetailCHSPresenter(Activity activity) {
         this.activity = activity;
-        progressDialog = createProgress();
         netModel = NetModel.newInstance();
     }
 
-    private ProgressDialog createProgress() {
-        ProgressDialog progressDialog = new ProgressDialog(activity);
-        progressDialog.setMessage("加载中");
-        progressDialog.create();
-        return progressDialog;
-    }
-    
-    public void deleteCity(Long id) {
-        netModel.deleteCity(id)
+    public void save(CitySellRent citySellRent, CommercialHouseTradeModel model) {
+        progressDialog = createProgress("上传中");
+        progressDialog.show();
+        netModel.saveCity(JSON.toJSONString(citySellRent))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>() {
@@ -53,98 +42,42 @@ public class DetailCHSPresenter extends DetailBasePresenter<DetailCHSView> {
 
                     @Override
                     public void onError(Throwable e) {
-                        e.printStackTrace();
+                        showToast("上传失败");
                     }
 
                     @Override
                     public void onNext(String s) {
-                        showToast("删除成功");
+                        showToast("上传成功");
                     }
                 });
-    }
-
-    public void save(CitySellRent citySellRent, CommercialHouseTradeModel model) {
-        System.out.println("save");
-//        netModel.saveCity(JSON.toJSONString(citySellRent))
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Observer<String>() {
-//                    @Override
-//                    public void onCompleted() {
-//                        progressDialog.dismiss();
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//                        e.printStackTrace();
-//                        showToast("保存失败");
-//                    }
-//
-//                    @Override
-//                    public void onNext(String s) {
-//
-//                    }
-//                });
-//        netModel.saveCommercial(JSON.toJSONString(model))
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Observer<String>() {
-//                    @Override
-//                    public void onCompleted() {
-//                        progressDialog.dismiss();
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//                        e.printStackTrace();
-//                        showToast("保存失败");
-//                    }
-//
-//                    @Override
-//                    public void onNext(String s) {
-//                        showToast("保存成功");
-//                    }
-//                });
-        TestTask testTask = new TestTask(view);
-        testTask.execute(JSON.toJSONString(citySellRent), JSON.toJSONString(model));
-    }
-
-    @Override
-    public void dismissProgress() {
-        if (progressDialog!=null)
-            progressDialog.dismiss();
-    }
-
-    @Override
-    public void showProgress() {
-        if (progressDialog!=null)
-            progressDialog.show();
-    }
-
-    public void loadModel(Long id) {
-        netModel.getCommercialHouseTradeModel(id)
+        netModel.saveCommercial(JSON.toJSONString(model))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>() {
                     @Override
                     public void onCompleted() {
+                        progressDialog.dismiss();
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        showToast("请求出错");
-                        e.printStackTrace();
-                        activity.finish();
+                        progressDialog.dismiss();
+                        showToast("上传失败");
                     }
 
                     @Override
-                    public void onNext(String model) {
-                        view.initCommercialHouseTradeModel(JSON.parseObject(model, CommercialHouseTradeModel.class));
+                    public void onNext(String s) {
+                        progressDialog.dismiss();
+                        showToast("上传成功");
                     }
                 });
-
     }
-    
+
+
+
+
+
+
     @SuppressLint("ShowToast")
     public void showToast(String message) {
         Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();

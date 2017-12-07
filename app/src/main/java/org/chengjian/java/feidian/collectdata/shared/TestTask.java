@@ -1,5 +1,6 @@
 package org.chengjian.java.feidian.collectdata.shared;
 
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -21,9 +22,11 @@ import okhttp3.*;
 public class TestTask  extends AsyncTask<String , Void, Void>{
 
     private DetailCHSView view;
+    ProgressDialog progressDialog;
 
-    public TestTask(DetailCHSView view) {
+    public TestTask(DetailCHSView view, ProgressDialog progressDialog) {
         this.view = view;
+        this.progressDialog = progressDialog;
     }
 
     @Override
@@ -50,7 +53,7 @@ public class TestTask  extends AsyncTask<String , Void, Void>{
                     .build();
             okHttpClient.newCall(request).execute();
             System.out.println(response.code()+" "+response.message());
-
+            progressDialog.dismiss();
         } catch (IOException e) {
             e.printStackTrace();
         }

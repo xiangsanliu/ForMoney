@@ -87,8 +87,17 @@ public class NetModel {
         return okHttpClient.newCall(request).execute().body().string();
     }
 
-    public Observable<String> deleteCity(Long id) {
-        return service.deleteCitySellRent(id);
+    public Observable<Integer> deleteCity(final Long id) {
+        return Observable.create(new Observable.OnSubscribe<Integer>() {
+            @Override
+            public void call(Subscriber<? super Integer> subscriber) {
+                try {
+                    subscriber.onNext(delete(id, "/city/delete/city"));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     public Observable<String> saveCity(final String content) {
@@ -97,7 +106,7 @@ public class NetModel {
             public void call(Subscriber<? super String> subscriber) {
                 System.out.println("call");
                 try {
-                    subscriber.onNext(save(content, "save/citiy"));
+                    subscriber.onNext(save(content, "/city/save/city"));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -105,13 +114,25 @@ public class NetModel {
         });
     }
 
+    public Integer delete(Long id, String url) throws IOException {
+        System.out.println("savein");
+        OkHttpClient okHttpClient = new OkHttpClient();
+        RequestBody body = new FormBody.Builder()
+                .add("id", String.valueOf(id))
+                .build();
+        Request request = new Request.Builder()
+                .post(body)
+                .url(Constants.BASE_RUL+url)
+                .build();
+        return okHttpClient.newCall(request).execute().code();
+    }
 
     public Observable<String> saveCommercial(final String content) {
         return Observable.create(new Observable.OnSubscribe<String>() {
             @Override
             public void call(Subscriber<? super String> subscriber) {
                 try {
-                    subscriber.onNext(save(content, "save/commercial"));
+                    subscriber.onNext(save(content, "/city/save/commercial"));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.alibaba.fastjson.JSON;
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
@@ -34,13 +35,12 @@ public class CommercialHouseSellActivity extends DetailBaseActivity implements V
     ActivityCommercialHouseTradeBinding binding;
     private CommercialHouseTradeModel model;
     private DetailCHSPresenter presenter;
-    private boolean isNew;
+    AMapLocationClient aMapLocationClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, getLayoutId());
-        initExpandableLayout();
         presenter = new DetailCHSPresenter(this);
         presenter.attachView(this);
     }
@@ -87,12 +87,10 @@ public class CommercialHouseSellActivity extends DetailBaseActivity implements V
         binding.setEditable(isEditable);
         if (!isEditable) {
             presenter.loadModel(citySellRent.getId());
-            isNew = false;
         } else {
             model = new CommercialHouseTradeModel();
             model.setId(citySellRent.getId());
-            isNew = false;
-            initCommercialHouseTradeModel(model);
+            initModel(model);
         }
     }
 
@@ -101,7 +99,6 @@ public class CommercialHouseSellActivity extends DetailBaseActivity implements V
         initView(stickyMessage);
         initExpandableLayout();
     }
-
 
     @Override
     public void getSpinner() {
@@ -121,23 +118,25 @@ public class CommercialHouseSellActivity extends DetailBaseActivity implements V
 
     @Override
     public void save() {
-        Long id = System.currentTimeMillis();
-        citySellRent.setId(id);
-        model.setId(id);
         getSpinner();
-        System.out.println("landdev"+citySellRent.getLandDevelopingSituation());
+        binding.setEditable(false);
         presenter.save(citySellRent, model);
+        if (aMapLocationClient != null) {
+            aMapLocationClient.stopLocation();
+        }
     }
 
     @Override
     public void delete() {
         presenter.deleteCity(citySellRent.getId());
         EventBus.getDefault().postSticky(new ResultMessage(true));
+        if (aMapLocationClient != null) {
+            aMapLocationClient.stopLocation();
+        }
     }
 
     @Override
     public void onClick(View v) {
-
         switch (v.getId()) {
             case R.id.button_extra:
                 changeELState(binding.childBase.elExtra);
@@ -168,16 +167,13 @@ public class CommercialHouseSellActivity extends DetailBaseActivity implements V
                 binding.childBase.etReasearcher.requestFocus();
                 binding.childBase.elExtra.expand();
                 break;
+
+
             case R.id.button_delete:
                 delete();
-                finish();
                 break;
             case R.id.button_save:
-                isEditable = false;
-                binding.setEditable(false);
-                delete();
                 save();
-                binding.setEditable(false);
                 break;
             case R.id.et_authorized_time:
                 setTime(binding.childChsLandSituation.etAuthorizedTime);
@@ -185,6 +181,7 @@ public class CommercialHouseSellActivity extends DetailBaseActivity implements V
             case R.id.et_trade_time:
                 setTime(binding.childChsTradeSituation.etTradeTime);
                 break;
+
             case R.id.locate:
 //                startActivityForResult(new Intent(this, MapActivity.class), RESULT_OK);
                 locate();
@@ -206,33 +203,37 @@ public class CommercialHouseSellActivity extends DetailBaseActivity implements V
 
     }
 
+
+    //获取位置信息
     private void locate() {
-        AMapLocationClient aMapLocationClient;
         AMapLocationClientOption aMapLocationClientOption = new AMapLocationClientOption();
         aMapLocationClientOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
         aMapLocationClientOption.setNeedAddress(true);
-        aMapLocationClientOption.setOnceLocation(true);
+        aMapLocationClientOption.setInterval(2000);
         aMapLocationClient = new AMapLocationClient(getApplicationContext());
         aMapLocationClient.setLocationListener(new AMapLocationListener() {
             @Override
             public void onLocationChanged(AMapLocation aMapLocation) {
-                System.out.println(aMapLocation.getAddress());
-                System.out.println(aMapLocation.getLongitude());
-                System.out.println(aMapLocation.getLatitude());
                 binding.childBase.longitude.setText(String.valueOf(aMapLocation.getLongitude()));
                 binding.childBase.latitude.setText(String.valueOf(aMapLocation.getLatitude()));
                 binding.childChsLandSituation.etLandLocation.setText(aMapLocation.getAddress());
-
             }
         });
         aMapLocationClient.setLocationOption(aMapLocationClientOption);
         aMapLocationClient.startLocation();
     }
 
+    //加载CommercialHouseTradeModel
     @Override
-    public void initCommercialHouseTradeModel(CommercialHouseTradeModel model) {
-        binding.setCommercialHouseTradeModel(model);
+    public void initModel(String model) {
+        this.model = JSON.parseObject(model, CommercialHouseTradeModel.class);
+        binding.setCommercialHouseTradeModel(this.model);
+        initSpinner();
+    }
+
+    public void initModel(CommercialHouseTradeModel model) {
         this.model = model;
+        binding.setCommercialHouseTradeModel(model);
         initSpinner();
     }
 }

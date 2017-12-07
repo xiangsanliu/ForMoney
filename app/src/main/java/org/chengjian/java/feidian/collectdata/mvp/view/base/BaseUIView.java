@@ -6,4 +6,5 @@ package org.chengjian.java.feidian.collectdata.mvp.view.base;
  */
 
 public interface BaseUIView extends ProgressView, MessageView {
+    public void initModel(String model);
 }

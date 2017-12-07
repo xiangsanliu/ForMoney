@@ -7,5 +7,5 @@ import org.chengjian.java.feidian.collectdata.beans.CommercialHouseTradeModel;
  */
 
 public interface DetailCHSView extends BaseUIView {
-    public void initCommercialHouseTradeModel(CommercialHouseTradeModel model);
+    public void initModel(String model);
 }
