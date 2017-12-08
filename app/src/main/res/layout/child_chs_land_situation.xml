@@ -6,9 +6,6 @@
     <data>
         <import type="android.view.View"/>
         <variable
-            name="commercialHouseTradeModel"
-            type="org.chengjian.java.feidian.collectdata.beans.CommercialHouseTradeModel" />
-        <variable
             name="citySellRent"
             type="org.chengjian.java.feidian.collectdata.beans.CitySellRent"/>
         <variable

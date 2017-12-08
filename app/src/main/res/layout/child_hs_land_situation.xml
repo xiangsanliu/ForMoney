@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="model"
+            type="org.chengjian.java.feidian.collectdata.beans.HouseTradeModel" />
+        <variable
+            name="citySellRent"
+            type="org.chengjian.java.feidian.collectdata.beans.CitySellRent"/>
+        <variable
+            name="editable"
+            type="Boolean"/>
+    </data>
+
+    <android.support.v7.widget.CardView
+        app:cardCornerRadius="10dp"
+        bind:cardElevation="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/button_land_situation"
+                style="@style/TextAppearance.AppCompat.Medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/itemColor3"
+                android:elevation="6dp"
+                android:foreground="?selectableItemBackground"
+                android:gravity="center"
+                android:padding="16dp"
+                android:text="土地基本状况"
+                android:textColor="#fff" />
+
+            <net.cachapa.expandablelayout.ExpandableLayout
+                android:id="@+id/el_land_situation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:el_duration="500"
+                app:el_expanded="false">
+
+                <LinearLayout
+                    android:layout_margin="8dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <android.support.design.widget.TextInputEditText
+                            android:enabled='@{editable}'
+                            android:id="@+id/et_land_location"
+                            android:hint="宗地位置"
+                            android:text="@={citySellRent.landLoacation}"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <android.support.design.widget.TextInputEditText
+                            android:enabled='@{editable}'
+                            android:id="@+id/et_land_range"
+                            android:hint="土地四至"
+                            android:text="@={citySellRent.landRange}"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <android.support.design.widget.TextInputEditText
+                            android:enabled='@{editable}'
+                            android:id="@+id/et_nearby_street_name"
+                            android:hint="所临道路名称"
+                            android:text="@={citySellRent.nearbyStreetName}"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+                    </android.support.design.widget.TextInputLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <fr.ganfra.materialspinner.MaterialSpinner
+                            android:layout_marginEnd="4dp"
+                            android:layout_weight="1"
+                            app:ms_hintTextSize="18sp"
+                            app:ms_hint="交叉路口形式"
+                            android:id="@+id/sp_crossroad_situation"
+                            android:entries="@array/array_nearby_street_type"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"/>
+
+                        <fr.ganfra.materialspinner.MaterialSpinner
+                            android:layout_weight="1"
+                            app:ms_hint="宗地形状"
+                            app:ms_hintTextSize="18sp"
+                            android:layout_marginStart="4dp"
+                            android:entries="@array/array_land_shape"
+                            android:id="@+id/sp_land_shape"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content">
+                            <android.support.design.widget.TextInputEditText
+                                android:hint="宗地长度"
+                                android:id="@+id/et_land_length"
+                                android:layout_width="match_parent"
+                                android:text='@={citySellRent.landLength}'
+                                android:layout_height="wrap_content"
+                                android:inputType="text">
+                            </android.support.design.widget.TextInputEditText>
+                        </android.support.design.widget.TextInputLayout>
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content">
+                            <android.support.design.widget.TextInputEditText
+                                android:hint="宗地宽度"
+                                android:text='@={citySellRent.landWidth}'
+                                android:id="@+id/et_land_width"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+                        </android.support.design.widget.TextInputLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_height="wrap_content">
+                        <fr.ganfra.materialspinner.MaterialSpinner
+                            app:ms_hintTextSize="18sp"
+                            android:layout_marginEnd="4dp"
+                            app:ms_hint="土地开发状况"
+                            android:id="@+id/sp_land_developing_situation"
+                            android:entries="@array/array_land_developing_situation"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"/>
+                        <fr.ganfra.materialspinner.MaterialSpinner
+                            app:ms_hintTextSize="18sp"
+                            android:layout_weight="1"
+                            app:ms_hint="建筑朝向"
+                            android:layout_marginStart="4dp"
+                            android:id="@+id/sp_building_direction"
+                            android:entries="@array/array_building_direction"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <fr.ganfra.materialspinner.MaterialSpinner
+                            app:ms_hintTextSize="18sp"
+                            app:ms_hint="临街状况"
+                            android:id="@+id/sp_nearby_street_situation"
+                            android:layout_marginEnd="4dp"
+                            android:layout_weight="1"
+                            android:entries="@array/array_nearby_street_situation"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"/>
+
+                        <fr.ganfra.materialspinner.MaterialSpinner
+                            app:ms_hintTextSize="18sp"
+                            android:layout_marginStart="4dp"
+                            android:layout_weight="1"
+                            app:ms_hint="畸零地"
+                            android:entries="@array/array_bool"
+                            android:id="@+id/sp_is_gore"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:baselineAligned="false">
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_weight="1"
+                            android:hint="至拐角距离"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content">
+                            <android.support.design.widget.TextInputEditText
+                                android:text='@={""+citySellRent.distToCornor}'
+                                android:id="@+id/et_dist_to_cornor"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+                        </android.support.design.widget.TextInputLayout>
+                        <android.support.design.widget.TextInputLayout
+                            android:hint="建筑容积率"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content">
+                            <android.support.design.widget.TextInputEditText
+                                android:text='@={"" + citySellRent.buildingPlotRate}'
+                                android:id="@+id/et_building_plot_rate"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+                        </android.support.design.widget.TextInputLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:baselineAligned="false">
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:hint="临街宽度(m)"
+                            android:layout_height="wrap_content">
+                            <android.support.design.widget.TextInputEditText
+                                android:text='@{"" + citySellRent.widthToStreet}'
+                                android:id="@+id/et_width_to_street"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+                        </android.support.design.widget.TextInputLayout>
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_weight="1"
+                            android:hint="临街深度(m)"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content">
+                            <android.support.design.widget.TextInputEditText
+                                android:text='@{"" + citySellRent.depthToStreet}'
+                                android:id="@+id/et_depth_to_street"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+                        </android.support.design.widget.TextInputLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <fr.ganfra.materialspinner.MaterialSpinner
+                            app:ms_hint="规划用途"
+                            app:ms_hintTextSize="18sp"
+                            android:layout_weight="1"
+                            android:layout_marginEnd="4dp"
+                            android:id="@+id/sp_usage_planed"
+                            android:entries="@array/array_usage"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"/>
+                        <fr.ganfra.materialspinner.MaterialSpinner
+                            app:ms_hint="实际用途"
+                            app:ms_hintTextSize="18sp"
+                            android:layout_marginStart="4dp"
+                            android:layout_weight="1"
+                            android:id="@+id/sp_usage_actucal"
+                            android:entries="@array/array_usage"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                    </LinearLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:hint="使用权取得时间"
+                        android:layout_height="wrap_content">
+                        <android.support.design.widget.TextInputEditText
+                            android:enabled='@{editable}'
+                            android:text="@={citySellRent.authorizedTime}"
+                            android:id="@+id/et_authorized_time"
+                            android:clickable="true"
+                            android:focusableInTouchMode="false"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:hint="土地使用年限"
+                        android:layout_height="wrap_content">
+                        <android.support.design.widget.TextInputEditText
+                            android:text='@={""+citySellRent.landServiceableLife}'
+                            android:enabled='@{editable}'
+                            android:id="@+id/et_land_serviceable_life"
+                            android:entries="@array/array_usage"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+                    </android.support.design.widget.TextInputLayout>
+
+                </LinearLayout>
+
+
+            </net.cachapa.expandablelayout.ExpandableLayout>
+
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+</layout>
+

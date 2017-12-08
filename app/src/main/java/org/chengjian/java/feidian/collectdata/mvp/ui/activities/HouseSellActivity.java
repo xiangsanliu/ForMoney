@@ -11,12 +11,16 @@ import android.widget.TextView;
 import net.cachapa.expandablelayout.ExpandableLayout;
 
 import org.chengjian.java.feidian.collectdata.R;
+import org.chengjian.java.feidian.collectdata.beans.HouseTradeModel;
 import org.chengjian.java.feidian.collectdata.beans.SellRentModel;
 import org.chengjian.java.feidian.collectdata.databinding.ActivityHouseSellBinding;
 import org.chengjian.java.feidian.collectdata.mvp.model.BaseModel;
 import org.chengjian.java.feidian.collectdata.mvp.model.LocalDbModel;
 import org.chengjian.java.feidian.collectdata.mvp.model.ResultMessage;
+import org.chengjian.java.feidian.collectdata.mvp.model.StickyMessage;
+import org.chengjian.java.feidian.collectdata.mvp.presenter.detail.DetailHSPresenter;
 import org.chengjian.java.feidian.collectdata.mvp.ui.activities.base.DetailBaseActivity;
+import org.chengjian.java.feidian.collectdata.mvp.view.base.DetailHSView;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -26,27 +30,19 @@ import java.util.Calendar;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class HouseSellActivity extends DetailBaseActivity implements View.OnClickListener {
+public class HouseSellActivity extends DetailBaseActivity implements View.OnClickListener, DetailHSView {
 
-    ActivityHouseSellBinding binding;
-    BaseModel dbModel;
+    private ActivityHouseSellBinding binding;
+    private DetailHSPresenter presenter;
+    private HouseTradeModel model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, getLayoutId());
-        dbModel = LocalDbModel.getInstance(this);
+        presenter = new DetailHSPresenter(this);
+        presenter.attachView(this);
     }
-
-//    private void initViews(SellRentModel sellRentModel) {
-//        if (sellRentModel.getResearcher() == null || sellRentModel.getResearcher().length()<=0 ) {
-//            editable.isEditable.set("true");
-//        } else {
-//            editable.isEditable.set("false");
-//        }
-//        binding.setSellRentModel(sellRentModel);
-//        binding.setEditable(editable);
-//    }
 
     @Override
     protected int getLayoutId() {
@@ -55,10 +51,13 @@ public class HouseSellActivity extends DetailBaseActivity implements View.OnClic
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void onEventMainThread(SellRentModel sellRentModel) {
-        this.sellRentModel = dbModel.querySellRentModelById(sellRentModel.getId());
-//        initViews(sellRentModel);
         initExpandableLayout();
         initSpinner();
+    }
+
+    private void initView(StickyMessage message) {
+        this.citySellRent = message.getCitySellRent();
+        this.isEditable = message.getEditable();
     }
 
     @Override
@@ -113,14 +112,11 @@ public class HouseSellActivity extends DetailBaseActivity implements View.OnClic
     public void save() {
 //        editable.isEditable.set("false");
         getSpinner();
-        dbModel.getDaoSession().getSellRentModelDao().update(binding.getSellRentModel());
-        dbModel.getDaoSession().getTradeInfo3ModelDao().update(binding.childTrade.getTradeModel());
         EventBus.getDefault().post(new ResultMessage(true));
     }
 
     @Override
     public void delete() {
-        dbModel.getDaoSession().getSellRentModelDao().delete(sellRentModel);
         EventBus.getDefault().postSticky(new ResultMessage(true));
         finish();
     }
@@ -159,5 +155,15 @@ public class HouseSellActivity extends DetailBaseActivity implements View.OnClic
                 setTime(binding.childTrade.etTradeTime);
                 break;
         }
+    }
+
+    @Override
+    public void initModel(String model) {
+
+    }
+
+    @Override
+    public void initModel(HouseTradeModel model) {
+
     }
 }
