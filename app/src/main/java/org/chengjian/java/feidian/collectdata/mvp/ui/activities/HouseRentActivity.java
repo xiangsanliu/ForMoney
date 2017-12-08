@@ -8,39 +8,32 @@ import android.view.View;
 import android.widget.DatePicker;
 
 import org.chengjian.java.feidian.collectdata.R;
+import org.chengjian.java.feidian.collectdata.beans.HouseRentModel;
 import org.chengjian.java.feidian.collectdata.beans.SellRentModel;
 import org.chengjian.java.feidian.collectdata.databinding.ActivityHouseRentBinding;
 import org.chengjian.java.feidian.collectdata.mvp.model.BaseModel;
 import org.chengjian.java.feidian.collectdata.mvp.model.LocalDbModel;
 import org.chengjian.java.feidian.collectdata.mvp.model.ResultMessage;
 import org.chengjian.java.feidian.collectdata.mvp.ui.activities.base.DetailBaseActivity;
+import org.chengjian.java.feidian.collectdata.mvp.view.base.DetailHRView;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.Calendar;
 
-public class HouseRentActivity extends DetailBaseActivity implements View.OnClickListener {
+public class HouseRentActivity extends DetailBaseActivity implements View.OnClickListener, DetailHRView {
 
-    ActivityHouseRentBinding binding;
-    BaseModel dbModel;
+    private ActivityHouseRentBinding binding;
+    private HouseRentModel model;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, getLayoutId());
-        dbModel = LocalDbModel.getInstance(this);
     }
 
-//    private void initViews(SellRentModel sellRentModel) {
-//        if (sellRentModel.getResearcher() == null || sellRentModel.getResearcher().length()<=0 ) {
-//            editable.isEditable.set("true");
-//        } else {
-//            editable.isEditable.set("false");
-//        }
-//        binding.setSellRentModel(sellRentModel);
-//        binding.setEditable(editable);
-//    }
 
 
     @Override
@@ -50,7 +43,6 @@ public class HouseRentActivity extends DetailBaseActivity implements View.OnClic
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void onEventMainThread(SellRentModel sellRentModel) {
-        this.sellRentModel = dbModel.querySellRentModelById(sellRentModel.getId());
 //        initViews(sellRentModel);
         initExpandableLayout();
         initSpinner();
@@ -110,16 +102,10 @@ public class HouseRentActivity extends DetailBaseActivity implements View.OnClic
     public void save() {
 //        editable.isEditable.set("false");
         getSpinner();
-        dbModel.getDaoSession().getSellRentModelDao().update(binding.getSellRentModel());
-        dbModel.getDaoSession().getRentInfo4ModelDao().update(binding.childRent.getRentModel());
-        EventBus.getDefault().post(new ResultMessage(true));
     }
 
     @Override
     public void delete() {
-        dbModel.getDaoSession().getSellRentModelDao().delete(sellRentModel);
-        EventBus.getDefault().postSticky(new ResultMessage(true));
-        finish();
     }
 
     @Override
@@ -156,5 +142,15 @@ public class HouseRentActivity extends DetailBaseActivity implements View.OnClic
                 setTime(binding.childRent.etAppointTime);
                 break;
         }
+    }
+
+    @Override
+    public void initModel(String model) {
+
+    }
+
+    @Override
+    public void initModel(HouseRentModel model) {
+
     }
 }

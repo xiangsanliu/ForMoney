@@ -12,6 +12,7 @@ import org.chengjian.java.feidian.collectdata.beans.CitySellRent;
 import org.chengjian.java.feidian.collectdata.beans.CommercialHouseTradeModel;
 import org.chengjian.java.feidian.collectdata.mvp.model.NetModel;
 import org.chengjian.java.feidian.collectdata.mvp.view.base.BaseUIView;
+import org.chengjian.java.feidian.collectdata.mvp.view.base.DetailBaseView;
 
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
@@ -22,14 +23,16 @@ import rx.schedulers.Schedulers;
  *
  */
 
-public class DetailBasePresenter <T extends BaseUIView> {
+public class DetailBasePresenter <T extends DetailBaseView> {
 
     protected T view;
     ProgressDialog progressDialog;
     NetModel netModel;
     Activity activity;
 
-
+    DetailBasePresenter() {
+        netModel = NetModel.newInstance();
+    }
 
     public void attachView(T view) {
         this.view = view;
@@ -71,6 +74,27 @@ public class DetailBasePresenter <T extends BaseUIView> {
                 });
     }
 
+    void saveCity(CitySellRent citySellRent) {
+        netModel.saveCity(JSON.toJSONString(citySellRent))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        showToast("上传失败");
+                    }
+
+                    @Override
+                    public void onNext(String s) {
+                        showToast("上传成功");
+                    }
+                });
+    }
+
     public void loadModel(Long id) {
         progressDialog = createProgress("加载中");
         progressDialog.show();
@@ -98,8 +122,7 @@ public class DetailBasePresenter <T extends BaseUIView> {
 
     }
 
-    @SuppressLint("ShowToast")
-    public void showToast(String content) {
+    void showToast(String content) {
         Toast.makeText((Context) view, content, Toast.LENGTH_SHORT).show();
     }
 

@@ -8,10 +8,17 @@ import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputEditText;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
+
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationClientOption;
+import com.amap.api.location.AMapLocationListener;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
 
@@ -34,6 +41,7 @@ public abstract class DetailBaseActivity extends BaseActivity {
     public CitySellRent citySellRent;
     public Boolean isEditable;
     public ViewDataBinding binding;
+    public AMapLocationClient aMapLocationClient;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
@@ -125,5 +133,24 @@ public abstract class DetailBaseActivity extends BaseActivity {
                 });
         builder.create().show();
     }
+
+    public void locate(final TextView longitude, final TextView latitude, final TextInputEditText landLocation) {
+        AMapLocationClientOption aMapLocationClientOption = new AMapLocationClientOption();
+        aMapLocationClientOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
+        aMapLocationClientOption.setNeedAddress(true);
+        aMapLocationClientOption.setInterval(2000);
+        aMapLocationClient = new AMapLocationClient(getApplicationContext());
+        aMapLocationClient.setLocationListener(new AMapLocationListener() {
+            @Override
+            public void onLocationChanged(AMapLocation aMapLocation) {
+                longitude.setText(String.valueOf(aMapLocation.getLongitude()));
+                latitude.setText(String.valueOf(aMapLocation.getLatitude()));
+                landLocation.setText(aMapLocation.getAddress());
+            }
+        });
+        aMapLocationClient.setLocationOption(aMapLocationClientOption);
+        aMapLocationClient.startLocation();
+    }
+
 
 }

@@ -3,8 +3,10 @@ package org.chengjian.java.feidian.collectdata.mvp.ui.activities;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.design.widget.TextInputEditText;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.amap.api.location.AMapLocation;
@@ -28,14 +30,12 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.Map;
 
-
 public class CommercialHouseSellActivity extends DetailBaseActivity implements View.OnClickListener, DetailCHSView {
 
 
-    ActivityCommercialHouseTradeBinding binding;
+    private ActivityCommercialHouseTradeBinding binding;
     private CommercialHouseTradeModel model;
     private DetailCHSPresenter presenter;
-    AMapLocationClient aMapLocationClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -167,8 +167,6 @@ public class CommercialHouseSellActivity extends DetailBaseActivity implements V
                 binding.childBase.etReasearcher.requestFocus();
                 binding.childBase.elExtra.expand();
                 break;
-
-
             case R.id.button_delete:
                 delete();
                 break;
@@ -184,43 +182,9 @@ public class CommercialHouseSellActivity extends DetailBaseActivity implements V
 
             case R.id.locate:
 //                startActivityForResult(new Intent(this, MapActivity.class), RESULT_OK);
-                locate();
+                locate(binding.childBase.longitude, binding.childBase.latitude
+                        , binding.childChsLandSituation.etLandLocation);
         }
-    }
-
-    @Override
-    public void showProgress() {
-
-    }
-
-    @Override
-    public void hideProgress() {
-        presenter.dismissProgress();
-    }
-
-    @Override
-    public void showMessage(String message) {
-
-    }
-
-
-    //获取位置信息
-    private void locate() {
-        AMapLocationClientOption aMapLocationClientOption = new AMapLocationClientOption();
-        aMapLocationClientOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
-        aMapLocationClientOption.setNeedAddress(true);
-        aMapLocationClientOption.setInterval(2000);
-        aMapLocationClient = new AMapLocationClient(getApplicationContext());
-        aMapLocationClient.setLocationListener(new AMapLocationListener() {
-            @Override
-            public void onLocationChanged(AMapLocation aMapLocation) {
-                binding.childBase.longitude.setText(String.valueOf(aMapLocation.getLongitude()));
-                binding.childBase.latitude.setText(String.valueOf(aMapLocation.getLatitude()));
-                binding.childChsLandSituation.etLandLocation.setText(aMapLocation.getAddress());
-            }
-        });
-        aMapLocationClient.setLocationOption(aMapLocationClientOption);
-        aMapLocationClient.startLocation();
     }
 
     //加载CommercialHouseTradeModel
@@ -231,6 +195,7 @@ public class CommercialHouseSellActivity extends DetailBaseActivity implements V
         initSpinner();
     }
 
+    @Override
     public void initModel(CommercialHouseTradeModel model) {
         this.model = model;
         binding.setCommercialHouseTradeModel(model);

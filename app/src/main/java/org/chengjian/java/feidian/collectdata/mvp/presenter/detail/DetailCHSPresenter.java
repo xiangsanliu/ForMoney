@@ -26,30 +26,12 @@ public class DetailCHSPresenter extends DetailBasePresenter<DetailCHSView> {
 
     public DetailCHSPresenter(Activity activity) {
         this.activity = activity;
-        netModel = NetModel.newInstance();
     }
 
     public void save(CitySellRent citySellRent, CommercialHouseTradeModel model) {
         progressDialog = createProgress("上传中");
         progressDialog.show();
-        netModel.saveCity(JSON.toJSONString(citySellRent))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<String>() {
-                    @Override
-                    public void onCompleted() {
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        showToast("上传失败");
-                    }
-
-                    @Override
-                    public void onNext(String s) {
-                        showToast("上传成功");
-                    }
-                });
+        saveCity(citySellRent);
         netModel.saveCommercial(JSON.toJSONString(model))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -71,16 +53,6 @@ public class DetailCHSPresenter extends DetailBasePresenter<DetailCHSView> {
                         showToast("上传成功");
                     }
                 });
-    }
-
-
-
-
-
-
-    @SuppressLint("ShowToast")
-    public void showToast(String message) {
-        Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
     }
 
 }
