@@ -75,7 +75,7 @@ public class DetailBasePresenter <T extends DetailBaseView> {
     }
 
     void saveCity(CitySellRent citySellRent) {
-        netModel.saveCity(JSON.toJSONString(citySellRent))
+        netModel.save(JSON.toJSONString(citySellRent), "city/save/city")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>() {

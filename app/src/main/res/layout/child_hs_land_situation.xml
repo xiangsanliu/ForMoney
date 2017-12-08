@@ -6,9 +6,6 @@
     <data>
         <import type="android.view.View"/>
         <variable
-            name="model"
-            type="org.chengjian.java.feidian.collectdata.beans.HouseTradeModel" />
-        <variable
             name="citySellRent"
             type="org.chengjian.java.feidian.collectdata.beans.CitySellRent"/>
         <variable
@@ -45,7 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:el_duration="500"
-                app:el_expanded="false">
+                app:el_expanded="true">
 
                 <LinearLayout
                     android:layout_margin="8dp"
@@ -250,6 +247,14 @@
                                 android:layout_height="wrap_content" />
                         </android.support.design.widget.TextInputLayout>
                     </LinearLayout>
+
+                    <fr.ganfra.materialspinner.MaterialSpinner
+                        android:id="@+id/sp_nearby_land_type"
+                        app:ms_hint="周围土地类型"
+                        app:ms_hintTextSize="18sp"
+                        android:entries="@array/array_nearby_land_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
 
                     <LinearLayout
                         android:orientation="horizontal"

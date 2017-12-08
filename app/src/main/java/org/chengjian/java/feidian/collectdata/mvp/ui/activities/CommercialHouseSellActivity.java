@@ -1,19 +1,10 @@
 package org.chengjian.java.feidian.collectdata.mvp.ui.activities;
 
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.design.widget.TextInputEditText;
-import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
-import com.amap.api.location.AMapLocation;
-import com.amap.api.location.AMapLocationClient;
-import com.amap.api.location.AMapLocationClientOption;
-import com.amap.api.location.AMapLocationListener;
-import com.amap.api.maps2d.AMap;
 
 import org.chengjian.java.feidian.collectdata.R;
 import org.chengjian.java.feidian.collectdata.beans.CommercialHouseTradeModel;
@@ -23,12 +14,10 @@ import org.chengjian.java.feidian.collectdata.mvp.model.StickyMessage;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.detail.DetailCHSPresenter;
 import org.chengjian.java.feidian.collectdata.mvp.ui.activities.base.DetailBaseActivity;
 import org.chengjian.java.feidian.collectdata.mvp.view.base.DetailCHSView;
-import org.chengjian.java.feidian.collectdata.shared.Constants;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.util.Map;
 
 public class CommercialHouseSellActivity extends DetailBaseActivity implements View.OnClickListener, DetailCHSView {
 
@@ -164,8 +153,6 @@ public class CommercialHouseSellActivity extends DetailBaseActivity implements V
                 break;
             case R.id.button_edit:
                 binding.setEditable(true);
-                binding.childBase.etReasearcher.requestFocus();
-                binding.childBase.elExtra.expand();
                 break;
             case R.id.button_delete:
                 delete();

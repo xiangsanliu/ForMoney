@@ -12,7 +12,7 @@ public class HouseTradeModel{
 
     //土地基本状况
     private int useageActual;   //实际用途
-    private int useagePlande;   //规划用途
+    private int useagePlaned;   //规划用途
     private int nearByLandType;     //周围土地类型
 
     //房屋情况
@@ -37,221 +37,233 @@ public class HouseTradeModel{
     private String useageBeforeTrade;    //买卖前用途
     private String useageAfterTrade;    //买卖后用途
     private float tradeBuildingArea;    //出卖建筑面积
-    private float buindingTradeSharedLandArea;  //出卖建筑分摊土地面积
+    private float buildingTradeSharedLandArea;  //出卖建筑分摊土地面积
     private float houseTradeTotalPrice;      //房屋交易总价
     private float houseTradeTax;             //房屋交易税费
     private float landTradeTotalPirce;         //土地交易总价
     private float landPricePerSquare;           //单位面积地价
-    @Generated(hash = 1968205066)
-    public HouseTradeModel(Long id, int useageActual, int useagePlande,
-            int nearByLandType, int floorNum, String tradeLevel, int decorationType,
-            int lightAirType, float houseStandardPrice, float totalArea,
-            float houseResetTotalPrice, float subbuildingResetPrice,
-            float houseTodayValue, float subbuildingTodayValue, int yearRobust,
-            int yearUsed, String tradeOut, String tradeIn, String tradeTime,
-            String tradeMethod, String useageBeforeTrade, String useageAfterTrade,
-            float tradeBuildingArea, float buindingTradeSharedLandArea,
-            float houseTradeTotalPrice, float houseTradeTax,
-            float landTradeTotalPirce, float landPricePerSquare) {
-        this.id = id;
-        this.useageActual = useageActual;
-        this.useagePlande = useagePlande;
-        this.nearByLandType = nearByLandType;
-        this.floorNum = floorNum;
-        this.tradeLevel = tradeLevel;
-        this.decorationType = decorationType;
-        this.lightAirType = lightAirType;
-        this.houseStandardPrice = houseStandardPrice;
-        this.totalArea = totalArea;
-        this.houseResetTotalPrice = houseResetTotalPrice;
-        this.subbuildingResetPrice = subbuildingResetPrice;
-        this.houseTodayValue = houseTodayValue;
-        this.subbuildingTodayValue = subbuildingTodayValue;
-        this.yearRobust = yearRobust;
-        this.yearUsed = yearUsed;
-        this.tradeOut = tradeOut;
-        this.tradeIn = tradeIn;
-        this.tradeTime = tradeTime;
-        this.tradeMethod = tradeMethod;
-        this.useageBeforeTrade = useageBeforeTrade;
-        this.useageAfterTrade = useageAfterTrade;
-        this.tradeBuildingArea = tradeBuildingArea;
-        this.buindingTradeSharedLandArea = buindingTradeSharedLandArea;
-        this.houseTradeTotalPrice = houseTradeTotalPrice;
-        this.houseTradeTax = houseTradeTax;
-        this.landTradeTotalPirce = landTradeTotalPirce;
-        this.landPricePerSquare = landPricePerSquare;
-    }
-    @Generated(hash = 1818476635)
-    public HouseTradeModel() {
-    }
-    public int getUseageActual() {
-        return this.useageActual;
-    }
-    public void setUseageActual(int useageActual) {
-        this.useageActual = useageActual;
-    }
-    public int getUseagePlande() {
-        return this.useagePlande;
-    }
-    public void setUseagePlande(int useagePlande) {
-        this.useagePlande = useagePlande;
-    }
-    public int getNearByLandType() {
-        return this.nearByLandType;
-    }
-    public void setNearByLandType(int nearByLandType) {
-        this.nearByLandType = nearByLandType;
-    }
-    public int getFloorNum() {
-        return this.floorNum;
-    }
-    public void setFloorNum(int floorNum) {
-        this.floorNum = floorNum;
-    }
-    public String getTradeLevel() {
-        return this.tradeLevel;
-    }
-    public void setTradeLevel(String tradeLevel) {
-        this.tradeLevel = tradeLevel;
-    }
-    public int getDecorationType() {
-        return this.decorationType;
-    }
-    public void setDecorationType(int decorationType) {
-        this.decorationType = decorationType;
-    }
-    public int getLightAirType() {
-        return this.lightAirType;
-    }
-    public void setLightAirType(int lightAirType) {
-        this.lightAirType = lightAirType;
-    }
-    public float getHouseStandardPrice() {
-        return this.houseStandardPrice;
-    }
-    public void setHouseStandardPrice(float houseStandardPrice) {
-        this.houseStandardPrice = houseStandardPrice;
-    }
-    public float getTotalArea() {
-        return this.totalArea;
-    }
-    public void setTotalArea(float totalArea) {
-        this.totalArea = totalArea;
-    }
-    public float getHouseResetTotalPrice() {
-        return this.houseResetTotalPrice;
-    }
-    public void setHouseResetTotalPrice(float houseResetTotalPrice) {
-        this.houseResetTotalPrice = houseResetTotalPrice;
-    }
-    public float getSubbuildingResetPrice() {
-        return this.subbuildingResetPrice;
-    }
-    public void setSubbuildingResetPrice(float subbuildingResetPrice) {
-        this.subbuildingResetPrice = subbuildingResetPrice;
-    }
-    public float getHouseTodayValue() {
-        return this.houseTodayValue;
-    }
-    public void setHouseTodayValue(float houseTodayValue) {
-        this.houseTodayValue = houseTodayValue;
-    }
-    public float getSubbuildingTodayValue() {
-        return this.subbuildingTodayValue;
-    }
-    public void setSubbuildingTodayValue(float subbuildingTodayValue) {
-        this.subbuildingTodayValue = subbuildingTodayValue;
-    }
-    public int getYearRobust() {
-        return this.yearRobust;
-    }
-    public void setYearRobust(int yearRobust) {
-        this.yearRobust = yearRobust;
-    }
-    public int getYearUsed() {
-        return this.yearUsed;
-    }
-    public void setYearUsed(int yearUsed) {
-        this.yearUsed = yearUsed;
-    }
-    public String getTradeOut() {
-        return this.tradeOut;
-    }
-    public void setTradeOut(String tradeOut) {
-        this.tradeOut = tradeOut;
-    }
-    public String getTradeIn() {
-        return this.tradeIn;
-    }
-    public void setTradeIn(String tradeIn) {
-        this.tradeIn = tradeIn;
-    }
-    public String getTradeTime() {
-        return this.tradeTime;
-    }
-    public void setTradeTime(String tradeTime) {
-        this.tradeTime = tradeTime;
-    }
-    public String getTradeMethod() {
-        return this.tradeMethod;
-    }
-    public void setTradeMethod(String tradeMethod) {
-        this.tradeMethod = tradeMethod;
-    }
-    public String getUseageBeforeTrade() {
-        return this.useageBeforeTrade;
-    }
-    public void setUseageBeforeTrade(String useageBeforeTrade) {
-        this.useageBeforeTrade = useageBeforeTrade;
-    }
-    public String getUseageAfterTrade() {
-        return this.useageAfterTrade;
-    }
-    public void setUseageAfterTrade(String useageAfterTrade) {
-        this.useageAfterTrade = useageAfterTrade;
-    }
-    public float getTradeBuildingArea() {
-        return this.tradeBuildingArea;
-    }
-    public void setTradeBuildingArea(float tradeBuildingArea) {
-        this.tradeBuildingArea = tradeBuildingArea;
-    }
-    public float getBuindingTradeSharedLandArea() {
-        return this.buindingTradeSharedLandArea;
-    }
-    public void setBuindingTradeSharedLandArea(float buindingTradeSharedLandArea) {
-        this.buindingTradeSharedLandArea = buindingTradeSharedLandArea;
-    }
-    public float getHouseTradeTotalPrice() {
-        return this.houseTradeTotalPrice;
-    }
-    public void setHouseTradeTotalPrice(float houseTradeTotalPrice) {
-        this.houseTradeTotalPrice = houseTradeTotalPrice;
-    }
-    public float getHouseTradeTax() {
-        return this.houseTradeTax;
-    }
-    public void setHouseTradeTax(float houseTradeTax) {
-        this.houseTradeTax = houseTradeTax;
-    }
-    public float getLandTradeTotalPirce() {
-        return this.landTradeTotalPirce;
-    }
-    public void setLandTradeTotalPirce(float landTradeTotalPirce) {
-        this.landTradeTotalPirce = landTradeTotalPirce;
-    }
-    public float getLandPricePerSquare() {
-        return this.landPricePerSquare;
-    }
-    public void setLandPricePerSquare(float landPricePerSquare) {
-        this.landPricePerSquare = landPricePerSquare;
-    }
+
     public Long getId() {
-        return this.id;
+        return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
 
+    public int getUseageActual() {
+        return useageActual;
+    }
+
+    public void setUseageActual(int useageActual) {
+        this.useageActual = useageActual;
+    }
+
+    public int getUseagePlaned() {
+        return useagePlaned;
+    }
+
+    public void setUseagePlaned(int useagePlaned) {
+        this.useagePlaned = useagePlaned;
+    }
+
+    public int getNearByLandType() {
+        return nearByLandType;
+    }
+
+    public void setNearByLandType(int nearByLandType) {
+        this.nearByLandType = nearByLandType;
+    }
+
+    public int getFloorNum() {
+        return floorNum;
+    }
+
+    public void setFloorNum(int floorNum) {
+        this.floorNum = floorNum;
+    }
+
+    public String getTradeLevel() {
+        return tradeLevel;
+    }
+
+    public void setTradeLevel(String tradeLevel) {
+        this.tradeLevel = tradeLevel;
+    }
+
+    public int getDecorationType() {
+        return decorationType;
+    }
+
+    public void setDecorationType(int decorationType) {
+        this.decorationType = decorationType;
+    }
+
+    public int getLightAirType() {
+        return lightAirType;
+    }
+
+    public void setLightAirType(int lightAirType) {
+        this.lightAirType = lightAirType;
+    }
+
+    public float getHouseStandardPrice() {
+        return houseStandardPrice;
+    }
+
+    public void setHouseStandardPrice(float houseStandardPrice) {
+        this.houseStandardPrice = houseStandardPrice;
+    }
+
+    public float getTotalArea() {
+        return totalArea;
+    }
+
+    public void setTotalArea(float totalArea) {
+        this.totalArea = totalArea;
+    }
+
+    public float getHouseResetTotalPrice() {
+        return houseResetTotalPrice;
+    }
+
+    public void setHouseResetTotalPrice(float houseResetTotalPrice) {
+        this.houseResetTotalPrice = houseResetTotalPrice;
+    }
+
+    public float getSubbuildingResetPrice() {
+        return subbuildingResetPrice;
+    }
+
+    public void setSubbuildingResetPrice(float subbuildingResetPrice) {
+        this.subbuildingResetPrice = subbuildingResetPrice;
+    }
+
+    public float getHouseTodayValue() {
+        return houseTodayValue;
+    }
+
+    public void setHouseTodayValue(float houseTodayValue) {
+        this.houseTodayValue = houseTodayValue;
+    }
+
+    public float getSubbuildingTodayValue() {
+        return subbuildingTodayValue;
+    }
+
+    public void setSubbuildingTodayValue(float subbuildingTodayValue) {
+        this.subbuildingTodayValue = subbuildingTodayValue;
+    }
+
+    public int getYearRobust() {
+        return yearRobust;
+    }
+
+    public void setYearRobust(int yearRobust) {
+        this.yearRobust = yearRobust;
+    }
+
+    public int getYearUsed() {
+        return yearUsed;
+    }
+
+    public void setYearUsed(int yearUsed) {
+        this.yearUsed = yearUsed;
+    }
+
+    public String getTradeOut() {
+        return tradeOut;
+    }
+
+    public void setTradeOut(String tradeOut) {
+        this.tradeOut = tradeOut;
+    }
+
+    public String getTradeIn() {
+        return tradeIn;
+    }
+
+    public void setTradeIn(String tradeIn) {
+        this.tradeIn = tradeIn;
+    }
+
+    public String getTradeTime() {
+        return tradeTime;
+    }
+
+    public void setTradeTime(String tradeTime) {
+        this.tradeTime = tradeTime;
+    }
+
+    public String getTradeMethod() {
+        return tradeMethod;
+    }
+
+    public void setTradeMethod(String tradeMethod) {
+        this.tradeMethod = tradeMethod;
+    }
+
+    public String getUseageBeforeTrade() {
+        return useageBeforeTrade;
+    }
+
+    public void setUseageBeforeTrade(String useageBeforeTrade) {
+        this.useageBeforeTrade = useageBeforeTrade;
+    }
+
+    public String getUseageAfterTrade() {
+        return useageAfterTrade;
+    }
+
+    public void setUseageAfterTrade(String useageAfterTrade) {
+        this.useageAfterTrade = useageAfterTrade;
+    }
+
+    public float getTradeBuildingArea() {
+        return tradeBuildingArea;
+    }
+
+    public void setTradeBuildingArea(float tradeBuildingArea) {
+        this.tradeBuildingArea = tradeBuildingArea;
+    }
+
+    public float getBuildingTradeSharedLandArea() {
+        return buildingTradeSharedLandArea;
+    }
+
+    public void setBuildingTradeSharedLandArea(float buildingTradeSharedLandArea) {
+        this.buildingTradeSharedLandArea = buildingTradeSharedLandArea;
+    }
+
+    public float getHouseTradeTotalPrice() {
+        return houseTradeTotalPrice;
+    }
+
+    public void setHouseTradeTotalPrice(float houseTradeTotalPrice) {
+        this.houseTradeTotalPrice = houseTradeTotalPrice;
+    }
+
+    public float getHouseTradeTax() {
+        return houseTradeTax;
+    }
+
+    public void setHouseTradeTax(float houseTradeTax) {
+        this.houseTradeTax = houseTradeTax;
+    }
+
+    public float getLandTradeTotalPirce() {
+        return landTradeTotalPirce;
+    }
+
+    public void setLandTradeTotalPirce(float landTradeTotalPirce) {
+        this.landTradeTotalPirce = landTradeTotalPirce;
+    }
+
+    public float getLandPricePerSquare() {
+        return landPricePerSquare;
+    }
+
+    public void setLandPricePerSquare(float landPricePerSquare) {
+        this.landPricePerSquare = landPricePerSquare;
+    }
 }

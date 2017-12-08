@@ -74,8 +74,7 @@ public class NetModel {
         return okHttpClient.newCall(request).execute().body().string();
     }
 
-    private String save(String content, String url) throws IOException {
-        System.out.println("savein");
+    private String saveBody(String content, String url) throws IOException {
         OkHttpClient okHttpClient = new OkHttpClient();
         RequestBody body = new FormBody.Builder()
                 .add("content", content)
@@ -92,7 +91,7 @@ public class NetModel {
             @Override
             public void call(Subscriber<? super Integer> subscriber) {
                 try {
-                    subscriber.onNext(delete(id, "/city/delete/city"));
+                    subscriber.onNext(deleteBody(id, "city/delete/city"));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -100,13 +99,13 @@ public class NetModel {
         });
     }
 
-    public Observable<String> saveCity(final String content) {
+    public Observable<String> save(final String content, final String url) {
         return Observable.create(new Observable.OnSubscribe<String>() {
             @Override
             public void call(Subscriber<? super String> subscriber) {
                 System.out.println("call");
                 try {
-                    subscriber.onNext(save(content, "/city/save/city"));
+                    subscriber.onNext(saveBody(content, url));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -114,7 +113,9 @@ public class NetModel {
         });
     }
 
-    public Integer delete(Long id, String url) throws IOException {
+
+
+    public Integer deleteBody(Long id, String url) throws IOException {
         System.out.println("savein");
         OkHttpClient okHttpClient = new OkHttpClient();
         RequestBody body = new FormBody.Builder()
@@ -125,19 +126,6 @@ public class NetModel {
                 .url(Constants.BASE_RUL+url)
                 .build();
         return okHttpClient.newCall(request).execute().code();
-    }
-
-    public Observable<String> saveCommercial(final String content) {
-        return Observable.create(new Observable.OnSubscribe<String>() {
-            @Override
-            public void call(Subscriber<? super String> subscriber) {
-                try {
-                    subscriber.onNext(save(content, "/city/save/commercial"));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
     }
 
 

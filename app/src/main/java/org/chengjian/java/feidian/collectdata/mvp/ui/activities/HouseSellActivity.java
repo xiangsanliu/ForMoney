@@ -1,21 +1,14 @@
 package org.chengjian.java.feidian.collectdata.mvp.ui.activities;
 
-import android.app.DatePickerDialog;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.DatePicker;
-import android.widget.TextView;
 
-import net.cachapa.expandablelayout.ExpandableLayout;
+import com.alibaba.fastjson.JSON;
 
 import org.chengjian.java.feidian.collectdata.R;
 import org.chengjian.java.feidian.collectdata.beans.HouseTradeModel;
-import org.chengjian.java.feidian.collectdata.beans.SellRentModel;
 import org.chengjian.java.feidian.collectdata.databinding.ActivityHouseSellBinding;
-import org.chengjian.java.feidian.collectdata.mvp.model.BaseModel;
-import org.chengjian.java.feidian.collectdata.mvp.model.LocalDbModel;
 import org.chengjian.java.feidian.collectdata.mvp.model.ResultMessage;
 import org.chengjian.java.feidian.collectdata.mvp.model.StickyMessage;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.detail.DetailHSPresenter;
@@ -25,10 +18,6 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.util.Calendar;
-
-import butterknife.BindView;
-import butterknife.OnClick;
 
 public class HouseSellActivity extends DetailBaseActivity implements View.OnClickListener, DetailHSView {
 
@@ -50,7 +39,7 @@ public class HouseSellActivity extends DetailBaseActivity implements View.OnClic
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
-    public void onEventMainThread(SellRentModel sellRentModel) {
+    public void onEventMainThread(StickyMessage stickyMessage) {
         initExpandableLayout();
         initSpinner();
     }
@@ -58,54 +47,62 @@ public class HouseSellActivity extends DetailBaseActivity implements View.OnClic
     private void initView(StickyMessage message) {
         this.citySellRent = message.getCitySellRent();
         this.isEditable = message.getEditable();
+        binding.setCitySellRent(citySellRent);
+        binding.setEditable(isEditable);
+        if (!isEditable) {
+            presenter.loadModel(citySellRent.getId());
+        } else {
+            model = new HouseTradeModel();
+            model.setId(citySellRent.getId());
+            initModel(model);
+        }
     }
 
     @Override
     protected void initExpandableLayout() {
-        binding.childExtra.buttonExtra.setOnClickListener(this);
-        binding.childLandSituation.buttonLandSituation.setOnClickListener(this);
-        binding.childBuildingSituation.buttonBuildingSituation.setOnClickListener(this);
-        binding.childTrade.buttonTradeSituation.setOnClickListener(this);
+        binding.childBase.buttonExtra.setOnClickListener(this);
+        binding.childHsLandSituation.buttonLandSituation.setOnClickListener(this);
+        binding.childHsBuildingSituation.buttonBuildingSituation.setOnClickListener(this);
+        binding.childHsTradeSituation.buttonTradeSituation.setOnClickListener(this);
         binding.buttonDelete.setOnClickListener(this);
         binding.buttonEdit.setOnClickListener(this);
         binding.buttonSave.setOnClickListener(this);
-        binding.childTrade.etTradeTime.setOnClickListener(this);
-        binding.childLandSituation.etAuthorizedTime.setOnClickListener(this);
+        binding.childHsTradeSituation.etTradeTime.setOnClickListener(this);
+        binding.childHsLandSituation.etAuthorizedTime.setOnClickListener(this);
     }
 
     @Override
     public void initSpinner() {
-        binding.childLandSituation.spCrossroadSituation.setSelection(sellRentModel.getCrossRoadSituation());
-        binding.childLandSituation.spLandShape.setSelection(sellRentModel.getLandShape());
-        binding.childLandSituation.spLandDevelopingSituation.setSelection(sellRentModel.getLandShape());
-        binding.childLandSituation.spBuildingDirection.setSelection(sellRentModel.getBuildingDirection());
-        binding.childLandSituation.spNearbyStreetSituation.setSelection(sellRentModel.getNearbyStreetSituation());
-        binding.childLandSituation.spIsGore.setSelection(sellRentModel.getIsGore()? 1:0);
-        binding.childLandSituation.spNearbyLandType.setSelection(sellRentModel.getNearbyLandType());
-        binding.childLandSituation.spUsagePlaned.setSelection(sellRentModel.getUsagePlaned());
-        binding.childLandSituation.spUsageActucal.setSelection(sellRentModel.getUsageActual());
-        binding.childBuildingSituation.spDecorationType.setSelection(sellRentModel.getDecorationType());
-        binding.childBuildingSituation.spStructureType.setSelection(sellRentModel.getStructureType());
-        binding.childBuildingSituation.spQualityLevel.setSelection(sellRentModel.getQualityLevel());
-        binding.childBuildingSituation.spLightAirType.setSelection(sellRentModel.getLightAirType());
+        binding.childHsLandSituation.spCrossroadSituation.setSelection(citySellRent.getCrossRoadSituation());
+        binding.childHsLandSituation.spLandShape.setSelection(citySellRent.getLandShape());
+        binding.childHsLandSituation.spLandDevelopingSituation.setSelection(citySellRent.getLandShape());
+        binding.childHsLandSituation.spBuildingDirection.setSelection(citySellRent.getBuildingDirection());
+        binding.childHsLandSituation.spNearbyStreetSituation.setSelection(citySellRent.getNearbyStreetSituation());
+        binding.childHsLandSituation.spIsGore.setSelection(citySellRent.isGore()? 1:0);
+        binding.childHsLandSituation.spNearbyLandType.setSelection(model.getNearByLandType());
+        binding.childHsLandSituation.spUsagePlaned.setSelection(model.getUseagePlaned());
+        binding.childHsLandSituation.spUsageActucal.setSelection(model.getUseageActual());
+        binding.childHsBuildingSituation.spDecorationType.setSelection(model.getDecorationType());
+        binding.childHsBuildingSituation.spStructureType.setSelection(citySellRent.getStructureType());
+        binding.childHsBuildingSituation.spQualityLevel.setSelection(citySellRent.getQualityLevel());
+        binding.childHsBuildingSituation.spLightAirType.setSelection(model.getLightAirType());
     }
 
 
     @Override
     public void getSpinner() {
-        SellRentModel sellRentModel = binding.getSellRentModel();
-        sellRentModel.setCrossRoadSituation(binding.childLandSituation.spCrossroadSituation.getSelectedItemPosition());
-        sellRentModel.setLandShape(binding.childLandSituation.spLandShape.getSelectedItemPosition());
-        sellRentModel.setLandDevelopingSituation(binding.childLandSituation.spLandDevelopingSituation.getSelectedItemPosition());
-        sellRentModel.setBuildingDirection(binding.childLandSituation.spBuildingDirection.getSelectedItemPosition());
-        sellRentModel.setNearbyStreetSituation(binding.childLandSituation.spNearbyStreetSituation.getSelectedItemPosition());
-        sellRentModel.setIsGore(binding.childLandSituation.spIsGore.getSelectedItemPosition() == 1);
-        sellRentModel.setUsagePlaned(binding.childLandSituation.spUsagePlaned.getSelectedItemPosition());
-        sellRentModel.setUsageActual(binding.childLandSituation.spUsageActucal.getSelectedItemPosition());
-        sellRentModel.setDecorationType(binding.childBuildingSituation.spDecorationType.getSelectedItemPosition());
-        sellRentModel.setStructureType(binding.childBuildingSituation.spStructureType.getSelectedItemPosition());
-        sellRentModel.setQualityLevel(binding.childBuildingSituation.spQualityLevel.getSelectedItemPosition());
-        sellRentModel.setLightAirType(binding.childBuildingSituation.spLightAirType.getSelectedItemPosition());
+        citySellRent.setCrossRoadSituation(binding.childHsLandSituation.spCrossroadSituation.getSelectedItemPosition());
+        citySellRent.setLandShape(binding.childHsLandSituation.spLandShape.getSelectedItemPosition());
+        citySellRent.setLandDevelopingSituation(binding.childHsLandSituation.spLandDevelopingSituation.getSelectedItemPosition());
+        citySellRent.setBuildingDirection(binding.childHsLandSituation.spBuildingDirection.getSelectedItemPosition());
+        citySellRent.setNearbyStreetSituation(binding.childHsLandSituation.spNearbyStreetSituation.getSelectedItemPosition());
+        citySellRent.setGore(binding.childHsLandSituation.spIsGore.getSelectedItemPosition() == 1);
+        model.setUseagePlaned(binding.childHsLandSituation.spUsagePlaned.getSelectedItemPosition());
+        model.setUseageActual(binding.childHsLandSituation.spUsageActucal.getSelectedItemPosition());
+        model.setDecorationType(binding.childHsBuildingSituation.spDecorationType.getSelectedItemPosition());
+        citySellRent.setStructureType(binding.childHsBuildingSituation.spStructureType.getSelectedItemPosition());
+        citySellRent.setQualityLevel(binding.childHsBuildingSituation.spQualityLevel.getSelectedItemPosition());
+        model.setLightAirType(binding.childHsBuildingSituation.spLightAirType.getSelectedItemPosition());
     }
 
     @Override
@@ -125,21 +122,33 @@ public class HouseSellActivity extends DetailBaseActivity implements View.OnClic
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button_extra:
-                changeELState(binding.childExtra.elExtra);
-                break;
-            case R.id.button_land_situation:
-                changeELState(binding.childLandSituation.elLandSituation);
+                changeELState(binding.childBase.elExtra);
+                binding.childHsBuildingSituation.elBuildingSituation.collapse();
+                binding.childHsLandSituation.elLandSituation.collapse();
+                binding.childHsTradeSituation.elTradeSituation.collapse();
                 break;
             case R.id.button_building_situation:
-                changeELState(binding.childBuildingSituation.elBuildingSituation);
+                changeELState(binding.childHsBuildingSituation.elBuildingSituation);
+                binding.childBase.elExtra.collapse();
+                binding.childHsLandSituation.elLandSituation.collapse();
+                binding.childHsTradeSituation.elTradeSituation.collapse();
+                break;
+            case R.id.button_land_situation:
+                changeELState(binding.childHsLandSituation.elLandSituation);
+                binding.childHsBuildingSituation.elBuildingSituation.collapse();
+                binding.childBase.elExtra.collapse();
+                binding.childHsTradeSituation.elTradeSituation.collapse();
                 break;
             case R.id.button_trade_situation:
-                changeELState(binding.childTrade.elTradeSituation);
+                changeELState(binding.childHsTradeSituation.elTradeSituation);
+                binding.childHsBuildingSituation.elBuildingSituation.collapse();
+                binding.childHsLandSituation.elLandSituation.collapse();
+                binding.childBase.elExtra.collapse();
                 break;
             case R.id.button_edit:
 //                editable.isEditable.set("true");
-                binding.childExtra.etReasearcher.requestFocus();
-                binding.childExtra.elExtra.expand();
+                binding.childBase.etReasearcher.requestFocus();
+                binding.childBase.elExtra.expand();
                 showInputMethod();
                 break;
             case R.id.button_save:
@@ -149,21 +158,26 @@ public class HouseSellActivity extends DetailBaseActivity implements View.OnClic
                 showDeleteConfirm();
                 break;
             case R.id.et_authorized_time:
-                setTime(binding.childLandSituation.etAuthorizedTime);
+                setTime(binding.childHsLandSituation.etAuthorizedTime);
                 break;
             case R.id.et_trade_time:
-                setTime(binding.childTrade.etTradeTime);
+                setTime(binding.childHsTradeSituation.etTradeTime);
                 break;
         }
     }
 
     @Override
     public void initModel(String model) {
+        this.model = JSON.parseObject(model, HouseTradeModel.class);
+        binding.setModel(this.model);
+        initSpinner();
 
     }
 
     @Override
     public void initModel(HouseTradeModel model) {
-
+        this.model = model;
+        binding.setModel(model);
+        initSpinner();
     }
 }

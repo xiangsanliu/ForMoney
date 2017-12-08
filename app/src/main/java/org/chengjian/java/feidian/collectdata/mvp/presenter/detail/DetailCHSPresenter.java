@@ -32,7 +32,7 @@ public class DetailCHSPresenter extends DetailBasePresenter<DetailCHSView> {
         progressDialog = createProgress("上传中");
         progressDialog.show();
         saveCity(citySellRent);
-        netModel.saveCommercial(JSON.toJSONString(model))
+        netModel.save(JSON.toJSONString(model), "city/save/commercial")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>() {
