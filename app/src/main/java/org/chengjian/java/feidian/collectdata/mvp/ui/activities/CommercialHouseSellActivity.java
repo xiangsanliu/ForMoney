@@ -11,6 +11,7 @@ import org.chengjian.java.feidian.collectdata.beans.CommercialHouseTradeModel;
 import org.chengjian.java.feidian.collectdata.databinding.ActivityCommercialHouseTradeBinding;
 import org.chengjian.java.feidian.collectdata.mvp.model.ResultMessage;
 import org.chengjian.java.feidian.collectdata.mvp.model.StickyMessage;
+import org.chengjian.java.feidian.collectdata.mvp.presenter.detail.DetailBasePresenter;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.detail.DetailCHSPresenter;
 import org.chengjian.java.feidian.collectdata.mvp.ui.activities.base.DetailBaseActivity;
 import org.chengjian.java.feidian.collectdata.mvp.view.base.DetailCHSView;
@@ -115,13 +116,10 @@ public class CommercialHouseSellActivity extends DetailBaseActivity implements V
         }
     }
 
+
     @Override
-    public void delete() {
-        presenter.deleteCity(citySellRent.getId());
-        EventBus.getDefault().postSticky(new ResultMessage(true));
-        if (aMapLocationClient != null) {
-            aMapLocationClient.stopLocation();
-        }
+    public DetailBasePresenter getPresenter() {
+        return presenter;
     }
 
     @Override

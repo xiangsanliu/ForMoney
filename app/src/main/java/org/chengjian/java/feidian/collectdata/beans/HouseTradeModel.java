@@ -43,6 +43,51 @@ public class HouseTradeModel{
     private float landTradeTotalPirce;         //土地交易总价
     private float landPricePerSquare;           //单位面积地价
 
+    @Generated(hash = 1565259052)
+    public HouseTradeModel(Long id, int useageActual, int useagePlaned,
+            int nearByLandType, int floorNum, String tradeLevel, int decorationType,
+            int lightAirType, float houseStandardPrice, float totalArea,
+            float houseResetTotalPrice, float subbuildingResetPrice,
+            float houseTodayValue, float subbuildingTodayValue, int yearRobust,
+            int yearUsed, String tradeOut, String tradeIn, String tradeTime,
+            String tradeMethod, String useageBeforeTrade, String useageAfterTrade,
+            float tradeBuildingArea, float buildingTradeSharedLandArea,
+            float houseTradeTotalPrice, float houseTradeTax,
+            float landTradeTotalPirce, float landPricePerSquare) {
+        this.id = id;
+        this.useageActual = useageActual;
+        this.useagePlaned = useagePlaned;
+        this.nearByLandType = nearByLandType;
+        this.floorNum = floorNum;
+        this.tradeLevel = tradeLevel;
+        this.decorationType = decorationType;
+        this.lightAirType = lightAirType;
+        this.houseStandardPrice = houseStandardPrice;
+        this.totalArea = totalArea;
+        this.houseResetTotalPrice = houseResetTotalPrice;
+        this.subbuildingResetPrice = subbuildingResetPrice;
+        this.houseTodayValue = houseTodayValue;
+        this.subbuildingTodayValue = subbuildingTodayValue;
+        this.yearRobust = yearRobust;
+        this.yearUsed = yearUsed;
+        this.tradeOut = tradeOut;
+        this.tradeIn = tradeIn;
+        this.tradeTime = tradeTime;
+        this.tradeMethod = tradeMethod;
+        this.useageBeforeTrade = useageBeforeTrade;
+        this.useageAfterTrade = useageAfterTrade;
+        this.tradeBuildingArea = tradeBuildingArea;
+        this.buildingTradeSharedLandArea = buildingTradeSharedLandArea;
+        this.houseTradeTotalPrice = houseTradeTotalPrice;
+        this.houseTradeTax = houseTradeTax;
+        this.landTradeTotalPirce = landTradeTotalPirce;
+        this.landPricePerSquare = landPricePerSquare;
+    }
+
+    @Generated(hash = 1818476635)
+    public HouseTradeModel() {
+    }
+
     public Long getId() {
         return id;
     }

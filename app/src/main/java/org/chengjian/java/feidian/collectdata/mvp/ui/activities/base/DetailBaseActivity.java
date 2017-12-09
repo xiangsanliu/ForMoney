@@ -25,6 +25,8 @@ import net.cachapa.expandablelayout.ExpandableLayout;
 import org.chengjian.java.feidian.collectdata.beans.CitySellRent;
 import org.chengjian.java.feidian.collectdata.beans.Editable;
 import org.chengjian.java.feidian.collectdata.beans.SellRentModel;
+import org.chengjian.java.feidian.collectdata.mvp.model.ResultMessage;
+import org.chengjian.java.feidian.collectdata.mvp.presenter.detail.DetailBasePresenter;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -88,7 +90,13 @@ public abstract class DetailBaseActivity extends BaseActivity {
     }
 
     public abstract void save();
-    public abstract void delete();
+
+    public void delete() {
+        getPresenter().deleteCity(citySellRent.getId());
+        if (aMapLocationClient != null) {
+            aMapLocationClient.stopLocation();
+        }
+    }
 
     @Override
     public void onBackPressed() {
@@ -114,6 +122,8 @@ public abstract class DetailBaseActivity extends BaseActivity {
             super.onBackPressed();
         }
     }
+
+    public abstract DetailBasePresenter getPresenter();
 
     public void showDeleteConfirm() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this)

@@ -11,6 +11,7 @@ import org.chengjian.java.feidian.collectdata.beans.HouseTradeModel;
 import org.chengjian.java.feidian.collectdata.databinding.ActivityHouseSellBinding;
 import org.chengjian.java.feidian.collectdata.mvp.model.ResultMessage;
 import org.chengjian.java.feidian.collectdata.mvp.model.StickyMessage;
+import org.chengjian.java.feidian.collectdata.mvp.presenter.detail.DetailBasePresenter;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.detail.DetailHSPresenter;
 import org.chengjian.java.feidian.collectdata.mvp.ui.activities.base.DetailBaseActivity;
 import org.chengjian.java.feidian.collectdata.mvp.view.base.DetailHSView;
@@ -40,8 +41,8 @@ public class HouseSellActivity extends DetailBaseActivity implements View.OnClic
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void onEventMainThread(StickyMessage stickyMessage) {
+        initView(stickyMessage);
         initExpandableLayout();
-        initSpinner();
     }
 
     private void initView(StickyMessage message) {
@@ -109,13 +110,16 @@ public class HouseSellActivity extends DetailBaseActivity implements View.OnClic
     public void save() {
 //        editable.isEditable.set("false");
         getSpinner();
-        EventBus.getDefault().post(new ResultMessage(true));
+        binding.setEditable(false);
+        presenter.save(citySellRent, model);
+        if (aMapLocationClient != null) {
+            aMapLocationClient.stopLocation();
+        }
     }
 
     @Override
-    public void delete() {
-        EventBus.getDefault().postSticky(new ResultMessage(true));
-        finish();
+    public DetailBasePresenter getPresenter() {
+        return presenter;
     }
 
     @Override
@@ -146,10 +150,7 @@ public class HouseSellActivity extends DetailBaseActivity implements View.OnClic
                 binding.childBase.elExtra.collapse();
                 break;
             case R.id.button_edit:
-//                editable.isEditable.set("true");
-                binding.childBase.etReasearcher.requestFocus();
-                binding.childBase.elExtra.expand();
-                showInputMethod();
+                binding.setEditable(true);
                 break;
             case R.id.button_save:
                 save();
@@ -163,6 +164,9 @@ public class HouseSellActivity extends DetailBaseActivity implements View.OnClic
             case R.id.et_trade_time:
                 setTime(binding.childHsTradeSituation.etTradeTime);
                 break;
+            case R.id.locate:
+                locate(binding.childBase.longitude, binding.childBase.latitude
+                        , binding.childHsLandSituation.etLandLocation);
         }
     }
 
@@ -171,8 +175,8 @@ public class HouseSellActivity extends DetailBaseActivity implements View.OnClic
         this.model = JSON.parseObject(model, HouseTradeModel.class);
         binding.setModel(this.model);
         initSpinner();
-
     }
+
 
     @Override
     public void initModel(HouseTradeModel model) {

@@ -11,8 +11,10 @@ import com.alibaba.fastjson.JSON;
 import org.chengjian.java.feidian.collectdata.beans.CitySellRent;
 import org.chengjian.java.feidian.collectdata.beans.CommercialHouseTradeModel;
 import org.chengjian.java.feidian.collectdata.mvp.model.NetModel;
+import org.chengjian.java.feidian.collectdata.mvp.model.ResultMessage;
 import org.chengjian.java.feidian.collectdata.mvp.view.base.BaseUIView;
 import org.chengjian.java.feidian.collectdata.mvp.view.base.DetailBaseView;
+import org.greenrobot.eventbus.EventBus;
 
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
@@ -70,6 +72,7 @@ public class DetailBasePresenter <T extends DetailBaseView> {
                     public void onNext(Integer s) {
                         progressDialog.dismiss();
                         showToast("删除成功");
+                        refreshList();
                     }
                 });
     }
@@ -91,6 +94,7 @@ public class DetailBasePresenter <T extends DetailBaseView> {
                     @Override
                     public void onNext(String s) {
                         showToast("上传成功");
+                        refreshList();
                     }
                 });
     }
@@ -124,6 +128,10 @@ public class DetailBasePresenter <T extends DetailBaseView> {
 
     void showToast(String content) {
         Toast.makeText((Context) view, content, Toast.LENGTH_SHORT).show();
+    }
+
+    private void refreshList() {
+        EventBus.getDefault().post(new ResultMessage(true));
     }
 
 }
