@@ -32,7 +32,7 @@
             android:background="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways"
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:title="商品房出售调查"
+            app:title="房屋买卖价格出售调查"
             app:titleTextColor="@color/colorTitle">
 
             <LinearLayout

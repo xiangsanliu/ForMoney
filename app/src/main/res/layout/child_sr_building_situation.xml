@@ -7,7 +7,7 @@
     <data>
         <variable
             name="model"
-            type="org.chengjian.java.feidian.collectdata.beans.HouseTradeModel" />
+            type="org.chengjian.java.feidian.collectdata.beans.ShopRentModel" />
         <variable
             name="editable"
             type="Boolean"/>
@@ -44,7 +44,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:el_duration="500"
-                app:el_expanded="false">
+                app:el_expanded="true">
 
                 <LinearLayout
                     android:layout_margin="8dp"
@@ -53,7 +53,7 @@
                     android:layout_height="wrap_content">
 
                     <android.support.design.widget.TextInputLayout
-                        android:hint="房屋位置"
+                        android:hint="柜台具体位置"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
@@ -142,33 +142,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
-
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:hint="楼层数"
-                        android:layout_height="wrap_content">
-                        <android.support.design.widget.TextInputEditText
-                            android:enabled='@{editable}'
-                            android:text='@={"" + model.floorNum}'
-                            android:id="@+id/et_floor_num"
-                            android:inputType="number"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
-                    </android.support.design.widget.TextInputLayout>
-
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:hint="买卖层次"
-                        android:layout_height="wrap_content">
-                        <android.support.design.widget.TextInputEditText
-                            android:enabled='@{editable}'
-                            android:text='@={model.tradeLevel}'
-                            android:id="@+id/et_trade_level"
-                            android:inputType="number"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
-                    </android.support.design.widget.TextInputLayout>
-
 
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"

@@ -1,32 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<layout xmlns:bind="http://schemas.android.com/apk/res-auto"
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
+    xmlns:bind="http://schemas.android.com/tools">
     <data>
-        <variable
-            name="model"
-            type="org.chengjian.java.feidian.collectdata.beans.HouseTradeModel" />
         <variable
             name="editable"
             type="Boolean"/>
+
         <variable
-            name="citySellRent"
-            type="org.chengjian.java.feidian.collectdata.beans.CitySellRent"/>
+            name="model"
+            type="org.chengjian.java.feidian.collectdata.beans.ShopRentModel" />
     </data>
+
     <android.support.v7.widget.CardView
         app:cardCornerRadius="10dp"
-        app:cardElevation="5dp"
+        bind:cardElevation="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/button_building_situation"
+                android:id="@+id/button_rent_situation"
                 style="@style/TextAppearance.AppCompat.Medium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -35,245 +33,272 @@
                 android:foreground="?selectableItemBackground"
                 android:gravity="center"
                 android:padding="16dp"
-                android:text="建筑情况"
+                android:text="出租情况"
                 android:textColor="#fff" />
 
             <net.cachapa.expandablelayout.ExpandableLayout
-
-                android:id="@+id/el_building_situation"
+                android:id="@+id/el_trade_situation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:el_duration="500"
                 app:el_expanded="false">
-
                 <LinearLayout
-                    android:layout_margin="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <android.support.design.widget.TextInputLayout
-                        android:hint="房屋位置"
                         android:layout_width="match_parent"
+                        android:hint="出租人"
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text="@={citySellRent.houseLocation}"
-                            android:id="@+id/et_building_num"
-                            android:inputType="number"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
-                    </android.support.design.widget.TextInputLayout>
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:baselineAligned="false"
-                        android:orientation="horizontal">
-                        <fr.ganfra.materialspinner.MaterialSpinner
-                            app:ms_hint="房屋结构"
-                            android:layout_marginStart="4dp"
-                            app:ms_hintTextSize="18sp"
-                            android:id="@+id/sp_structure_type"
-                            android:entries="@array/array_structure_type"
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content"/>
-
-                        <fr.ganfra.materialspinner.MaterialSpinner
-                            android:layout_weight="1"
-                            app:ms_hint="质量等级"
-                            app:ms_hintTextSize="18sp"
-                            android:id="@+id/sp_quality_level"
-                            android:layout_marginEnd="4dp"
-                            android:entries="@array/array_quality_level"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:baselineAligned="false"
-                        android:orientation="horizontal">
-                        <fr.ganfra.materialspinner.MaterialSpinner
-                            app:ms_hint="装修标准"
-                            android:layout_marginStart="4dp"
-                            app:ms_hintTextSize="18sp"
-                            android:id="@+id/sp_decoration_type"
-                            android:entries="@array/array_structure_type"
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content"/>
-
-                        <fr.ganfra.materialspinner.MaterialSpinner
-                            android:layout_weight="1"
-                            app:ms_hint="采光通风状况"
-                            app:ms_hintTextSize="18sp"
-                            android:id="@+id/sp_light_air_type"
-                            android:layout_marginEnd="4dp"
-                            android:entries="@array/array_quality_level"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"/>
-                    </LinearLayout>
-
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:hint="建筑面积"
-                        android:layout_height="wrap_content">
-                        <android.support.design.widget.TextInputEditText
-                            android:enabled='@{editable}'
-                            android:inputType="number"
-                            android:text='@={"" + citySellRent.buildingArea}'
-                            android:id="@+id/et_building_area"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
-                    </android.support.design.widget.TextInputLayout>
-
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:hint="房屋建筑面积"
-                        android:layout_height="wrap_content">
-                        <android.support.design.widget.TextInputEditText
-                            android:enabled='@{editable}'
-                            android:text='@={"" + citySellRent.houseArea}'
-                            android:id="@+id/et_house_area"
-                            android:inputType="number"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
-                    </android.support.design.widget.TextInputLayout>
-
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:hint="楼层数"
-                        android:layout_height="wrap_content">
-                        <android.support.design.widget.TextInputEditText
-                            android:enabled='@{editable}'
-                            android:text='@={"" + model.floorNum}'
-                            android:id="@+id/et_floor_num"
-                            android:inputType="number"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
-                    </android.support.design.widget.TextInputLayout>
-
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:hint="买卖层次"
-                        android:layout_height="wrap_content">
-                        <android.support.design.widget.TextInputEditText
-                            android:enabled='@{editable}'
-                            android:text='@={model.tradeLevel}'
-                            android:id="@+id/et_trade_level"
-                            android:inputType="number"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
-                    </android.support.design.widget.TextInputLayout>
-
-
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:hint="房屋标准造价"
-                        android:layout_height="wrap_content">
-                        <android.support.design.widget.TextInputEditText
-                            android:enabled='@{editable}'
-                            android:text='@={"" + model.houseStandardPrice}'
-                            android:id="@+id/et_house_standard_price"
-                            android:inputType="number"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
-                    </android.support.design.widget.TextInputLayout>
-
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:hint="总占地面积"
-                        android:layout_height="wrap_content">
-                        <android.support.design.widget.TextInputEditText
-                            android:enabled='@{editable}'
-                            android:text='@={""+model.totalArea}'
-                            android:id="@+id/et_total_area"
-                            android:inputType="number"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
-                    </android.support.design.widget.TextInputLayout>
-
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:hint="房屋重置总价"
-                        android:layout_height="wrap_content">
-                        <android.support.design.widget.TextInputEditText
-                            android:enabled='@{editable}'
-                            android:text='@={""+model.houseResetTotalPrice}'
-                            android:id="@+id/et_house_reset_total_price"
+                            android:text='@={model.rentOut}'
+                            android:id="@+id/et_rent_out"
                             android:inputType="number"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
-                        android:hint="其它附属建筑物重置总价"
+                        android:hint="承租人"
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={""+model.subbuildingResetPrice}'
-                            android:id="@+id/et_subbuilding_reset_price"
-                            android:inputType="number"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
-                    </android.support.design.widget.TextInputLayout>
-
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:hint="房屋现值"
-                        android:layout_height="wrap_content">
-                        <android.support.design.widget.TextInputEditText
-                            android:enabled='@{editable}'
-                            android:text='@={""+model.houseTodayValue}'
-                            android:id="@+id/et_house_today_value"
+                            android:text='@={model.rentIn}'
+                            android:id="@+id/et_rent_in"
                             android:inputType="number"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
-                        android:hint="其它附属建筑物现价"
+                        android:hint="出租时间"
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={""+model.subbuildingTodayValue}'
-                            android:id="@+id/et_subbuilding_today_value"
+                            android:text='@={model.rentTime}'
+                            android:id="@+id/et_rent_time"
                             android:inputType="number"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
-                        android:hint="耐用年限"
+                        android:hint="出租方式"
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={""+model.yearRobust}'
-                            android:id="@+id/et_year_robust"
+                            android:text='@={model.rentMethod}'
+                            android:id="@+id/et_rent_method"
                             android:inputType="number"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
-                        android:hint="已使用年限"
+                        android:hint="出租用途"
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={""+model.yearUsed}'
-                            android:id="@+id/et_year_used"
+                            android:text='@={model.useage}'
+                            android:id="@+id/et_useage"
+                            android:inputType="number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:hint="出租期限"
+                        android:layout_height="wrap_content">
+                        <android.support.design.widget.TextInputEditText
+                            android:enabled='@{editable}'
+                            android:text='@={model.rentDeadline}'
+                            android:id="@+id/et_rent_deadline"
+                            android:inputType="number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:hint="总营业面积"
+                        android:layout_height="wrap_content">
+                        <android.support.design.widget.TextInputEditText
+                            android:enabled='@{editable}'
+                            android:text='@={model.totalTrdeArea}'
+                            android:id="@+id/et_total_trade_area"
+                            android:inputType="number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:hint="出租柜台营业面积"
+                        android:layout_height="wrap_content">
+                        <android.support.design.widget.TextInputEditText
+                            android:enabled='@{editable}'
+                            android:text='@={model.counterTradeArea}'
+                            android:id="@+id/et_counter_trade_area"
+                            android:inputType="number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:hint="出租房地产总费用"
+                        android:layout_height="wrap_content">
+                        <android.support.design.widget.TextInputEditText
+                            android:enabled='@{editable}'
+                            android:text='@={model.totalRentPrice}'
+                            android:id="@+id/et_total_rent_price"
+                            android:inputType="number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:hint="其中维修费"
+                        android:layout_height="wrap_content">
+                        <android.support.design.widget.TextInputEditText
+                            android:enabled='@{editable}'
+                            android:text='@={""+model.fixFee}'
+                            android:id="@+id/et_fix_fee"
+                            android:inputType="number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:hint="折旧费"
+                        android:layout_height="wrap_content">
+                        <android.support.design.widget.TextInputEditText
+                            android:enabled='@{editable}'
+                            android:text='@={""+model.oldFee}'
+                            android:id="@+id/et_old_fee"
+                            android:inputType="number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:hint="保险费"
+                        android:layout_height="wrap_content">
+                        <android.support.design.widget.TextInputEditText
+                            android:enabled='@{editable}'
+                            android:text='@={""+model.insuranceFee}'
+                            android:id="@+id/et_insurance_fee"
+                            android:inputType="number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:hint="管理费"
+                        android:layout_height="wrap_content">
+                        <android.support.design.widget.TextInputEditText
+                            android:enabled='@{editable}'
+                            android:text='@={""+model.manageFree}'
+                            android:id="@+id/et_manage_fee"
+                            android:inputType="number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:hint="税费"
+                        android:layout_height="wrap_content">
+                        <android.support.design.widget.TextInputEditText
+                            android:enabled='@{editable}'
+                            android:text='@={""+model.taxFee}'
+                            android:id="@+id/et_tax_fee"
+                            android:inputType="number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:hint="其他费用"
+                        android:layout_height="wrap_content">
+                        <android.support.design.widget.TextInputEditText
+                            android:enabled='@{editable}'
+                            android:text='@={""+model.otherFee}'
+                            android:id="@+id/et_other_fee"
+                            android:inputType="number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:hint="出租柜台分摊土地面积"
+                        android:layout_height="wrap_content">
+                        <android.support.design.widget.TextInputEditText
+                            android:enabled='@{editable}'
+                            android:text='@={""+model.counterSharedLandArea}'
+                            android:id="@+id/et_counter_shared_land_area"
+                            android:inputType="number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:hint="出租柜台分摊总费"
+                        android:layout_height="wrap_content">
+                        <android.support.design.widget.TextInputEditText
+                            android:enabled='@{editable}'
+                            android:text='@={""+model.counterSharedLandFee}'
+                            android:id="@+id/et_counter_shared_land_fee"
+                            android:inputType="number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:hint="出租柜台年租金"
+                        android:layout_height="wrap_content">
+                        <android.support.design.widget.TextInputEditText
+                            android:enabled='@{editable}'
+                            android:text='@={""+model.counterFeeOfYear}'
+                            android:id="@+id/et_counter_fee_of_year"
+                            android:inputType="number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:hint="楼面单价"
+                        android:layout_height="wrap_content">
+                        <android.support.design.widget.TextInputEditText
+                            android:enabled='@{editable}'
+                            android:text='@={""+model.buildinglandPrice}'
+                            android:id="@+id/et_building_land_price"
+                            android:inputType="number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:hint="单位地价"
+                        android:layout_height="wrap_content">
+                        <android.support.design.widget.TextInputEditText
+                            android:enabled='@{editable}'
+                            android:text='@={""+model.pricePer}'
+                            android:id="@+id/et_price_per"
                             android:inputType="number"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
 
                 </LinearLayout>
-
             </net.cachapa.expandablelayout.ExpandableLayout>
+
+
+
         </LinearLayout>
 
     </android.support.v7.widget.CardView>
+
+
 </layout>
+

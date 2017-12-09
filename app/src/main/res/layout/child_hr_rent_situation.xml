@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="editable"
+            type="Boolean"/>
+
+        <variable
+            name="model"
+            type="org.chengjian.java.feidian.collectdata.beans.HouseRentModel" />
+    </data>
+
+    <android.support.v7.widget.CardView
+        app:cardCornerRadius="10dp"
+        bind:cardElevation="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/button_rent_situation"
+                style="@style/TextAppearance.AppCompat.Medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/itemColor3"
+                android:elevation="6dp"
+                android:foreground="?selectableItemBackground"
+                android:gravity="center"
+                android:padding="16dp"
+                android:text="出租情况"
+                android:textColor="#fff" />
+
+            <net.cachapa.expandablelayout.ExpandableLayout
+                android:id="@+id/el_rent_situation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:el_duration="500"
+                app:el_expanded="false">
+                <LinearLayout
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <android.support.design.widget.TextInputLayout
+                     android:layout_width="match_parent"
+                     android:hint="出租人"
+                     android:layout_height="wrap_content">
+                     <android.support.design.widget.TextInputEditText
+                         android:enabled='@{editable}'
+                         android:text='@={model.rentOut}'
+                         android:id="@+id/et_rent_out"
+                         android:inputType="number"
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content" />
+                    </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                     android:layout_width="match_parent"
+                     android:hint="承租人"
+                     android:layout_height="wrap_content">
+                     <android.support.design.widget.TextInputEditText
+                         android:enabled='@{editable}'
+                         android:text='@={model.rentIn}'
+                         android:id="@+id/et_rent_in"
+                         android:inputType="number"
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content" />
+                    </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                     android:layout_width="match_parent"
+                     android:hint="出租时间"
+                     android:layout_height="wrap_content">
+                     <android.support.design.widget.TextInputEditText
+                         android:enabled='@{editable}'
+                         android:text='@={model.rentTime}'
+                         android:id="@+id/et_rent_time"
+                         android:inputType="number"
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content" />
+                    </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                     android:layout_width="match_parent"
+                     android:hint="出租方式"
+                     android:layout_height="wrap_content">
+                     <android.support.design.widget.TextInputEditText
+                         android:enabled='@{editable}'
+                         android:text='@={model.rentMethod}'
+                         android:id="@+id/et_rent_method"
+                         android:inputType="number"
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content" />
+                    </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                     android:layout_width="match_parent"
+                     android:hint="房屋正常收益"
+                     android:layout_height="wrap_content">
+                     <android.support.design.widget.TextInputEditText
+                         android:enabled='@{editable}'
+                         android:text='@={model.houseNormalProfit}'
+                         android:id="@+id/et_house_nomal_profit"
+                         android:inputType="number"
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content" />
+                    </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                     android:layout_width="match_parent"
+                     android:hint="房屋正常总费用"
+                     android:layout_height="wrap_content">
+                     <android.support.design.widget.TextInputEditText
+                         android:enabled='@{editable}'
+                         android:text='@={model.houseNomalTotalFee}'
+                         android:id="@+id/et_house_normal_total_fee"
+                         android:inputType="number"
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content" />
+                    </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                     android:layout_width="match_parent"
+                     android:hint="年租金"
+                     android:layout_height="wrap_content">
+                     <android.support.design.widget.TextInputEditText
+                         android:enabled='@{editable}'
+                         android:text='@={""+model.priceOfYear}'
+                         android:id="@+id/et_price_of_year"
+                         android:inputType="number"
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content" />
+                    </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                     android:layout_width="match_parent"
+                     android:hint="其中维修费"
+                     android:layout_height="wrap_content">
+                     <android.support.design.widget.TextInputEditText
+                         android:enabled='@{editable}'
+                         android:text='@={""+model.fixFee}'
+                         android:id="@+id/et_fix_fee"
+                         android:inputType="number"
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content" />
+                    </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                         android:layout_width="match_parent"
+                         android:hint="押金利息"
+                         android:layout_height="wrap_content">
+                         <android.support.design.widget.TextInputEditText
+                             android:enabled='@{editable}'
+                             android:text='@={""+model.interestOfDeposit}'
+                             android:id="@+id/et_interest_of_deposit"
+                             android:inputType="number"
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content" />
+                     </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:hint="折旧费"
+                    android:layout_height="wrap_content">
+                    <android.support.design.widget.TextInputEditText
+                        android:enabled='@{editable}'
+                        android:text='@={""+model.oldFee}'
+                        android:id="@+id/et_old_fee"
+                        android:inputType="number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:hint="保险费"
+                        android:layout_height="wrap_content">
+                        <android.support.design.widget.TextInputEditText
+                            android:enabled='@{editable}'
+                            android:text='@={""+model.insuranceFee}'
+                            android:id="@+id/et_insurance_fee"
+                            android:inputType="number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:hint="其他收益"
+                        android:layout_height="wrap_content">
+                        <android.support.design.widget.TextInputEditText
+                            android:enabled='@{editable}'
+                            android:text='@={""+model.otherProfit}'
+                            android:id="@+id/et_other_profit"
+                            android:inputType="number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:hint="管理费"
+                        android:layout_height="wrap_content">
+                        <android.support.design.widget.TextInputEditText
+                            android:enabled='@{editable}'
+                            android:text='@={""+model.manageFree}'
+                            android:id="@+id/et_manage_fee"
+                            android:inputType="number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:hint="税费"
+                        android:layout_height="wrap_content">
+                        <android.support.design.widget.TextInputEditText
+                            android:enabled='@{editable}'
+                            android:text='@={""+model.taxFee}'
+                            android:id="@+id/et_tax_fee"
+                            android:inputType="number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:hint="房地纯收益"
+                        android:layout_height="wrap_content">
+                        <android.support.design.widget.TextInputEditText
+                            android:enabled='@{editable}'
+                            android:text='@={""+model.housePureProfit}'
+                            android:id="@+id/et_house_pure_profit"
+                            android:inputType="number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:hint="土地正常价格"
+                    android:layout_height="wrap_content">
+                    <android.support.design.widget.TextInputEditText
+                        android:enabled='@{editable}'
+                        android:text='@={""+model.landNormalPrice}'
+                        android:id="@+id/et_land_normal_price"
+                        android:inputType="number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+            </net.cachapa.expandablelayout.ExpandableLayout>
+
+
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+</layout>
+

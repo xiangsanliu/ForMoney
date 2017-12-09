@@ -7,7 +7,7 @@
     <data>
         <variable
             name="model"
-            type="org.chengjian.java.feidian.collectdata.beans.HouseTradeModel" />
+            type="org.chengjian.java.feidian.collectdata.beans.HouseRentModel" />
         <variable
             name="editable"
             type="Boolean"/>
@@ -91,32 +91,14 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"/>
                     </LinearLayout>
-                    <LinearLayout
+
+                    <fr.ganfra.materialspinner.MaterialSpinner
+                        app:ms_hint="采光通风状况"
+                        app:ms_hintTextSize="18sp"
+                        android:id="@+id/sp_light_air_type"
+                        android:entries="@array/array_quality_level"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:baselineAligned="false"
-                        android:orientation="horizontal">
-                        <fr.ganfra.materialspinner.MaterialSpinner
-                            app:ms_hint="装修标准"
-                            android:layout_marginStart="4dp"
-                            app:ms_hintTextSize="18sp"
-                            android:id="@+id/sp_decoration_type"
-                            android:entries="@array/array_structure_type"
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content"/>
-
-                        <fr.ganfra.materialspinner.MaterialSpinner
-                            android:layout_weight="1"
-                            app:ms_hint="采光通风状况"
-                            app:ms_hintTextSize="18sp"
-                            android:id="@+id/sp_light_air_type"
-                            android:layout_marginEnd="4dp"
-                            android:entries="@array/array_quality_level"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"/>
-                    </LinearLayout>
-
+                        android:layout_height="wrap_content"/>
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:hint="建筑面积"
@@ -158,11 +140,11 @@
 
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
-                        android:hint="买卖层次"
+                        android:hint="出租层次"
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={model.tradeLevel}'
+                            android:text='@={model.rentLevel}'
                             android:id="@+id/et_trade_level"
                             android:inputType="number"
                             android:layout_width="match_parent"
@@ -202,7 +184,7 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={""+model.houseResetTotalPrice}'
+                            android:text='@={""+model.houseResetToalPrice}'
                             android:id="@+id/et_house_reset_total_price"
                             android:inputType="number"
                             android:layout_width="match_parent"
@@ -210,16 +192,17 @@
                     </android.support.design.widget.TextInputLayout>
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
-                        android:hint="其它附属建筑物重置总价"
+                        android:hint="房屋重置单价"
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={""+model.subbuildingResetPrice}'
-                            android:id="@+id/et_subbuilding_reset_price"
+                            android:text='@={""+model.houseResetPerPrice}'
+                            android:id="@+id/et_house_reset_per_price"
                             android:inputType="number"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
+
 
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"

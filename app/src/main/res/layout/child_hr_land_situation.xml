@@ -256,29 +256,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
 
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <fr.ganfra.materialspinner.MaterialSpinner
-                            app:ms_hint="规划用途"
-                            app:ms_hintTextSize="18sp"
-                            android:layout_weight="1"
-                            android:layout_marginEnd="4dp"
-                            android:id="@+id/sp_usage_planed"
-                            android:entries="@array/array_usage"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"/>
-                        <fr.ganfra.materialspinner.MaterialSpinner
-                            app:ms_hint="实际用途"
-                            app:ms_hintTextSize="18sp"
-                            android:layout_marginStart="4dp"
-                            android:layout_weight="1"
-                            android:id="@+id/sp_usage_actucal"
-                            android:entries="@array/array_usage"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"/>
-                    </LinearLayout>
 
                     <LinearLayout
                         android:orientation="horizontal"
