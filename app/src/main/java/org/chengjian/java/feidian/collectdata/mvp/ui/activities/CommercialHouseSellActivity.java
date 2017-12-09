@@ -1,5 +1,6 @@
 package org.chengjian.java.feidian.collectdata.mvp.ui.activities;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.View;
@@ -9,11 +10,13 @@ import com.alibaba.fastjson.JSON;
 import org.chengjian.java.feidian.collectdata.R;
 import org.chengjian.java.feidian.collectdata.beans.CommercialHouseTradeModel;
 import org.chengjian.java.feidian.collectdata.databinding.ActivityCommercialHouseTradeBinding;
+import org.chengjian.java.feidian.collectdata.mvp.model.LocationMessage;
 import org.chengjian.java.feidian.collectdata.mvp.model.StickyMessage;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.detail.DetailBasePresenter;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.detail.DetailCHSPresenter;
 import org.chengjian.java.feidian.collectdata.mvp.ui.activities.base.DetailBaseActivity;
 import org.chengjian.java.feidian.collectdata.mvp.view.base.DetailCHSView;
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -87,6 +90,14 @@ public class CommercialHouseSellActivity extends DetailBaseActivity implements V
         initExpandableLayout();
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onLocateResult(LocationMessage locationMessage) {
+        binding.setEditable(locationMessage.isEditable());
+        binding.childBase.latitude.setText(String.valueOf(locationMessage.getLatitude()));
+        binding.childBase.longitude.setText(String.valueOf(locationMessage.getLongitude()));
+        binding.childChsLandSituation.etLandLocation.setText(String.valueOf(locationMessage.getAddress()));
+    }
+
     @Override
     public void getSpinner() {
         citySellRent.setBuildingDirection(binding.childChsLandSituation.spBuildingDirection.getSelectedItemPosition());
@@ -108,9 +119,6 @@ public class CommercialHouseSellActivity extends DetailBaseActivity implements V
         binding.setEditable(false);
         setSpinnerIsEnable(getIsEditable());
         presenter.save(citySellRent, model);
-        if (aMapLocationClient != null) {
-            aMapLocationClient.stopLocation();
-        }
     }
 
     @Override
@@ -184,9 +192,8 @@ public class CommercialHouseSellActivity extends DetailBaseActivity implements V
                 break;
 
             case R.id.locate:
-//                startActivityForResult(new Intent(this, MapActivity.class), RESULT_OK);
-                locate(binding.childBase.longitude, binding.childBase.latitude
-                        , binding.childChsLandSituation.etLandLocation);
+                locate();
+                break;
         }
     }
 

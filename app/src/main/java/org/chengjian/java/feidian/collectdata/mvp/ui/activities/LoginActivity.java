@@ -172,7 +172,7 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void enterMainPage() {
-        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        Intent intent = new Intent(LoginActivity.this, DrawerActivity.class);
         startActivity(intent);
         finish();
     }

@@ -9,6 +9,7 @@ import com.alibaba.fastjson.JSON;
 import org.chengjian.java.feidian.collectdata.R;
 import org.chengjian.java.feidian.collectdata.beans.HouseRentModel;
 import org.chengjian.java.feidian.collectdata.databinding.ActivityHouseRentBinding;
+import org.chengjian.java.feidian.collectdata.mvp.model.LocationMessage;
 import org.chengjian.java.feidian.collectdata.mvp.model.StickyMessage;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.detail.DetailBasePresenter;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.detail.DetailHRPresenter;
@@ -45,6 +46,14 @@ public class HouseRentActivity extends DetailBaseActivity implements View.OnClic
     public void onEventMainThread(StickyMessage stickyMessage) {
         initViews(stickyMessage);
         initExpandableLayout();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onLocateResult(LocationMessage locationMessage) {
+        binding.setEditable(locationMessage.isEditable());
+        binding.childBase.latitude.setText(String.valueOf(locationMessage.getLatitude()));
+        binding.childBase.longitude.setText(String.valueOf(locationMessage.getLongitude()));
+        binding.childHrLandSituation.etLandLocation.setText(String.valueOf(locationMessage.getAddress()));
     }
 
     private void initViews(StickyMessage message) {
@@ -112,9 +121,6 @@ public class HouseRentActivity extends DetailBaseActivity implements View.OnClic
         binding.setEditable(false);
         setSpinnerIsEnable(getIsEditable());
         presenter.save(citySellRent, model);
-        if (aMapLocationClient != null) {
-            aMapLocationClient.stopLocation();
-        }
     }
 
     @Override
@@ -186,8 +192,8 @@ public class HouseRentActivity extends DetailBaseActivity implements View.OnClic
                 setTime(binding.childHrRentSituation.etRentTime);
                 break;
             case R.id.locate:
-                locate(binding.childBase.longitude, binding.childBase.latitude
-                        , binding.childHrLandSituation.etLandLocation);
+                locate();
+                break;
         }
     }
 

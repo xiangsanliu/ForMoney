@@ -9,6 +9,7 @@ import com.alibaba.fastjson.JSON;
 import org.chengjian.java.feidian.collectdata.R;
 import org.chengjian.java.feidian.collectdata.beans.ShopRentModel;
 import org.chengjian.java.feidian.collectdata.databinding.ActivityShopRentBinding;
+import org.chengjian.java.feidian.collectdata.mvp.model.LocationMessage;
 import org.chengjian.java.feidian.collectdata.mvp.model.ResultMessage;
 import org.chengjian.java.feidian.collectdata.mvp.model.StickyMessage;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.detail.DetailBasePresenter;
@@ -59,6 +60,14 @@ public class ShopRentActivity extends DetailBaseActivity implements View.OnClick
     public void onEventMainThread(StickyMessage stickyMessage) {
         initView(stickyMessage);
         initExpandableLayout();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onLocateResult(LocationMessage locationMessage) {
+        binding.setEditable(locationMessage.isEditable());
+        binding.childBase.latitude.setText(String.valueOf(locationMessage.getLatitude()));
+        binding.childBase.longitude.setText(String.valueOf(locationMessage.getLongitude()));
+        binding.childSrLandSituation.etLandLocation.setText(String.valueOf(locationMessage.getAddress()));
     }
 
     @Override
@@ -115,9 +124,6 @@ public class ShopRentActivity extends DetailBaseActivity implements View.OnClick
         binding.setEditable(false);
         setSpinnerIsEnable(getIsEditable());
         presenter.save(citySellRent, model);
-        if (aMapLocationClient!=null) {
-            aMapLocationClient.stopLocation();
-        }
     }
 
     @Override
@@ -191,8 +197,8 @@ public class ShopRentActivity extends DetailBaseActivity implements View.OnClick
                 setTime(binding.childSrRentSituation.etRentTime);
                 break;
             case R.id.locate:
-                locate(binding.childBase.longitude, binding.childBase.latitude
-                        , binding.childSrLandSituation.etLandLocation);
+                locate();
+                break;
         }
     }
 

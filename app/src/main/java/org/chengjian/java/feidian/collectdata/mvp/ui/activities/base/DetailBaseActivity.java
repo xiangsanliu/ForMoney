@@ -3,24 +3,23 @@ package org.chengjian.java.feidian.collectdata.mvp.ui.activities.base;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TextInputEditText;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.TextView;
-
-import com.amap.api.location.AMapLocation;
-import com.amap.api.location.AMapLocationClient;
-import com.amap.api.location.AMapLocationClientOption;
-import com.amap.api.location.AMapLocationListener;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
 
 import org.chengjian.java.feidian.collectdata.beans.CitySellRent;
+import org.chengjian.java.feidian.collectdata.mvp.model.LocationMessage;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.detail.DetailBasePresenter;
+import org.chengjian.java.feidian.collectdata.mvp.ui.activities.MapActivity;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.Calendar;
 
@@ -33,7 +32,6 @@ public abstract class DetailBaseActivity extends BaseActivity {
 
     public CitySellRent citySellRent;
     public ViewDataBinding binding;
-    public AMapLocationClient aMapLocationClient;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
@@ -83,9 +81,9 @@ public abstract class DetailBaseActivity extends BaseActivity {
 
     public void delete() {
         getPresenter().deleteCity(citySellRent.getId());
-        if (aMapLocationClient != null) {
-            aMapLocationClient.stopLocation();
-        }
+//        if (aMapLocationClient != null) {
+//            aMapLocationClient.stopLocation();
+//        }
     }
 
     public abstract Boolean getIsEditable();
@@ -135,22 +133,10 @@ public abstract class DetailBaseActivity extends BaseActivity {
         builder.create().show();
     }
 
-    public void locate(final TextView longitude, final TextView latitude, final TextInputEditText landLocation) {
-        AMapLocationClientOption aMapLocationClientOption = new AMapLocationClientOption();
-        aMapLocationClientOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
-        aMapLocationClientOption.setNeedAddress(true);
-        aMapLocationClientOption.setInterval(2000);
-        aMapLocationClient = new AMapLocationClient(getApplicationContext());
-        aMapLocationClient.setLocationListener(new AMapLocationListener() {
-            @Override
-            public void onLocationChanged(AMapLocation aMapLocation) {
-                longitude.setText(String.valueOf(aMapLocation.getLongitude()));
-                latitude.setText(String.valueOf(aMapLocation.getLatitude()));
-                landLocation.setText(aMapLocation.getAddress());
-            }
-        });
-        aMapLocationClient.setLocationOption(aMapLocationClientOption);
-        aMapLocationClient.startLocation();
+    public void locate() {
+        LocationMessage locationMessage = new LocationMessage(citySellRent.getLongitude(), citySellRent.getLatitude(), citySellRent.getLandLoacation());
+        EventBus.getDefault().postSticky(locationMessage);
+        startActivityForResult(new Intent(this, MapActivity.class), RESULT_OK);
     }
 
     public abstract void setSpinnerIsEnable(boolean isEnable);

@@ -73,6 +73,7 @@ public class DetailBasePresenter <T extends DetailBaseView> {
                         progressDialog.dismiss();
                         showToast("删除成功");
                         refreshList();
+                        activity.finish();
                     }
                 });
     }

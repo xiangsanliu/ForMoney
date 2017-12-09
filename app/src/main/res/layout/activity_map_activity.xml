@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="org.chengjian.java.feidian.collectdata.mvp.ui.activities.MapActivity">
+    tools:context="org.chengjian.java.feidian.collectdata.mvp.ui.activities.MapActivity"
+    android:orientation="vertical">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -26,12 +27,24 @@
                 android:layout_gravity="end">
 
                 <TextView
-                    android:text="确定"
-                    android:textSize="24sp"
+                    android:text="重新定位"
+                    android:textSize="18sp"
                     android:gravity="center"
+                    android:layout_marginEnd="8dp"
+                    android:textColor="@android:color/white"
+                    android:id="@+id/button_relocate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="?actionBarSize"/>
+
+                <TextView
+                    android:text="确定"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="8dp"
                     android:textColor="@android:color/white"
                     android:id="@+id/button_save"
-                    android:layout_width="?actionBarSize"
+                    android:layout_width="wrap_content"
                     android:layout_height="?actionBarSize"/>
             </LinearLayout>
 

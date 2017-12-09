@@ -9,6 +9,7 @@ import com.alibaba.fastjson.JSON;
 import org.chengjian.java.feidian.collectdata.R;
 import org.chengjian.java.feidian.collectdata.beans.HouseTradeModel;
 import org.chengjian.java.feidian.collectdata.databinding.ActivityHouseSellBinding;
+import org.chengjian.java.feidian.collectdata.mvp.model.LocationMessage;
 import org.chengjian.java.feidian.collectdata.mvp.model.ResultMessage;
 import org.chengjian.java.feidian.collectdata.mvp.model.StickyMessage;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.detail.DetailBasePresenter;
@@ -43,6 +44,14 @@ public class HouseSellActivity extends DetailBaseActivity implements View.OnClic
     public void onEventMainThread(StickyMessage stickyMessage) {
         initView(stickyMessage);
         initExpandableLayout();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onLocateResult(LocationMessage locationMessage) {
+        binding.setEditable(locationMessage.isEditable());
+        binding.childBase.latitude.setText(String.valueOf(locationMessage.getLatitude()));
+        binding.childBase.longitude.setText(String.valueOf(locationMessage.getLongitude()));
+        binding.childHsLandSituation.etLandLocation.setText(String.valueOf(locationMessage.getAddress()));
     }
 
     private void initView(StickyMessage message) {
@@ -130,9 +139,6 @@ public class HouseSellActivity extends DetailBaseActivity implements View.OnClic
         binding.setEditable(false);
         setSpinnerIsEnable(getIsEditable());
         presenter.save(citySellRent, model);
-        if (aMapLocationClient != null) {
-            aMapLocationClient.stopLocation();
-        }
     }
 
     @Override
@@ -191,8 +197,8 @@ public class HouseSellActivity extends DetailBaseActivity implements View.OnClic
                 setTime(binding.childHsTradeSituation.etTradeTime);
                 break;
             case R.id.locate:
-                locate(binding.childBase.longitude, binding.childBase.latitude
-                        , binding.childHsLandSituation.etLandLocation);
+                locate();
+                break;
         }
     }
 

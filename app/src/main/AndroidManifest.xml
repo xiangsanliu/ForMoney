@@ -31,7 +31,6 @@
             android:name="com.amap.api.v2.apikey"
             android:value="e9dfde9b90a971f41eb0b55ec077e2ed" />
         <service android:name="com.amap.api.location.APSService"/>
-        <activity android:name=".mvp.ui.activities.MainActivity" />
         <activity android:name=".mvp.ui.activities.HouseRentActivity" />
         <activity android:name=".mvp.ui.activities.HouseSellActivity" />
         <activity android:name=".mvp.ui.activities.ShopRentActivity" />
