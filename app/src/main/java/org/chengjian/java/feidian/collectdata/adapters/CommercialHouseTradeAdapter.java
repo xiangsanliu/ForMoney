@@ -1,4 +1,4 @@
-package org.chengjian.java.feidian.collectdata.adapters.base;
+package org.chengjian.java.feidian.collectdata.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,30 +8,24 @@ import android.view.View;
 import android.widget.TextView;
 
 import org.chengjian.java.feidian.collectdata.R;
-import org.chengjian.java.feidian.collectdata.beans.SellRentModel;
-import org.chengjian.java.feidian.collectdata.mvp.ui.activities.HouseRentActivity;
+import org.chengjian.java.feidian.collectdata.adapters.base.BaseRecyclerAdapter;
+import org.chengjian.java.feidian.collectdata.beans.CitySellRent;
+import org.chengjian.java.feidian.collectdata.mvp.model.StickyMessage;
+import org.chengjian.java.feidian.collectdata.mvp.ui.activities.CommercialHouseSellActivity;
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
 /**
- * Created by xiang on 2017/9/12.
+ * Created by StormPhoenix on 17-9-12.
+ * StormPhoenix is a intelligent Android developer.
  */
 
-public class HouseRentAdapter extends BaseRecyclerAdapter<SellRentModel, HouseRentAdapter.HouseRentViewHolder> {
-
-
-    public HouseRentAdapter(Context context) {
-        super(context);
-    }
-
-    public HouseRentAdapter(Context context, List<SellRentModel> list) {
-        super(context, list);
-    }
+public class CommercialHouseTradeAdapter extends BaseRecyclerAdapter<CitySellRent, CommercialHouseTradeAdapter.CommercialHouseSellViewHolder> {
 
     @Override
-    protected HouseRentViewHolder createViewHolder(View itemView) {
-        return new HouseRentViewHolder(itemView);
+    protected CommercialHouseSellViewHolder createViewHolder(View itemView) {
+        return new CommercialHouseSellViewHolder(itemView);
     }
 
     @Override
@@ -39,17 +33,22 @@ public class HouseRentAdapter extends BaseRecyclerAdapter<SellRentModel, HouseRe
         return R.layout.item_list;
     }
 
-    public class HouseRentViewHolder extends BaseRecyclerAdapter.ViewHolder<SellRentModel> {
+    public CommercialHouseTradeAdapter(Context context) {
+        super(context);
+    }
 
+    public CommercialHouseTradeAdapter(Context context, List<CitySellRent> list) {
+        super(context, list);
+    }
+
+    public class CommercialHouseSellViewHolder extends BaseRecyclerAdapter.ViewHolder<CitySellRent> {
         TextView reasearchPerson;
         TextView reasearchTime;
         TextView place;
         CardView cardView;
 
-
-        public HouseRentViewHolder(View itemView) {
+        public CommercialHouseSellViewHolder(View itemView) {
             super(itemView);
-
             reasearchPerson = (TextView) itemView.findViewById(R.id.reasearch_person);
             reasearchTime = (TextView) itemView.findViewById(R.id.reasearch_time);
             place = (TextView) itemView.findViewById(R.id.place);
@@ -57,7 +56,7 @@ public class HouseRentAdapter extends BaseRecyclerAdapter<SellRentModel, HouseRe
         }
 
         @Override
-        protected void bind(final SellRentModel data) {
+        protected void bind(final CitySellRent data) {
             reasearchPerson.setText(data.getResearcher());
             reasearchTime.setText(data.getResearcherTime());
 
@@ -70,11 +69,10 @@ public class HouseRentAdapter extends BaseRecyclerAdapter<SellRentModel, HouseRe
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    EventBus.getDefault().postSticky(data);
-                    mContext.startActivity(new Intent(mContext, HouseRentActivity.class));
+                    EventBus.getDefault().postSticky(new StickyMessage(data, false));
+                    mContext.startActivity(new Intent(mContext, CommercialHouseSellActivity.class));
                 }
             });
         }
     }
-
 }

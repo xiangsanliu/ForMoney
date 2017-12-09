@@ -16,7 +16,7 @@ import rx.Observable;
 
 public interface RetrofitService {
     @GET("/city/get/citysellrents")
-    Observable<List<CitySellRent>> getCitySellRents(@Query("userId") Long userId);
+    Observable<List<CitySellRent>> getCitySellRents(@Query("userId") Long userId, @Query("modelType") int modelType);
 
     @GET("/city/get/commercial")
     Observable<CommercialHouseTradeModel> getCommercialHouseTradeModel(@Query("id") Long id);

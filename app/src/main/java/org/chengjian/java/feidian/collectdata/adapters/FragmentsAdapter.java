@@ -1,4 +1,4 @@
-package org.chengjian.java.feidian.collectdata.adapters.base;
+package org.chengjian.java.feidian.collectdata.adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

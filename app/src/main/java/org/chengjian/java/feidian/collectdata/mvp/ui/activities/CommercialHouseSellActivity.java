@@ -9,13 +9,11 @@ import com.alibaba.fastjson.JSON;
 import org.chengjian.java.feidian.collectdata.R;
 import org.chengjian.java.feidian.collectdata.beans.CommercialHouseTradeModel;
 import org.chengjian.java.feidian.collectdata.databinding.ActivityCommercialHouseTradeBinding;
-import org.chengjian.java.feidian.collectdata.mvp.model.ResultMessage;
 import org.chengjian.java.feidian.collectdata.mvp.model.StickyMessage;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.detail.DetailBasePresenter;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.detail.DetailCHSPresenter;
 import org.chengjian.java.feidian.collectdata.mvp.ui.activities.base.DetailBaseActivity;
 import org.chengjian.java.feidian.collectdata.mvp.view.base.DetailCHSView;
-import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -67,16 +65,15 @@ public class CommercialHouseSellActivity extends DetailBaseActivity implements V
         binding.childChsBuildingSituation.spQualityLevel.setSelection(citySellRent.getQualityLevel());
         binding.childChsBuildingSituation.spStructureType.setSelection(citySellRent.getStructureType());
         binding.childChsTradeSituation.spTradeType.setSelection(model.getTradeType());
-
     }
 
     private void initView(StickyMessage message) {
         this.citySellRent = message.getCitySellRent();
-        this.isEditable = message.getEditable();
         binding.setCitySellRent(citySellRent);
-        binding.setEditable(isEditable);
-        if (!isEditable) {
-            presenter.loadModel(citySellRent.getId());
+        binding.setEditable(message.getEditable());
+        setSpinnerIsEnable(getIsEditable());
+        if (!message.getEditable()) {
+            presenter.loadModel(citySellRent.getId(), "commercial");
         } else {
             model = new CommercialHouseTradeModel();
             model.setId(citySellRent.getId());
@@ -103,23 +100,43 @@ public class CommercialHouseSellActivity extends DetailBaseActivity implements V
         citySellRent.setQualityLevel(binding.childChsBuildingSituation.spQualityLevel.getSelectedItemPosition());
         citySellRent.setStructureType(binding.childChsBuildingSituation.spStructureType.getSelectedItemPosition());
         model.setTradeType(binding.childChsTradeSituation.spTradeType.getSelectedItemPosition());
-
     }
 
     @Override
     public void save() {
         getSpinner();
         binding.setEditable(false);
+        setSpinnerIsEnable(getIsEditable());
         presenter.save(citySellRent, model);
         if (aMapLocationClient != null) {
             aMapLocationClient.stopLocation();
         }
     }
 
+    @Override
+    public Boolean getIsEditable() {
+        return binding.getEditable();
+    }
+
 
     @Override
     public DetailBasePresenter getPresenter() {
         return presenter;
+    }
+
+    @Override
+    public void setSpinnerIsEnable(boolean isEnable) {
+        binding.childChsLandSituation.spBuildingDirection.setEnabled(isEnable);
+        binding.childChsLandSituation.spCrossroadSituation.setEnabled(isEnable);
+        binding.childChsLandSituation.spIsGore.setEnabled(isEnable);
+        binding.childChsLandSituation.spLandDevelopingSituation.setEnabled(isEnable);
+        binding.childChsLandSituation.spLandShape.setEnabled(isEnable);
+        binding.childChsLandSituation.spNearbyStreetSituation.setEnabled(isEnable);
+        binding.childChsLandSituation.spUsageActucal.setEnabled(isEnable);
+        binding.childChsLandSituation.spUsagePlaned.setEnabled(isEnable);
+        binding.childChsBuildingSituation.spQualityLevel.setEnabled(isEnable);
+        binding.childChsBuildingSituation.spStructureType.setEnabled(isEnable);
+        binding.childChsTradeSituation.spTradeType.setEnabled(isEnable);
     }
 
     @Override
@@ -151,6 +168,7 @@ public class CommercialHouseSellActivity extends DetailBaseActivity implements V
                 break;
             case R.id.button_edit:
                 binding.setEditable(true);
+                setSpinnerIsEnable(getIsEditable());
                 break;
             case R.id.button_delete:
                 delete();
@@ -183,7 +201,7 @@ public class CommercialHouseSellActivity extends DetailBaseActivity implements V
     @Override
     public void initModel(CommercialHouseTradeModel model) {
         this.model = model;
-        binding.setCommercialHouseTradeModel(model);
+        binding.setCommercialHouseTradeModel(this.model);
         initSpinner();
     }
 }

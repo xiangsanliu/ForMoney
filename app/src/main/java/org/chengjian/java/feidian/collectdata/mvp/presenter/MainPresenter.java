@@ -12,6 +12,9 @@ import org.chengjian.java.feidian.collectdata.mvp.model.LocalDbModel;
 import org.chengjian.java.feidian.collectdata.mvp.model.StickyMessage;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.base.BasePresenter;
 import org.chengjian.java.feidian.collectdata.mvp.ui.activities.CommercialHouseSellActivity;
+import org.chengjian.java.feidian.collectdata.mvp.ui.activities.HouseRentActivity;
+import org.chengjian.java.feidian.collectdata.mvp.ui.activities.HouseSellActivity;
+import org.chengjian.java.feidian.collectdata.mvp.ui.activities.ShopRentActivity;
 import org.chengjian.java.feidian.collectdata.mvp.ui.fragments.CommercialHouseTradeFragment;
 import org.chengjian.java.feidian.collectdata.mvp.ui.fragments.HouseRentFragment;
 import org.chengjian.java.feidian.collectdata.mvp.ui.fragments.HouseSellFragment;
@@ -31,11 +34,9 @@ import java.util.Date;
 public class MainPresenter extends BasePresenter<MainView> {
     public static final String TAG = MainPresenter.class.getSimpleName();
     private Activity mContext;
-    BaseModel dbModel;
 
     public MainPresenter(Activity context) {
         mContext = context;
-        dbModel = LocalDbModel.getInstance(context);
     }
 
     @Override
@@ -47,30 +48,29 @@ public class MainPresenter extends BasePresenter<MainView> {
         ListFragment currentFragment = mView.getCurrentFragment();
 
         StickyMessage stickyMessage = new StickyMessage();
-        Intent intent = null;
+        Intent intent;
         Long id = System.currentTimeMillis();
         stickyMessage.setEditable(true);
 
         if (currentFragment instanceof CommercialHouseTradeFragment) {
             stickyMessage.setCitySellRent(initCitySellRent(id, Constants.COMMERCIAL_HOUSE_TRADE));
             intent = new Intent(mContext, CommercialHouseSellActivity.class);
+
         } else if (currentFragment instanceof HouseRentFragment) {
             stickyMessage.setCitySellRent(initCitySellRent(id, Constants.HOUSE_RENT));
-//            intent = new Intent(mContext, HouseRentActivity.class);
+            intent = new Intent(mContext, HouseRentActivity.class);
+
         } else if (currentFragment instanceof HouseSellFragment) {
             stickyMessage.setCitySellRent(initCitySellRent(id, Constants.HOUSE_SELL));
-//            intent = new Intent(mContext, HouseSellActivity.class);
+            intent = new Intent(mContext, HouseSellActivity.class);
+
         } else {
             stickyMessage.setCitySellRent(initCitySellRent(id, Constants.SHOP_RENT));
-//            intent = new Intent(mContext, ShopRentActivity.class);
+            intent = new Intent(mContext, ShopRentActivity.class);
         }
-//
 
         EventBus.getDefault().postSticky(stickyMessage);
-
-        if (intent !=  null) {
-            mContext.startActivityForResult(intent, 0);
-        }
+        mContext.startActivityForResult(intent, 0);
     }
 
     @SuppressLint("SimpleDateFormat")

@@ -120,6 +120,7 @@
                             android:layout_height="wrap_content">
                             <android.support.design.widget.TextInputEditText
                                 android:hint="宗地长度"
+                                android:enabled='@{editable}'
                                 android:id="@+id/et_land_length"
                                 android:layout_width="match_parent"
                                 android:text='@={citySellRent.landLength}'
@@ -134,6 +135,7 @@
                             <android.support.design.widget.TextInputEditText
                                 android:hint="宗地宽度"
                                 android:text='@={citySellRent.landWidth}'
+                                android:enabled='@{editable}'
                                 android:id="@+id/et_land_width"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" />
@@ -202,6 +204,7 @@
                             android:layout_height="wrap_content">
                             <android.support.design.widget.TextInputEditText
                                 android:text='@={""+citySellRent.distToCornor}'
+                                android:enabled='@{editable}'
                                 android:id="@+id/et_dist_to_cornor"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" />
@@ -213,6 +216,7 @@
                             android:layout_height="wrap_content">
                             <android.support.design.widget.TextInputEditText
                                 android:text='@={"" + citySellRent.buildingPlotRate}'
+                                android:enabled='@{editable}'
                                 android:id="@+id/et_building_plot_rate"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" />
@@ -232,6 +236,7 @@
                             <android.support.design.widget.TextInputEditText
                                 android:text='@{"" + citySellRent.widthToStreet}'
                                 android:id="@+id/et_width_to_street"
+                                android:enabled='@{editable}'
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" />
                         </android.support.design.widget.TextInputLayout>
@@ -241,6 +246,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content">
                             <android.support.design.widget.TextInputEditText
+                                android:enabled='@{editable}'
                                 android:text='@{"" + citySellRent.depthToStreet}'
                                 android:id="@+id/et_depth_to_street"
                                 android:layout_width="match_parent"

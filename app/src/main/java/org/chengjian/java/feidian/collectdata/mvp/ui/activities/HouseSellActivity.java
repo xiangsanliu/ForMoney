@@ -47,11 +47,11 @@ public class HouseSellActivity extends DetailBaseActivity implements View.OnClic
 
     private void initView(StickyMessage message) {
         this.citySellRent = message.getCitySellRent();
-        this.isEditable = message.getEditable();
         binding.setCitySellRent(citySellRent);
-        binding.setEditable(isEditable);
-        if (!isEditable) {
-            presenter.loadModel(citySellRent.getId());
+        binding.setEditable(message.getEditable());
+        setSpinnerIsEnable(getIsEditable());
+        if (!message.getEditable()) {
+            presenter.loadModel(citySellRent.getId(), "housetrade");
         } else {
             model = new HouseTradeModel();
             model.setId(citySellRent.getId());
@@ -70,6 +70,7 @@ public class HouseSellActivity extends DetailBaseActivity implements View.OnClic
         binding.buttonSave.setOnClickListener(this);
         binding.childHsTradeSituation.etTradeTime.setOnClickListener(this);
         binding.childHsLandSituation.etAuthorizedTime.setOnClickListener(this);
+        binding.childBase.locate.setOnClickListener(this);
     }
 
     @Override
@@ -87,6 +88,23 @@ public class HouseSellActivity extends DetailBaseActivity implements View.OnClic
         binding.childHsBuildingSituation.spStructureType.setSelection(citySellRent.getStructureType());
         binding.childHsBuildingSituation.spQualityLevel.setSelection(citySellRent.getQualityLevel());
         binding.childHsBuildingSituation.spLightAirType.setSelection(model.getLightAirType());
+    }
+
+    @Override
+    public void setSpinnerIsEnable(boolean isEnable) {
+        binding.childHsLandSituation.spCrossroadSituation.setEnabled(isEnable);
+        binding.childHsLandSituation.spLandShape.setEnabled(isEnable);
+        binding.childHsLandSituation.spLandDevelopingSituation.setEnabled(isEnable);
+        binding.childHsLandSituation.spBuildingDirection.setEnabled(isEnable);
+        binding.childHsLandSituation.spNearbyStreetSituation.setEnabled(isEnable);
+        binding.childHsLandSituation.spIsGore.setEnabled(isEnable);
+        binding.childHsLandSituation.spNearbyLandType.setEnabled(isEnable);
+        binding.childHsLandSituation.spUsagePlaned.setEnabled(isEnable);
+        binding.childHsLandSituation.spUsageActucal.setEnabled(isEnable);
+        binding.childHsBuildingSituation.spDecorationType.setEnabled(isEnable);
+        binding.childHsBuildingSituation.spStructureType.setEnabled(isEnable);
+        binding.childHsBuildingSituation.spQualityLevel.setEnabled(isEnable);
+        binding.childHsBuildingSituation.spLightAirType.setEnabled(isEnable);
     }
 
 
@@ -108,9 +126,9 @@ public class HouseSellActivity extends DetailBaseActivity implements View.OnClic
 
     @Override
     public void save() {
-//        editable.isEditable.set("false");
         getSpinner();
         binding.setEditable(false);
+        setSpinnerIsEnable(getIsEditable());
         presenter.save(citySellRent, model);
         if (aMapLocationClient != null) {
             aMapLocationClient.stopLocation();
@@ -118,9 +136,16 @@ public class HouseSellActivity extends DetailBaseActivity implements View.OnClic
     }
 
     @Override
+    public Boolean getIsEditable() {
+        return binding.getEditable();
+    }
+
+    @Override
     public DetailBasePresenter getPresenter() {
         return presenter;
     }
+
+
 
     @Override
     public void onClick(View v) {
@@ -151,6 +176,7 @@ public class HouseSellActivity extends DetailBaseActivity implements View.OnClic
                 break;
             case R.id.button_edit:
                 binding.setEditable(true);
+                setSpinnerIsEnable(getIsEditable());
                 break;
             case R.id.button_save:
                 save();
@@ -177,11 +203,11 @@ public class HouseSellActivity extends DetailBaseActivity implements View.OnClic
         initSpinner();
     }
 
-
     @Override
     public void initModel(HouseTradeModel model) {
         this.model = model;
-        binding.setModel(model);
+        binding.setModel(this.model);
         initSpinner();
     }
+
 }

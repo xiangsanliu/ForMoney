@@ -99,10 +99,10 @@ public class DetailBasePresenter <T extends DetailBaseView> {
                 });
     }
 
-    public void loadModel(Long id) {
+    public void loadModel(Long id, String typeUrl) {
         progressDialog = createProgress("加载中");
         progressDialog.show();
-        netModel.getCommercialHouseTradeModel(id)
+        netModel.getModel(id, typeUrl)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>() {

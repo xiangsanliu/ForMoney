@@ -2,15 +2,12 @@ package org.chengjian.java.feidian.collectdata.mvp.ui.activities.base;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
-import android.util.DisplayMetrics;
-import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -23,25 +20,18 @@ import com.amap.api.location.AMapLocationListener;
 import net.cachapa.expandablelayout.ExpandableLayout;
 
 import org.chengjian.java.feidian.collectdata.beans.CitySellRent;
-import org.chengjian.java.feidian.collectdata.beans.Editable;
-import org.chengjian.java.feidian.collectdata.beans.SellRentModel;
-import org.chengjian.java.feidian.collectdata.mvp.model.ResultMessage;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.detail.DetailBasePresenter;
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.Calendar;
 
 /**
  * Created by xiang on 2017/9/22.
+ *
  */
 
 public abstract class DetailBaseActivity extends BaseActivity {
 
-    public SellRentModel sellRentModel;
     public CitySellRent citySellRent;
-    public Boolean isEditable;
     public ViewDataBinding binding;
     public AMapLocationClient aMapLocationClient;
 
@@ -98,9 +88,11 @@ public abstract class DetailBaseActivity extends BaseActivity {
         }
     }
 
+    public abstract Boolean getIsEditable();
+
     @Override
     public void onBackPressed() {
-        if (isEditable) {
+        if (getIsEditable()) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this)
                     .setNegativeButton("取消", new DialogInterface.OnClickListener() {
                         @Override
@@ -112,7 +104,6 @@ public abstract class DetailBaseActivity extends BaseActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             save();
-                            DetailBaseActivity.super.onBackPressed();
                         }
                     })
                     .setTitle("提示")
@@ -162,5 +153,6 @@ public abstract class DetailBaseActivity extends BaseActivity {
         aMapLocationClient.startLocation();
     }
 
+    public abstract void setSpinnerIsEnable(boolean isEnable);
 
 }

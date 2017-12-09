@@ -92,7 +92,6 @@
                     android:id="@+id/child_hs_land_situation"
                     bind:editable="@={editable}"
                     bind:citySellRent="@={citySellRent}"
-                    bind:model="@={model}"
                     android:layout_marginTop="16dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"

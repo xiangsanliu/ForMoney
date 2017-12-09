@@ -45,16 +45,16 @@ public class NetModel {
         }
     }
 
-    public Observable<List<CitySellRent>> getCitySellRents(Long userId){
-        return service.getCitySellRents(userId);
+    public Observable<List<CitySellRent>> getCitySellRents(Long userId, int modelType){
+        return service.getCitySellRents(userId, modelType);
     }
 
-    public Observable<String> getCommercialHouseTradeModel(final Long id) {
+    public Observable<String> getModel(final Long id, final String typeUrl) {
         return Observable.create(new Observable.OnSubscribe<String>() {
             @Override
             public void call(Subscriber<? super String> subscriber) {
                 try {
-                    subscriber.onNext(getContent(id, "city/get/commercial"));
+                    subscriber.onNext(getContent(id, "city/get/"+typeUrl));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

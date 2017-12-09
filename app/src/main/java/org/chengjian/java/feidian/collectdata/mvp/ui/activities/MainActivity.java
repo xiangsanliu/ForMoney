@@ -8,9 +8,7 @@ import android.util.Log;
 import android.view.View;
 
 import org.chengjian.java.feidian.collectdata.R;
-import org.chengjian.java.feidian.collectdata.adapters.base.FragmentsAdapter;
-import org.chengjian.java.feidian.collectdata.beans.CommercialHouseTradeModel;
-import org.chengjian.java.feidian.collectdata.mvp.model.LocalDbModel;
+import org.chengjian.java.feidian.collectdata.adapters.FragmentsAdapter;
 import org.chengjian.java.feidian.collectdata.mvp.model.ResultMessage;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.MainPresenter;
 import org.chengjian.java.feidian.collectdata.mvp.ui.activities.base.TabPagerActivity;
@@ -28,7 +26,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends TabPagerActivity implements MainView {

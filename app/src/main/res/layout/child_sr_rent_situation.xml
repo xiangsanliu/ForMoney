@@ -37,7 +37,7 @@
                 android:textColor="#fff" />
 
             <net.cachapa.expandablelayout.ExpandableLayout
-                android:id="@+id/el_trade_situation"
+                android:id="@+id/el_rent_situation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:el_duration="500"
@@ -127,7 +127,7 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={model.totalTrdeArea}'
+                            android:text='@={""+model.totalTrdeArea}'
                             android:id="@+id/et_total_trade_area"
                             android:inputType="number"
                             android:layout_width="match_parent"
@@ -139,7 +139,7 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={model.counterTradeArea}'
+                            android:text='@={""+model.counterTradeArea}'
                             android:id="@+id/et_counter_trade_area"
                             android:inputType="number"
                             android:layout_width="match_parent"
@@ -151,7 +151,7 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={model.totalRentPrice}'
+                            android:text='@={""+model.totalRentPrice}'
                             android:id="@+id/et_total_rent_price"
                             android:inputType="number"
                             android:layout_width="match_parent"

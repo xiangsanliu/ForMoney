@@ -1,4 +1,4 @@
-package org.chengjian.java.feidian.collectdata.adapters.base;
+package org.chengjian.java.feidian.collectdata.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,7 +8,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import org.chengjian.java.feidian.collectdata.R;
-import org.chengjian.java.feidian.collectdata.beans.SellRentModel;
+import org.chengjian.java.feidian.collectdata.adapters.base.BaseRecyclerAdapter;
+import org.chengjian.java.feidian.collectdata.beans.CitySellRent;
+import org.chengjian.java.feidian.collectdata.mvp.model.StickyMessage;
 import org.chengjian.java.feidian.collectdata.mvp.ui.activities.HouseSellActivity;
 import org.greenrobot.eventbus.EventBus;
 
@@ -16,15 +18,16 @@ import java.util.List;
 
 /**
  * Created by xiang on 2017/9/12.
+ * 
  */
 
-public class HouseSellAdapter extends BaseRecyclerAdapter<SellRentModel, HouseSellAdapter.HouseSellViewHolder> {
+public class HouseSellAdapter extends BaseRecyclerAdapter<CitySellRent, HouseSellAdapter.HouseSellViewHolder> {
 
     public HouseSellAdapter(Context context) {
         super(context);
     }
 
-    public HouseSellAdapter(Context context, List<SellRentModel> list) {
+    public HouseSellAdapter(Context context, List<CitySellRent> list) {
         super(context, list);
     }
 
@@ -38,7 +41,7 @@ public class HouseSellAdapter extends BaseRecyclerAdapter<SellRentModel, HouseSe
         return R.layout.item_list;
     }
 
-    public class HouseSellViewHolder extends BaseRecyclerAdapter.ViewHolder<SellRentModel> {
+    public class HouseSellViewHolder extends BaseRecyclerAdapter.ViewHolder<CitySellRent> {
 
         TextView reasearchPerson;
         TextView reasearchTime;
@@ -55,7 +58,7 @@ public class HouseSellAdapter extends BaseRecyclerAdapter<SellRentModel, HouseSe
         }
 
         @Override
-        protected void bind(final SellRentModel data) {
+        protected void bind(final CitySellRent data) {
             reasearchPerson.setText(data.getResearcher());
             reasearchTime.setText(data.getResearcherTime());
             if (data.getLandLoacation()==null || data.getLandLoacation().length()<=0) {
@@ -67,7 +70,7 @@ public class HouseSellAdapter extends BaseRecyclerAdapter<SellRentModel, HouseSe
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    EventBus.getDefault().postSticky(data);
+                    EventBus.getDefault().postSticky(new StickyMessage(data, false));
                     mContext.startActivity(new Intent(mContext, HouseSellActivity.class));
                 }
             });

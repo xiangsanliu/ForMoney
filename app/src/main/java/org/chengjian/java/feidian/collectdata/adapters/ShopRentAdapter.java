@@ -1,4 +1,4 @@
-package org.chengjian.java.feidian.collectdata.adapters.base;
+package org.chengjian.java.feidian.collectdata.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,7 +8,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import org.chengjian.java.feidian.collectdata.R;
-import org.chengjian.java.feidian.collectdata.beans.SellRentModel;
+import org.chengjian.java.feidian.collectdata.adapters.base.BaseRecyclerAdapter;
+import org.chengjian.java.feidian.collectdata.beans.CitySellRent;
+import org.chengjian.java.feidian.collectdata.mvp.model.StickyMessage;
 import org.chengjian.java.feidian.collectdata.mvp.ui.activities.ShopRentActivity;
 import org.greenrobot.eventbus.EventBus;
 
@@ -19,14 +21,14 @@ import java.util.List;
  *
  */
 
-public class ShopRentAdapter extends BaseRecyclerAdapter<SellRentModel, ShopRentAdapter.ShopRentViewHolder> {
+public class ShopRentAdapter extends BaseRecyclerAdapter<CitySellRent, ShopRentAdapter.ShopRentViewHolder> {
 
 
     public ShopRentAdapter(Context context) {
         super(context);
     }
 
-    public ShopRentAdapter(Context context, List<SellRentModel> list) {
+    public ShopRentAdapter(Context context, List<CitySellRent> list) {
         super(context, list);
     }
 
@@ -40,7 +42,7 @@ public class ShopRentAdapter extends BaseRecyclerAdapter<SellRentModel, ShopRent
         return R.layout.item_list;
     }
 
-    public class ShopRentViewHolder extends BaseRecyclerAdapter.ViewHolder<SellRentModel> {
+    public class ShopRentViewHolder extends BaseRecyclerAdapter.ViewHolder<CitySellRent> {
 
         TextView reasearchPerson;
         TextView reasearchTime;
@@ -56,7 +58,7 @@ public class ShopRentAdapter extends BaseRecyclerAdapter<SellRentModel, ShopRent
         }
 
         @Override
-        protected void bind(final SellRentModel data) {
+        protected void bind(final CitySellRent data) {
             reasearchPerson.setText(data.getResearcher());
             reasearchTime.setText(data.getResearcherTime());
             if (data.getLandLoacation()==null || data.getLandLoacation().length()<=0) {
@@ -68,7 +70,7 @@ public class ShopRentAdapter extends BaseRecyclerAdapter<SellRentModel, ShopRent
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    EventBus.getDefault().postSticky(data);
+                    EventBus.getDefault().postSticky(new StickyMessage(data, false));
                     mContext.startActivity(new Intent(mContext, ShopRentActivity.class));
                 }
             });

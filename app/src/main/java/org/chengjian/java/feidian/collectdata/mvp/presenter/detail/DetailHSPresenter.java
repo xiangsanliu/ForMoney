@@ -44,6 +44,7 @@ public class DetailHSPresenter extends DetailBasePresenter<DetailHSView> {
 
                     @Override
                     public void onNext(String s) {
+                        System.out.println(s);
                         progressDialog.dismiss();
                         showToast("上传成功");
                     }

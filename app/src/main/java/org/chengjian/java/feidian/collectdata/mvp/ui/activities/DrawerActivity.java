@@ -1,30 +1,20 @@
 package org.chengjian.java.feidian.collectdata.mvp.ui.activities;
 
 import android.content.Intent;
-import android.location.Location;
 import android.os.Bundle;
-import android.os.LocaleList;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.view.PagerAdapter;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.amap.api.maps2d.AMap;
-import com.amap.api.maps2d.MapView;
-import com.amap.api.maps2d.model.MyLocationStyle;
-
 import org.chengjian.java.feidian.collectdata.R;
-import org.chengjian.java.feidian.collectdata.adapters.base.FragmentsAdapter;
-import org.chengjian.java.feidian.collectdata.beans.CommercialHouseTradeModel;
+import org.chengjian.java.feidian.collectdata.adapters.FragmentsAdapter;
 import org.chengjian.java.feidian.collectdata.mvp.model.LocalDbModel;
 import org.chengjian.java.feidian.collectdata.mvp.model.ResultMessage;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.MainPresenter;
@@ -50,7 +40,6 @@ public class DrawerActivity extends TabPagerActivity
 
     @BindView(R.id.btn_add_item)
     FloatingActionButton btnAddItem;
-    LocalDbModel localDbModel;
 
 
     private FragmentsAdapter mAdapter;
@@ -79,11 +68,6 @@ public class DrawerActivity extends TabPagerActivity
     }
 
 
-    private void test() {
-        Log.d("test", "test()");
-        localDbModel.querytest();
-    }
-
 
     @Override
     protected int getLayoutId() {
@@ -110,7 +94,6 @@ public class DrawerActivity extends TabPagerActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         configureTabPager();
-        localDbModel = LocalDbModel.getInstance(this);
 
 //        test();
     }

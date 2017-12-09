@@ -6,7 +6,6 @@
     <data>
 
         <import type="android.view.View" />
-
         <variable
             name="citySellRent"
             type="org.chengjian.java.feidian.collectdata.beans.CitySellRent" />
@@ -90,7 +89,7 @@
                     android:layout_height="wrap_content"/>
                 <include
                     android:id="@+id/child_chs_land_situation"
-                    bind:editable="@={editable}"
+                    bind:editable="@{editable}"
                     bind:citySellRent="@={citySellRent}"
                     android:layout_marginTop="16dp"
                     android:layout_marginStart="16dp"
@@ -101,7 +100,7 @@
                     android:layout_height="wrap_content"/>
                 <include
                     android:id="@+id/child_chs_building_situation"
-                    bind:editable="@={editable}"
+                    bind:editable="@{editable}"
                     bind:citySellRent="@={citySellRent}"
                     bind:commercialHouseTradeModel="@={commercialHouseTradeModel}"
                     android:layout_marginTop="16dp"
@@ -113,7 +112,7 @@
                     android:layout_height="wrap_content"/>
                 <include
                     android:id="@+id/child_chs_trade_situation"
-                    bind:editable="@={editable}"
+                    bind:editable="@{editable}"
                     bind:commercialHouseTradeModel="@={commercialHouseTradeModel}"
                     android:layout_marginTop="16dp"
                     android:layout_marginStart="16dp"

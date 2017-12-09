@@ -39,6 +39,6 @@ public class CommercialHouseTradePresenter extends ListItemPresenter<CitySellRen
 
     @Override
     protected Observable<List<CitySellRent>> load(int page) {
-        return NetModel.newInstance().getCitySellRents(Constants.userId);
+        return NetModel.newInstance().getCitySellRents(Constants.userId, Constants.COMMERCIAL_HOUSE_TRADE);
     }
 }

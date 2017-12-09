@@ -4,11 +4,14 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.View;
 
+import com.alibaba.fastjson.JSON;
+
 import org.chengjian.java.feidian.collectdata.R;
 import org.chengjian.java.feidian.collectdata.beans.HouseRentModel;
 import org.chengjian.java.feidian.collectdata.databinding.ActivityHouseRentBinding;
 import org.chengjian.java.feidian.collectdata.mvp.model.StickyMessage;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.detail.DetailBasePresenter;
+import org.chengjian.java.feidian.collectdata.mvp.presenter.detail.DetailHRPresenter;
 import org.chengjian.java.feidian.collectdata.mvp.ui.activities.base.DetailBaseActivity;
 import org.chengjian.java.feidian.collectdata.mvp.view.base.DetailHRView;
 import org.greenrobot.eventbus.Subscribe;
@@ -20,12 +23,15 @@ public class HouseRentActivity extends DetailBaseActivity implements View.OnClic
 
     private ActivityHouseRentBinding binding;
     private HouseRentModel model;
+    private DetailHRPresenter presenter;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, getLayoutId());
+        presenter = new DetailHRPresenter(this);
+        presenter.attachView(this);
     }
 
 
@@ -37,9 +43,22 @@ public class HouseRentActivity extends DetailBaseActivity implements View.OnClic
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void onEventMainThread(StickyMessage stickyMessage) {
-//        initViews(citySellRent);
+        initViews(stickyMessage);
         initExpandableLayout();
-        initSpinner();
+    }
+
+    private void initViews(StickyMessage message) {
+        this.citySellRent = message.getCitySellRent();
+        binding.setCitySellRent(citySellRent);
+        binding.setEditable(message.getEditable());
+        setSpinnerIsEnable(getIsEditable());
+        if (!message.getEditable()) {
+            presenter.loadModel(citySellRent.getId(), "houserent");
+        } else {
+            model = new HouseRentModel();
+            model.setId(citySellRent.getId());
+            initModel(model);
+        }
     }
 
     @Override
@@ -53,6 +72,7 @@ public class HouseRentActivity extends DetailBaseActivity implements View.OnClic
         binding.buttonSave.setOnClickListener(this);
         binding.childHrLandSituation.etAuthorizedTime.setOnClickListener(this);
         binding.childHrRentSituation.etRentTime.setOnClickListener(this);
+        binding.childBase.locate.setOnClickListener(this);
 
     }
 
@@ -63,7 +83,7 @@ public class HouseRentActivity extends DetailBaseActivity implements View.OnClic
         binding.childHrLandSituation.spLandDevelopingSituation.setSelection(citySellRent.getLandShape());
         binding.childHrLandSituation.spBuildingDirection.setSelection(citySellRent.getBuildingDirection());
         binding.childHrLandSituation.spNearbyStreetSituation.setSelection(citySellRent.getNearbyStreetSituation());
-        binding.childHrLandSituation.spIsGore.setSelection(citySellRent.getGore()? 1:0);
+        binding.childHrLandSituation.spIsGore.setSelection(citySellRent.isGore()? 1:0);
         binding.childHrLandSituation.spNearbyLandType.setSelection(model.getNearByLandType());
         binding.childHrBuildingSituation.spStructureType.setSelection(citySellRent.getStructureType());
         binding.childHrBuildingSituation.spQualityLevel.setSelection(citySellRent.getQualityLevel());
@@ -89,15 +109,37 @@ public class HouseRentActivity extends DetailBaseActivity implements View.OnClic
     public void save() {
 //        editable.isEditable.set("false");
         getSpinner();
+        binding.setEditable(false);
+        setSpinnerIsEnable(getIsEditable());
+        presenter.save(citySellRent, model);
+        if (aMapLocationClient != null) {
+            aMapLocationClient.stopLocation();
+        }
     }
 
     @Override
-    public void delete() {
+    public Boolean getIsEditable() {
+        return binding.getEditable();
     }
 
     @Override
     public DetailBasePresenter getPresenter() {
-        return null;
+        return presenter;
+    }
+
+    @Override
+    public void setSpinnerIsEnable(boolean isEnable) {
+        binding.childHrLandSituation.spCrossroadSituation.setEnabled(isEnable);
+        binding.childHrLandSituation.spLandShape.setEnabled(isEnable);
+        binding.childHrLandSituation.spLandDevelopingSituation.setEnabled(isEnable);
+        binding.childHrLandSituation.spBuildingDirection.setEnabled(isEnable);
+        binding.childHrLandSituation.spNearbyStreetSituation.setEnabled(isEnable);
+        binding.childHrLandSituation.spIsGore.setEnabled(isEnable);
+        binding.childHrLandSituation.spNearbyLandType.setEnabled(isEnable);
+        binding.childHrBuildingSituation.spStructureType.setEnabled(isEnable);
+        binding.childHrBuildingSituation.spQualityLevel.setEnabled(isEnable);
+        binding.childHrBuildingSituation.spLightAirType.setEnabled(isEnable);
+
     }
 
     @Override
@@ -128,10 +170,8 @@ public class HouseRentActivity extends DetailBaseActivity implements View.OnClic
                 binding.childBase.elExtra.collapse();
                 break;
             case R.id.button_edit:
-//                editable.isEditable.set("true");
-                binding.childBase.etReasearcher.requestFocus();
-                binding.childBase.elExtra.expand();
-                showInputMethod();
+                binding.setEditable(true);
+                setSpinnerIsEnable(getIsEditable());
                 break;
             case R.id.button_save:
                 save();
@@ -145,16 +185,24 @@ public class HouseRentActivity extends DetailBaseActivity implements View.OnClic
             case R.id.et_trade_time:
                 setTime(binding.childHrRentSituation.etRentTime);
                 break;
+            case R.id.locate:
+                locate(binding.childBase.longitude, binding.childBase.latitude
+                        , binding.childHrLandSituation.etLandLocation);
         }
     }
 
     @Override
     public void initModel(String model) {
-
+        this.model = JSON.parseObject(model,HouseRentModel.class);
+        binding.setModel(this.model);
+        initSpinner();
     }
 
     @Override
     public void initModel(HouseRentModel model) {
+        this.model = model;
+        binding.setModel(this.model);
+        initSpinner();
 
     }
 }

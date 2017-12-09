@@ -1,20 +1,14 @@
 package org.chengjian.java.feidian.collectdata.beans;
 
 
-import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Id;
-import org.greenrobot.greendao.annotation.NotNull;
-import org.greenrobot.greendao.annotation.Generated;
 
 /**
  * Created by StormPhoenix on 17-9-11.
  * StormPhoenix is a intelligent Android developer.
  */
-@Entity
 public class CitySellRent {
 
     // 主键 id
-    @Id
     private Long id;
 
     //土地基本信息
@@ -73,58 +67,9 @@ public class CitySellRent {
 
     private String researcherTime;  //调查时间
 
-    @NotNull
     private Long userId;
 
-    @NotNull
     private int modelType;
-
-    @Generated(hash = 1307042505)
-    public CitySellRent(Long id, String landLoacation, String landRange,
-            String nearbyStreetName, int crossRoadSituation, int landShape,
-            String landLength, String landWidth, int landDevelopingSituation,
-            int buildingDirection, int nearbyStreetSituation, float distToCornor,
-            float widthToStreet, float depthToStreet, boolean gore,
-            float buildingPlotRate, String authorizedTime,
-            float landServiceableLife, String houseLocation, int structureType,
-            int qualityLevel, float buildingArea, float houseArea, String detail,
-            float longitude, float latitude, String researcher,
-            String researcherTime, @NotNull Long userId, int modelType) {
-        this.id = id;
-        this.landLoacation = landLoacation;
-        this.landRange = landRange;
-        this.nearbyStreetName = nearbyStreetName;
-        this.crossRoadSituation = crossRoadSituation;
-        this.landShape = landShape;
-        this.landLength = landLength;
-        this.landWidth = landWidth;
-        this.landDevelopingSituation = landDevelopingSituation;
-        this.buildingDirection = buildingDirection;
-        this.nearbyStreetSituation = nearbyStreetSituation;
-        this.distToCornor = distToCornor;
-        this.widthToStreet = widthToStreet;
-        this.depthToStreet = depthToStreet;
-        this.gore = gore;
-        this.buildingPlotRate = buildingPlotRate;
-        this.authorizedTime = authorizedTime;
-        this.landServiceableLife = landServiceableLife;
-        this.houseLocation = houseLocation;
-        this.structureType = structureType;
-        this.qualityLevel = qualityLevel;
-        this.buildingArea = buildingArea;
-        this.houseArea = houseArea;
-        this.detail = detail;
-        this.longitude = longitude;
-        this.latitude = latitude;
-        this.researcher = researcher;
-        this.researcherTime = researcherTime;
-        this.userId = userId;
-        this.modelType = modelType;
-    }
-
-    @Generated(hash = 1815451546)
-    public CitySellRent() {
-    }
 
     public Long getId() {
         return id;
@@ -364,9 +309,5 @@ public class CitySellRent {
 
     public void setModelType(int modelType) {
         this.modelType = modelType;
-    }
-
-    public boolean getGore() {
-        return this.gore;
     }
 }
