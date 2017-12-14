@@ -60,7 +60,7 @@
                             android:enabled='@{editable}'
                             android:text="@={citySellRent.houseLocation}"
                             android:id="@+id/et_building_num"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -105,8 +105,8 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:inputType="number"
-                            android:text='@={"" + citySellRent.buildingArea}'
+                            android:inputType="text"
+                            android:text='@={ citySellRent.buildingArea}'
                             android:id="@+id/et_building_area"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
@@ -118,9 +118,9 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={"" + citySellRent.houseArea}'
+                            android:text='@={ citySellRent.houseArea}'
                             android:id="@+id/et_house_area"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -131,9 +131,9 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={"" + model.floorNum}'
+                            android:text='@={ model.floorNum}'
                             android:id="@+id/et_floor_num"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -146,7 +146,7 @@
                             android:enabled='@{editable}'
                             android:text='@={model.rentLevel}'
                             android:id="@+id/et_trade_level"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -158,9 +158,9 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={"" + model.houseStandardPrice}'
+                            android:text='@={ model.houseStandardPrice}'
                             android:id="@+id/et_house_standard_price"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -171,9 +171,9 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={""+model.totalArea}'
+                            android:text='@={model.totalArea}'
                             android:id="@+id/et_total_area"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -184,9 +184,9 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={""+model.houseResetToalPrice}'
+                            android:text='@={model.houseResetToalPrice}'
                             android:id="@+id/et_house_reset_total_price"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -196,9 +196,9 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={""+model.houseResetPerPrice}'
+                            android:text='@={model.houseResetPerPrice}'
                             android:id="@+id/et_house_reset_per_price"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -210,9 +210,9 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={""+model.houseTodayValue}'
+                            android:text='@={model.houseTodayValue}'
                             android:id="@+id/et_house_today_value"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -222,9 +222,9 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={""+model.subbuildingTodayValue}'
+                            android:text='@={model.subbuildingTodayValue}'
                             android:id="@+id/et_subbuilding_today_value"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -234,9 +234,9 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={""+model.yearRobust}'
+                            android:text='@={model.yearRobust}'
                             android:id="@+id/et_year_robust"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -246,9 +246,9 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={""+model.yearUsed}'
+                            android:text='@={model.yearUsed}'
                             android:id="@+id/et_year_used"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>

@@ -99,7 +99,7 @@
                             android:layout_height="wrap_content">
                             <android.support.design.widget.TextInputEditText
                                 android:enabled='@{editable}'
-                                android:text='@{""+commercialHouseTradeModel.loanYear}'
+                                android:text='@{commercialHouseTradeModel.loanYear}'
                                 android:id="@+id/et_load_year"
                                 android:inputType="text"
                                 android:layout_width="match_parent"
@@ -154,7 +154,7 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={""+commercialHouseTradeModel.plotRatePlaned}'
+                            android:text='@={commercialHouseTradeModel.plotRatePlaned}'
                             android:id="@+id/et_plot_rate_planed"
                             android:inputType="text"
                             android:layout_width="match_parent"
@@ -166,7 +166,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
-                            android:text='@{"" + commercialHouseTradeModel.buildingDensity}'
+                            android:text='@{ commercialHouseTradeModel.buildingDensity}'
                             android:id="@+id/et_building_density"
                             android:enabled='@{editable}'
                             android:inputType="text"
@@ -180,7 +180,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
-                            android:text='@{"" + commercialHouseTradeModel.wholeBuildingPrice}'
+                            android:text='@{ commercialHouseTradeModel.wholeBuildingPrice}'
                             android:id="@+id/et_whole_building_price"
                             android:enabled='@{editable}'
                             android:inputType="text"
@@ -193,7 +193,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
-                            android:text='@{"" + commercialHouseTradeModel.wholeBuildingFee}'
+                            android:text='@{ commercialHouseTradeModel.wholeBuildingFee}'
                             android:id="@+id/et_whole_building_fee"
                             android:enabled='@{editable}'
                             android:inputType="text"
@@ -206,9 +206,9 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={""+commercialHouseTradeModel.interest}'
+                            android:text='@={commercialHouseTradeModel.interest}'
                             android:id="@+id/et_interest"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -218,9 +218,9 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={""+commercialHouseTradeModel.profitOfDeveloper}'
+                            android:text='@={commercialHouseTradeModel.profitOfDeveloper}'
                             android:id="@+id/et_profit_of_developer"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -230,9 +230,9 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={""+commercialHouseTradeModel.price}'
+                            android:text='@={commercialHouseTradeModel.price}'
                             android:id="@+id/et_price"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -242,9 +242,9 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={""+commercialHouseTradeModel.tax}'
+                            android:text='@={commercialHouseTradeModel.tax}'
                             android:id="@+id/et_tax"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -254,9 +254,9 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={""+commercialHouseTradeModel.landPricePerSquare}'
+                            android:text='@={commercialHouseTradeModel.landPricePerSquare}'
                             android:id="@+id/et_land_price_per_square"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -266,9 +266,9 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={""+commercialHouseTradeModel.shareLandArea}'
+                            android:text='@={commercialHouseTradeModel.shareLandArea}'
                             android:id="@+id/et_share_land_area"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>

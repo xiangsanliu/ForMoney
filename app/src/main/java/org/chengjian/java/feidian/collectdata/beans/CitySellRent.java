@@ -32,19 +32,19 @@ public class CitySellRent {
 
     private int nearbyStreetSituation;      //临界状况
 
-    private float distToCornor;             //至拐角距离
+    private String distToCornor;             //至拐角距离
 
-    private float widthToStreet;             //临街宽度
+    private String widthToStreet;             //临街宽度
 
-    private float depthToStreet;            //临街深度
+    private String depthToStreet;            //临街深度
 
     private boolean gore;                 //是否是畸零地
 
-    private float buildingPlotRate;         //建筑容积率
+    private String buildingPlotRate;         //建筑容积率
 
     private String authorizedTime;          //使用权限取得时间
 
-    private float landServiceableLife;         //土地使用年限
+    private String landServiceableLife;         //土地使用年限
 
     //房屋信息
     private String houseLocation;        //房屋位置/柜台具体位置
@@ -53,9 +53,9 @@ public class CitySellRent {
 
     private int qualityLevel;       //质量等级
 
-    private float buildingArea;     //建筑面积
+    private String buildingArea;     //建筑面积
 
-    private float houseArea;             //房屋建筑面积
+    private String houseArea;             //房屋建筑面积
 
     private String detail;              //详细说明
 
@@ -159,27 +159,27 @@ public class CitySellRent {
         this.nearbyStreetSituation = nearbyStreetSituation;
     }
 
-    public float getDistToCornor() {
+    public String getDistToCornor() {
         return distToCornor;
     }
 
-    public void setDistToCornor(float distToCornor) {
+    public void setDistToCornor(String distToCornor) {
         this.distToCornor = distToCornor;
     }
 
-    public float getWidthToStreet() {
+    public String getWidthToStreet() {
         return widthToStreet;
     }
 
-    public void setWidthToStreet(float widthToStreet) {
+    public void setWidthToStreet(String widthToStreet) {
         this.widthToStreet = widthToStreet;
     }
 
-    public float getDepthToStreet() {
+    public String getDepthToStreet() {
         return depthToStreet;
     }
 
-    public void setDepthToStreet(float depthToStreet) {
+    public void setDepthToStreet(String depthToStreet) {
         this.depthToStreet = depthToStreet;
     }
 
@@ -191,11 +191,11 @@ public class CitySellRent {
         this.gore = gore;
     }
 
-    public float getBuildingPlotRate() {
+    public String getBuildingPlotRate() {
         return buildingPlotRate;
     }
 
-    public void setBuildingPlotRate(float buildingPlotRate) {
+    public void setBuildingPlotRate(String buildingPlotRate) {
         this.buildingPlotRate = buildingPlotRate;
     }
 
@@ -207,11 +207,11 @@ public class CitySellRent {
         this.authorizedTime = authorizedTime;
     }
 
-    public float getLandServiceableLife() {
+    public String getLandServiceableLife() {
         return landServiceableLife;
     }
 
-    public void setLandServiceableLife(float landServiceableLife) {
+    public void setLandServiceableLife(String landServiceableLife) {
         this.landServiceableLife = landServiceableLife;
     }
 
@@ -239,19 +239,19 @@ public class CitySellRent {
         this.qualityLevel = qualityLevel;
     }
 
-    public float getBuildingArea() {
+    public String getBuildingArea() {
         return buildingArea;
     }
 
-    public void setBuildingArea(float buildingArea) {
+    public void setBuildingArea(String buildingArea) {
         this.buildingArea = buildingArea;
     }
 
-    public float getHouseArea() {
+    public String getHouseArea() {
         return houseArea;
     }
 
-    public void setHouseArea(float houseArea) {
+    public void setHouseArea(String houseArea) {
         this.houseArea = houseArea;
     }
 

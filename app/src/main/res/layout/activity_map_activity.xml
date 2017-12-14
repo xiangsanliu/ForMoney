@@ -35,6 +35,16 @@
                     android:id="@+id/button_relocate"
                     android:layout_width="wrap_content"
                     android:layout_height="?actionBarSize"/>
+                <TextView
+                    android:text="取消"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    android:layout_marginEnd="8dp"
+                    android:textColor="@android:color/white"
+                    android:id="@+id/button_cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="?actionBarSize"/>
+
 
                 <TextView
                     android:text="确定"

@@ -60,7 +60,7 @@
                             android:enabled='@{editable}'
                             android:text='@={model.tradeOut}'
                             android:id="@+id/et_trade_out"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -73,7 +73,7 @@
                             android:enabled='@{editable}'
                             android:text='@={model.tradeIn}'
                             android:id="@+id/et_trade_in"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -85,7 +85,7 @@
                             android:enabled='@{editable}'
                             android:text='@={model.tradeTime}'
                             android:id="@+id/et_trade_time"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -97,7 +97,7 @@
                             android:enabled='@{editable}'
                             android:text='@={model.tradeMethod}'
                             android:id="@+id/et_trade_method"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -109,7 +109,7 @@
                             android:enabled='@{editable}'
                             android:text='@={model.useageBeforeTrade}'
                             android:id="@+id/et_usage_before"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -121,7 +121,7 @@
                             android:enabled='@{editable}'
                             android:text='@={model.useageAfterTrade}'
                             android:id="@+id/et_usage_after"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -131,9 +131,9 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={""+model.tradeBuildingArea}'
+                            android:text='@={model.tradeBuildingArea}'
                             android:id="@+id/et_trade_building_area"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -143,9 +143,9 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={""+model.buildingTradeSharedLandArea}'
+                            android:text='@={model.buildingTradeSharedLandArea}'
                             android:id="@+id/et_building_trade_shared_land_area"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -155,9 +155,9 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={""+model.houseTradeTotalPrice}'
+                            android:text='@={model.houseTradeTotalPrice}'
                             android:id="@+id/et_house_trade_total_price"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -168,9 +168,9 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={""+model.houseTradeTax}'
+                            android:text='@={model.houseTradeTax}'
                             android:id="@+id/et_house_trade_tax"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -180,9 +180,9 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={""+model.landTradeTotalPirce}'
+                            android:text='@={model.landTradeTotalPirce}'
                             android:id="@+id/et_land_trade_total_price"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -192,9 +192,9 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={""+model.landPricePerSquare}'
+                            android:text='@={model.landPricePerSquare}'
                             android:id="@+id/et_land_price_per_square"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>

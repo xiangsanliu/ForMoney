@@ -1,5 +1,6 @@
 package org.chengjian.java.feidian.collectdata.mvp.ui.activities;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -13,9 +14,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.yanzhenjie.permission.AndPermission;
+import com.yanzhenjie.permission.Permission;
+
 import org.chengjian.java.feidian.collectdata.R;
 import org.chengjian.java.feidian.collectdata.adapters.FragmentsAdapter;
-import org.chengjian.java.feidian.collectdata.mvp.model.LocalDbModel;
 import org.chengjian.java.feidian.collectdata.mvp.model.ResultMessage;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.MainPresenter;
 import org.chengjian.java.feidian.collectdata.mvp.ui.activities.base.TabPagerActivity;
@@ -40,6 +43,8 @@ public class DrawerActivity extends TabPagerActivity
 
     @BindView(R.id.btn_add_item)
     FloatingActionButton btnAddItem;
+
+
 
 
     private FragmentsAdapter mAdapter;
@@ -94,6 +99,14 @@ public class DrawerActivity extends TabPagerActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         configureTabPager();
+
+
+        AndPermission.with(this)
+                .requestCode(100)
+                .permission(
+                        Permission.LOCATION,
+                        Permission.STORAGE
+                ).start();
 
 //        test();
     }

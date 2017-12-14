@@ -57,7 +57,7 @@
                             android:enabled='@{editable}'
                             android:text='@={model.rentOut}'
                             android:id="@+id/et_rent_out"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -69,7 +69,7 @@
                             android:enabled='@{editable}'
                             android:text='@={model.rentIn}'
                             android:id="@+id/et_rent_in"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -81,7 +81,7 @@
                             android:enabled='@{editable}'
                             android:text='@={model.rentTime}'
                             android:id="@+id/et_rent_time"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -93,7 +93,7 @@
                             android:enabled='@{editable}'
                             android:text='@={model.rentMethod}'
                             android:id="@+id/et_rent_method"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -105,7 +105,7 @@
                             android:enabled='@{editable}'
                             android:text='@={model.useage}'
                             android:id="@+id/et_useage"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -117,7 +117,7 @@
                             android:enabled='@{editable}'
                             android:text='@={model.rentDeadline}'
                             android:id="@+id/et_rent_deadline"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -127,9 +127,9 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={""+model.totalTrdeArea}'
+                            android:text='@={model.totalTrdeArea}'
                             android:id="@+id/et_total_trade_area"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -139,9 +139,9 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={""+model.counterTradeArea}'
+                            android:text='@={model.counterTradeArea}'
                             android:id="@+id/et_counter_trade_area"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -151,9 +151,9 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={""+model.totalRentPrice}'
+                            android:text='@={model.totalRentPrice}'
                             android:id="@+id/et_total_rent_price"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -163,9 +163,9 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={""+model.fixFee}'
+                            android:text='@={model.fixFee}'
                             android:id="@+id/et_fix_fee"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -175,9 +175,9 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={""+model.oldFee}'
+                            android:text='@={model.oldFee}'
                             android:id="@+id/et_old_fee"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -187,9 +187,9 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={""+model.insuranceFee}'
+                            android:text='@={model.insuranceFee}'
                             android:id="@+id/et_insurance_fee"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -199,9 +199,9 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={""+model.manageFree}'
+                            android:text='@={model.manageFree}'
                             android:id="@+id/et_manage_fee"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -211,9 +211,9 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={""+model.taxFee}'
+                            android:text='@={model.taxFee}'
                             android:id="@+id/et_tax_fee"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -223,9 +223,9 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={""+model.otherFee}'
+                            android:text='@={model.otherFee}'
                             android:id="@+id/et_other_fee"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -235,9 +235,9 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={""+model.counterSharedLandArea}'
+                            android:text='@={model.counterSharedLandArea}'
                             android:id="@+id/et_counter_shared_land_area"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -247,9 +247,9 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={""+model.counterSharedLandFee}'
+                            android:text='@={model.counterSharedLandFee}'
                             android:id="@+id/et_counter_shared_land_fee"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -259,9 +259,9 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={""+model.counterFeeOfYear}'
+                            android:text='@={model.counterFeeOfYear}'
                             android:id="@+id/et_counter_fee_of_year"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -271,9 +271,9 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={""+model.buildinglandPrice}'
+                            android:text='@={model.buildinglandPrice}'
                             android:id="@+id/et_building_land_price"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -283,9 +283,9 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={""+model.pricePer}'
+                            android:text='@={model.pricePer}'
                             android:id="@+id/et_price_per"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>

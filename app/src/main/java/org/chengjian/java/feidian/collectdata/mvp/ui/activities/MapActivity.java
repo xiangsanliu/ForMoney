@@ -34,6 +34,9 @@ public class MapActivity extends BaseActivity {
     private LocationMessage message = new LocationMessage();
     private Marker marker;
     private boolean isNeedSave;
+    private TextView cancel;
+    private TextView save;
+    private TextView relocate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,25 +45,10 @@ public class MapActivity extends BaseActivity {
         mapView = (MapView) findViewById(R.id.map_view);
         mapView.onCreate(savedInstanceState);
         aMap = mapView.getMap();
-        findViewById(R.id.button_save).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isNeedSave) {
-                    EventBus.getDefault().post(message);
-                }
-                finish();
-            }
-        });
-        findViewById(R.id.button_relocate).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                isNeedSave = true;
-                message.setEditable(true);
-                marker.remove();
-                setUpMap();
-                findViewById(R.id.button_relocate).setVisibility(View.GONE);
-            }
-        });
+        cancel = (TextView) findViewById(R.id.button_cancel);
+        save = (TextView) findViewById(R.id.button_save);
+        relocate = (TextView) findViewById(R.id.button_relocate);
+
     }
 
     @Override
@@ -106,10 +94,37 @@ public class MapActivity extends BaseActivity {
             aMap.animateCamera(cameraUpdate, 1000, null);
             isNeedSave = false;
         } else {
+            relocate.setVisibility(View.GONE);
             isNeedSave = true;
             setUpMap();
             message.setEditable(true);
         }
+
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isNeedSave) {
+                    EventBus.getDefault().post(message);
+                }
+                finish();
+            }
+        });
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        relocate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isNeedSave = true;
+                message.setEditable(true);
+                marker.remove();
+                setUpMap();
+                findViewById(R.id.button_relocate).setVisibility(View.GONE);
+            }
+        });
     }
 
     @Override

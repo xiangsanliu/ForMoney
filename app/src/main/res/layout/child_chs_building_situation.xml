@@ -60,7 +60,7 @@
                             android:enabled='@{editable}'
                             android:text="@={citySellRent.houseLocation}"
                             android:id="@+id/et_building_num"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -98,8 +98,8 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:inputType="number"
-                            android:text='@={"" + citySellRent.buildingArea}'
+                            android:inputType="text"
+                            android:text='@={ citySellRent.buildingArea}'
                             android:id="@+id/et_building_area"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
@@ -111,9 +111,9 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={"" + citySellRent.houseArea}'
+                            android:text='@={ citySellRent.houseArea}'
                             android:id="@+id/et_house_area"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -124,9 +124,9 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={"" + commercialHouseTradeModel.floorNum}'
+                            android:text='@={ commercialHouseTradeModel.floorNum}'
                             android:id="@+id/et_floor_num"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -137,9 +137,9 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={"" + commercialHouseTradeModel.houseStandardPrice}'
+                            android:text='@={ commercialHouseTradeModel.houseStandardPrice}'
                             android:id="@+id/et_house_standard_price"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -149,9 +149,9 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={""+commercialHouseTradeModel.buildingProjectPrice}'
+                            android:text='@={commercialHouseTradeModel.buildingProjectPrice}'
                             android:id="@+id/et_building_project_price"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -161,9 +161,9 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={""+commercialHouseTradeModel.serviceFee}'
+                            android:text='@={commercialHouseTradeModel.serviceFee}'
                             android:id="@+id/et_service_fee"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -173,9 +173,9 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={""+commercialHouseTradeModel.otherDirectFee}'
+                            android:text='@={commercialHouseTradeModel.otherDirectFee}'
                             android:id="@+id/et_other_direct_fee"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -185,9 +185,9 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={""+commercialHouseTradeModel.manageFeeAndProfit}'
+                            android:text='@={commercialHouseTradeModel.manageFeeAndProfit}'
                             android:id="@+id/et_manage_fee_and_profit"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -197,9 +197,9 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={""+commercialHouseTradeModel.unPredictedFee}'
+                            android:text='@={commercialHouseTradeModel.unPredictedFee}'
                             android:id="@+id/et_unpredicted_fee"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -209,9 +209,9 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={""+commercialHouseTradeModel.landCompensateFee}'
+                            android:text='@={commercialHouseTradeModel.landCompensateFee}'
                             android:id="@+id/et_land_compensate_fee"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -221,9 +221,9 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={""+commercialHouseTradeModel.agentFee}'
+                            android:text='@={commercialHouseTradeModel.agentFee}'
                             android:id="@+id/et_agent_fee"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -233,9 +233,9 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={""+commercialHouseTradeModel.cityBigSuiteFee}'
+                            android:text='@={commercialHouseTradeModel.cityBigSuiteFee}'
                             android:id="@+id/et_city_big_suit_fee"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
@@ -245,9 +245,9 @@
                         android:layout_height="wrap_content">
                         <android.support.design.widget.TextInputEditText
                             android:enabled='@{editable}'
-                            android:text='@={""+commercialHouseTradeModel.otherFee}'
+                            android:text='@={commercialHouseTradeModel.otherFee}'
                             android:id="@+id/et_other_fee"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.design.widget.TextInputLayout>
