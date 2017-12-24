@@ -156,6 +156,8 @@ public class DrawerActivity extends TabPagerActivity
             case R.id.nav_exit:
                 finish();
                 break;
+            case R.id.about_imformation:
+                break;
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

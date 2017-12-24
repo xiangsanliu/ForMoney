@@ -235,7 +235,7 @@
                             android:layout_height="wrap_content">
                             <android.support.design.widget.TextInputEditText
                                 android:enabled='@{editable}'
-                                android:text='@{ citySellRent.widthToStreet}'
+                                android:text='@={ citySellRent.widthToStreet}'
                                 android:id="@+id/et_width_to_street"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" />
@@ -247,7 +247,7 @@
                             android:layout_height="wrap_content">
                             <android.support.design.widget.TextInputEditText
                                 android:enabled='@{editable}'
-                                android:text='@{ citySellRent.depthToStreet}'
+                                android:text='@={ citySellRent.depthToStreet}'
                                 android:id="@+id/et_depth_to_street"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" />

@@ -73,7 +73,7 @@
                         android:orientation="horizontal">
                         <fr.ganfra.materialspinner.MaterialSpinner
                             app:ms_hint="房屋结构"
-                            android:layout_marginStart="4dp"
+                            android:layout_marginEnd="4dp"
                             app:ms_hintTextSize="18sp"
                             android:id="@+id/sp_structure_type"
                             android:entries="@array/array_structure_type"
@@ -86,7 +86,7 @@
                             app:ms_hint="质量等级"
                             app:ms_hintTextSize="18sp"
                             android:id="@+id/sp_quality_level"
-                            android:layout_marginEnd="4dp"
+                            android:layout_marginStart="4dp"
                             android:entries="@array/array_quality_level"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"/>
@@ -98,10 +98,10 @@
                         android:orientation="horizontal">
                         <fr.ganfra.materialspinner.MaterialSpinner
                             app:ms_hint="装修标准"
-                            android:layout_marginStart="4dp"
+                            android:layout_marginEnd="4dp"
                             app:ms_hintTextSize="18sp"
                             android:id="@+id/sp_decoration_type"
-                            android:entries="@array/array_structure_type"
+                            android:entries="@array/array_decoration_type"
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:layout_height="wrap_content"/>
@@ -111,8 +111,8 @@
                             app:ms_hint="采光通风状况"
                             app:ms_hintTextSize="18sp"
                             android:id="@+id/sp_light_air_type"
-                            android:layout_marginEnd="4dp"
-                            android:entries="@array/array_quality_level"
+                            android:layout_marginStart="4dp"
+                            android:entries="@array/array_light_air_type"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"/>
                     </LinearLayout>

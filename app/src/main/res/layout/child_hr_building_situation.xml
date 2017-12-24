@@ -96,7 +96,7 @@
                         app:ms_hint="采光通风状况"
                         app:ms_hintTextSize="18sp"
                         android:id="@+id/sp_light_air_type"
-                        android:entries="@array/array_quality_level"
+                        android:entries="@array/array_light_air_type"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
                     <android.support.design.widget.TextInputLayout
