@@ -1,6 +1,5 @@
 package org.chengjian.java.feidian.collectdata.mvp.presenter.detail;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -9,10 +8,8 @@ import android.widget.Toast;
 import com.alibaba.fastjson.JSON;
 
 import org.chengjian.java.feidian.collectdata.beans.CitySellRent;
-import org.chengjian.java.feidian.collectdata.beans.CommercialHouseTradeModel;
 import org.chengjian.java.feidian.collectdata.mvp.model.NetModel;
-import org.chengjian.java.feidian.collectdata.mvp.model.ResultMessage;
-import org.chengjian.java.feidian.collectdata.mvp.view.base.BaseUIView;
+import org.chengjian.java.feidian.collectdata.beans.message.ResultMessage;
 import org.chengjian.java.feidian.collectdata.mvp.view.base.DetailBaseView;
 import org.greenrobot.eventbus.EventBus;
 

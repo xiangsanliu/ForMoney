@@ -1,6 +1,5 @@
 package org.chengjian.java.feidian.collectdata.mvp.ui.activities;
 
-import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -19,7 +18,7 @@ import com.yanzhenjie.permission.Permission;
 
 import org.chengjian.java.feidian.collectdata.R;
 import org.chengjian.java.feidian.collectdata.adapters.FragmentsAdapter;
-import org.chengjian.java.feidian.collectdata.mvp.model.ResultMessage;
+import org.chengjian.java.feidian.collectdata.beans.message.ResultMessage;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.MainPresenter;
 import org.chengjian.java.feidian.collectdata.mvp.ui.activities.base.TabPagerActivity;
 import org.chengjian.java.feidian.collectdata.mvp.ui.fragments.CommercialHouseTradeFragment;

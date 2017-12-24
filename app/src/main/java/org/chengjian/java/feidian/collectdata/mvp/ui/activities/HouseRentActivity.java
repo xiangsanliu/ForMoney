@@ -9,16 +9,14 @@ import com.alibaba.fastjson.JSON;
 import org.chengjian.java.feidian.collectdata.R;
 import org.chengjian.java.feidian.collectdata.beans.HouseRentModel;
 import org.chengjian.java.feidian.collectdata.databinding.ActivityHouseRentBinding;
-import org.chengjian.java.feidian.collectdata.mvp.model.LocationMessage;
-import org.chengjian.java.feidian.collectdata.mvp.model.StickyMessage;
+import org.chengjian.java.feidian.collectdata.beans.message.LocationMessage;
+import org.chengjian.java.feidian.collectdata.beans.message.StickyMessage;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.detail.DetailBasePresenter;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.detail.DetailHRPresenter;
 import org.chengjian.java.feidian.collectdata.mvp.ui.activities.base.DetailBaseActivity;
 import org.chengjian.java.feidian.collectdata.mvp.view.base.DetailHRView;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-
-import java.util.Calendar;
 
 public class HouseRentActivity extends DetailBaseActivity implements View.OnClickListener, DetailHRView {
 
@@ -59,9 +57,9 @@ public class HouseRentActivity extends DetailBaseActivity implements View.OnClic
     private void initViews(StickyMessage message) {
         this.citySellRent = message.getCitySellRent();
         binding.setCitySellRent(citySellRent);
-        binding.setEditable(message.getEditable());
+        binding.setEditable(message.getIsEditable());
         setSpinnerIsEnable(getIsEditable());
-        if (!message.getEditable()) {
+        if (!message.getIsEditable()) {
             presenter.loadModel(citySellRent.getId(), "houserent");
         } else {
             model = new HouseRentModel();

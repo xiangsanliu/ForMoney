@@ -4,12 +4,9 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import org.chengjian.java.feidian.collectdata.beans.CitySellRent;
-import org.chengjian.java.feidian.collectdata.mvp.model.BaseModel;
-import org.chengjian.java.feidian.collectdata.mvp.model.LocalDbModel;
-import org.chengjian.java.feidian.collectdata.mvp.model.StickyMessage;
+import org.chengjian.java.feidian.collectdata.beans.message.StickyMessage;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.base.BasePresenter;
 import org.chengjian.java.feidian.collectdata.mvp.ui.activities.CommercialHouseSellActivity;
 import org.chengjian.java.feidian.collectdata.mvp.ui.activities.HouseRentActivity;
@@ -50,7 +47,7 @@ public class MainPresenter extends BasePresenter<MainView> {
         StickyMessage stickyMessage = new StickyMessage();
         Intent intent;
         Long id = System.currentTimeMillis();
-        stickyMessage.setEditable(true);
+        stickyMessage.setIsEditable(true);
 
         if (currentFragment instanceof CommercialHouseTradeFragment) {
             stickyMessage.setCitySellRent(initCitySellRent(id, Constants.COMMERCIAL_HOUSE_TRADE));

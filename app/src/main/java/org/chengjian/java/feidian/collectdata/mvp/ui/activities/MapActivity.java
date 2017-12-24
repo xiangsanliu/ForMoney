@@ -20,7 +20,7 @@ import com.amap.api.maps2d.model.MarkerOptions;
 import com.amap.api.maps2d.model.MyLocationStyle;
 
 import org.chengjian.java.feidian.collectdata.R;
-import org.chengjian.java.feidian.collectdata.mvp.model.LocationMessage;
+import org.chengjian.java.feidian.collectdata.beans.message.LocationMessage;
 import org.chengjian.java.feidian.collectdata.mvp.ui.activities.base.BaseActivity;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

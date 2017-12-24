@@ -3,8 +3,6 @@ package org.chengjian.java.feidian.collectdata.mvp.model;
 import android.content.Context;
 
 import org.chengjian.java.feidian.collectdata.beans.CitySellRent;
-import org.chengjian.java.feidian.collectdata.beans.DaoMaster;
-import org.chengjian.java.feidian.collectdata.beans.DaoSession;
 
 import java.util.List;
 
@@ -14,23 +12,26 @@ import java.util.List;
  */
 
 public class LocalDbModel extends BaseModel {
-    private DaoMaster.DevOpenHelper devOpenHelper = null;
-    private List<CitySellRent> sellRentModels = null;
-    private DaoSession daoSession;
-
-    private static LocalDbModel localDbModel ;
-
-    public static LocalDbModel getInstance(Context context) {
-        if (localDbModel != null)
-            return localDbModel;
-        else return new LocalDbModel(context);
-    }
-
-    private LocalDbModel(Context context) {
+    public LocalDbModel(Context context) {
         super(context);
-        devOpenHelper = new DaoMaster.DevOpenHelper(context, "sell-db");
-        daoSession = new DaoMaster(devOpenHelper.getWritableDatabase()).newSession();
     }
-
+//    private DaoMaster.DevOpenHelper devOpenHelper = null;
+//    private List<CitySellRent> sellRentModels = null;
+//    private DaoSession daoSession;
+//
+//    private static LocalDbModel localDbModel ;
+//
+//    public static LocalDbModel getInstance(Context context) {
+//        if (localDbModel != null)
+//            return localDbModel;
+//        else return new LocalDbModel(context);
+//    }
+//
+//    private LocalDbModel(Context context) {
+//        super(context);
+//        devOpenHelper = new DaoMaster.DevOpenHelper(context, "sell-db");
+//        daoSession = new DaoMaster(devOpenHelper.getWritableDatabase()).newSession();
+//    }
+//
 
 }
