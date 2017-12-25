@@ -2,7 +2,7 @@ package org.chengjian.java.feidian.collectdata.mvp.model;
 
 import org.chengjian.java.feidian.collectdata.beans.CitySellRent;
 import org.chengjian.java.feidian.collectdata.shared.Constants;
-import org.chengjian.java.feidian.collectdata.mvp.model.interfaces.RetrofitService;
+import org.chengjian.java.feidian.collectdata.network.CityApi;
 
 import java.io.IOException;
 import java.util.List;
@@ -26,15 +26,15 @@ public class NetModel {
 
     private static NetModel netModel;
 
-    private RetrofitService service;
+    private CityApi service;
 
     private NetModel() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constants.BASE_RUL)
+                .baseUrl(Constants.BASE_URL)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        service = retrofit.create(RetrofitService.class);
+        service = retrofit.create(CityApi.class);
     }
 
     public static NetModel newInstance() {
@@ -69,7 +69,7 @@ public class NetModel {
                 .build();
         Request request = new Request.Builder()
                 .post(body)
-                .url(Constants.BASE_RUL+url)
+                .url(Constants.BASE_URL +url)
                 .build();
         return okHttpClient.newCall(request).execute().body().string();
     }
@@ -81,7 +81,7 @@ public class NetModel {
                 .build();
         Request request = new Request.Builder()
                 .post(body)
-                .url(Constants.BASE_RUL+url)
+                .url(Constants.BASE_URL +url)
                 .build();
         return okHttpClient.newCall(request).execute().body().string();
     }
@@ -123,7 +123,7 @@ public class NetModel {
                 .build();
         Request request = new Request.Builder()
                 .post(body)
-                .url(Constants.BASE_RUL+url)
+                .url(Constants.BASE_URL +url)
                 .build();
         return okHttpClient.newCall(request).execute().code();
     }

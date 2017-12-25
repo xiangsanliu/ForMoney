@@ -2,11 +2,7 @@ package org.chengjian.java.feidian.collectdata.shared;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
-import android.util.Log;
 
-import com.alibaba.fastjson.JSON;
-
-import org.chengjian.java.feidian.collectdata.beans.CitySellRent;
 import org.chengjian.java.feidian.collectdata.mvp.view.base.DetailCHSView;
 
 import java.io.IOException;
@@ -40,7 +36,7 @@ public class TestTask  extends AsyncTask<String , Void, Void>{
                     .build();
             Request request = new Request.Builder()
                     .post(body)
-                    .url(Constants.BASE_RUL+"city/save/city")
+                    .url(Constants.BASE_URL +"city/save/city")
                     .build();
             Response response = okHttpClient.newCall(request).execute();
             okHttpClient = new OkHttpClient();
@@ -49,7 +45,7 @@ public class TestTask  extends AsyncTask<String , Void, Void>{
                     .build();
             request = new Request.Builder()
                     .post(body)
-                    .url(Constants.BASE_RUL+"city/save/commercial")
+                    .url(Constants.BASE_URL +"city/save/commercial")
                     .build();
             okHttpClient.newCall(request).execute();
             System.out.println(response.code()+" "+response.message());

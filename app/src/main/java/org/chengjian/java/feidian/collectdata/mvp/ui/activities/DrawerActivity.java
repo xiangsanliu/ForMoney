@@ -3,15 +3,15 @@ package org.chengjian.java.feidian.collectdata.mvp.ui.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.util.Log;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.yanzhenjie.permission.AndPermission;
@@ -20,7 +20,6 @@ import com.yanzhenjie.permission.Permission;
 import org.chengjian.java.feidian.collectdata.R;
 import org.chengjian.java.feidian.collectdata.adapters.FragmentsAdapter;
 import org.chengjian.java.feidian.collectdata.beans.message.ResultMessage;
-import org.chengjian.java.feidian.collectdata.mvp.model.interfaces.AppUpdateApi;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.MainPresenter;
 import org.chengjian.java.feidian.collectdata.mvp.ui.activities.base.TabPagerActivity;
 import org.chengjian.java.feidian.collectdata.mvp.ui.fragments.CommercialHouseTradeFragment;
@@ -30,10 +29,9 @@ import org.chengjian.java.feidian.collectdata.mvp.ui.fragments.ShopRentFragment;
 import org.chengjian.java.feidian.collectdata.mvp.ui.fragments.base.BaseFragment;
 import org.chengjian.java.feidian.collectdata.mvp.ui.fragments.base.ListFragment;
 import org.chengjian.java.feidian.collectdata.mvp.view.base.MainView;
+import org.chengjian.java.feidian.collectdata.network.HttpMethod;
+import org.chengjian.java.feidian.collectdata.network.RequestCallback;
 import org.chengjian.java.feidian.collectdata.shared.AppTool;
-import org.chengjian.java.feidian.collectdata.shared.DownloadApk;
-import org.chengjian.java.feidian.collectdata.shared.rx.RxJavaCustomTransformer;
-import org.chengjian.java.feidian.collectdata.shared.rx.converter.StringConverterFactory;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -42,9 +40,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
-import rx.Subscriber;
 
 public class DrawerActivity extends TabPagerActivity
         implements NavigationView.OnNavigationItemSelectedListener, MainView {
@@ -76,7 +71,6 @@ public class DrawerActivity extends TabPagerActivity
         mAdapter.setFragmentList(fragmentList, titleList);
         return mAdapter;
     }
-
 
 
     @Override
@@ -175,36 +169,28 @@ public class DrawerActivity extends TabPagerActivity
     }
 
     private void downloadApk() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.3.58:8081/")
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .addConverterFactory(new StringConverterFactory())
-                .build();
+        HttpMethod.getInstance().getApkVersionCode(new RequestCallback<String>() {
+            @Override
+            public void beforeRequest() {
+                // 请求数据发送之前的处理
+            }
 
-        AppUpdateApi appUpdateApi = retrofit.create(AppUpdateApi.class);
-        appUpdateApi.getApkVersionCode()
-                .compose(RxJavaCustomTransformer.<String>defaultSchedulers())
-                .subscribe(new Subscriber<String>() {
-                    @Override
-                    public void onCompleted() {
-                    }
+            @Override
+            public void success(String data) {
+                int versionCode = Integer.parseInt(data);
+                if (versionCode > AppTool.getAppVersionCode(DrawerActivity.this)) {
+                    Toast.makeText(DrawerActivity.this, "Begin updating", Toast.LENGTH_LONG).show();
+                    HttpMethod.getInstance().downloadApk(DrawerActivity.this);
+                } else {
+                    Toast.makeText(DrawerActivity.this, "No need for updating", Toast.LENGTH_LONG).show();
+                }
+            }
 
-                    @Override
-                    public void onError(Throwable e) {
-                        Toast.makeText(DrawerActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-
-                    @Override
-                    public void onNext(String s) {
-                        int versionCode = Integer.parseInt(s);
-                        if (versionCode > AppTool.getAppVersionCode(DrawerActivity.this)) {
-                            Toast.makeText(DrawerActivity.this, "Begin updating", Toast.LENGTH_LONG).show();
-                            DownloadApk.download(DrawerActivity.this, "http://192.168.3.58:8081/update/download_apk", "update for money", "ForMoney");
-                        } else {
-                            Toast.makeText(DrawerActivity.this, "No need for updating", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                });
+            @Override
+            public void onError(String errorMsg) {
+                Toast.makeText(DrawerActivity.this, errorMsg, Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     @Override

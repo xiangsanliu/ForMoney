@@ -15,7 +15,7 @@ public class Constants {
     // 住房出租表
     public static final int HOUSE_RENT = 3;
 
-    public static final String BASE_RUL = "http://119.28.179.36:8080/";
+    public static final String BASE_URL = "http://119.28.179.36:8080/";
 
     public static Long userId = 123456L;
 }
