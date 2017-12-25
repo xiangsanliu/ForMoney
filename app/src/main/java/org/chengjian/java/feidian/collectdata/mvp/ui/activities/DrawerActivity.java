@@ -12,6 +12,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.Permission;
@@ -19,6 +20,7 @@ import com.yanzhenjie.permission.Permission;
 import org.chengjian.java.feidian.collectdata.R;
 import org.chengjian.java.feidian.collectdata.adapters.FragmentsAdapter;
 import org.chengjian.java.feidian.collectdata.beans.message.ResultMessage;
+import org.chengjian.java.feidian.collectdata.mvp.model.interfaces.AppUpdateApi;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.MainPresenter;
 import org.chengjian.java.feidian.collectdata.mvp.ui.activities.base.TabPagerActivity;
 import org.chengjian.java.feidian.collectdata.mvp.ui.fragments.CommercialHouseTradeFragment;
@@ -28,6 +30,10 @@ import org.chengjian.java.feidian.collectdata.mvp.ui.fragments.ShopRentFragment;
 import org.chengjian.java.feidian.collectdata.mvp.ui.fragments.base.BaseFragment;
 import org.chengjian.java.feidian.collectdata.mvp.ui.fragments.base.ListFragment;
 import org.chengjian.java.feidian.collectdata.mvp.view.base.MainView;
+import org.chengjian.java.feidian.collectdata.shared.AppTool;
+import org.chengjian.java.feidian.collectdata.shared.DownloadApk;
+import org.chengjian.java.feidian.collectdata.shared.rx.RxJavaCustomTransformer;
+import org.chengjian.java.feidian.collectdata.shared.rx.converter.StringConverterFactory;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -36,15 +42,15 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import rx.Subscriber;
 
 public class DrawerActivity extends TabPagerActivity
         implements NavigationView.OnNavigationItemSelectedListener, MainView {
 
     @BindView(R.id.btn_add_item)
     FloatingActionButton btnAddItem;
-
-
-
 
     private FragmentsAdapter mAdapter;
     private MainPresenter mainPresenter;
@@ -156,6 +162,9 @@ public class DrawerActivity extends TabPagerActivity
             case R.id.nav_exit:
                 finish();
                 break;
+            case R.id.check_update:
+                downloadApk();
+                break;
             case R.id.about_imformation:
                 break;
         }
@@ -163,6 +172,39 @@ public class DrawerActivity extends TabPagerActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void downloadApk() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://192.168.3.58:8081/")
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addConverterFactory(new StringConverterFactory())
+                .build();
+
+        AppUpdateApi appUpdateApi = retrofit.create(AppUpdateApi.class);
+        appUpdateApi.getApkVersionCode()
+                .compose(RxJavaCustomTransformer.<String>defaultSchedulers())
+                .subscribe(new Subscriber<String>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(DrawerActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onNext(String s) {
+                        int versionCode = Integer.parseInt(s);
+                        if (versionCode > AppTool.getAppVersionCode(DrawerActivity.this)) {
+                            Toast.makeText(DrawerActivity.this, "Begin updating", Toast.LENGTH_LONG).show();
+                            DownloadApk.download(DrawerActivity.this, "http://192.168.3.58:8081/update/download_apk", "update for money", "ForMoney");
+                        } else {
+                            Toast.makeText(DrawerActivity.this, "No need for updating", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
     }
 
     @Override

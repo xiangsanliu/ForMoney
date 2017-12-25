@@ -2,7 +2,7 @@ package org.chengjian.java.feidian.collectdata.mvp.model;
 
 import org.chengjian.java.feidian.collectdata.beans.CitySellRent;
 import org.chengjian.java.feidian.collectdata.shared.Constants;
-import org.chengjian.java.feidian.collectdata.shared.rx.RetrofitService;
+import org.chengjian.java.feidian.collectdata.mvp.model.interfaces.RetrofitService;
 
 import java.io.IOException;
 import java.util.List;
