@@ -14,4 +14,7 @@ public interface AppApi {
 
     @GET("/update/version_code")
     Observable<String> getApkVersionCode();
+
+    @GET("/user/login")
+    Observable<HttpResult<Void>> login(String imei);
 }

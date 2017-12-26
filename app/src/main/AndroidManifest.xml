@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.chengjian.java.feidian.collectdata">
 
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -30,7 +31,8 @@
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="e9dfde9b90a971f41eb0b55ec077e2ed" />
-        <service android:name="com.amap.api.location.APSService"/>
+        <service android:name="com.amap.api.location.APSService" />
+
         <activity android:name=".mvp.ui.activities.HouseRentActivity" />
         <activity android:name=".mvp.ui.activities.HouseSellActivity" />
         <activity android:name=".mvp.ui.activities.ShopRentActivity" />
@@ -45,7 +47,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".mvp.ui.activities.MapActivity"/>
+        <activity android:name=".mvp.ui.activities.MapActivity" />
     </application>
 
 </manifest>
