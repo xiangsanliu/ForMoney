@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="com.github.bmelnychuk:atv-1.2.9">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/atv-1.2.9.aar/f85bcade1b4de0e8686802c1ed101be3/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/atv-1.2.9.aar/f85bcade1b4de0e8686802c1ed101be3/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/atv-1.2.9.aar/8d6868ef6e141d62d54366e572b3b85a/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/atv-1.2.9.aar/8d6868ef6e141d62d54366e572b3b85a/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

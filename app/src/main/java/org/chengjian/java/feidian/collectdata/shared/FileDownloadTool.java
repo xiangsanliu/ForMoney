@@ -9,6 +9,8 @@ import android.os.Environment;
 /**
  * Created by StormPhoenix on 17-12-25.
  * StormPhoenix is a intelligent Android developer.
+ *
+ * 这个类用来下载文件，它的特点是下载的时候，会在通知栏显示下载通知
  */
 
 public class FileDownloadTool {
