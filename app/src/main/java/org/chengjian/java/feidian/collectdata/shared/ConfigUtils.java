@@ -50,28 +50,13 @@ public class ConfigUtils {
                 .commit();
     }
 
-    public String getUserGroupId() {
-        return userInfoSp.getString("group_id", null);
-    }
-
-    public void setUserGroupId(String groupId) {
+    public void setUserInfo(String imeiCode) {
         userInfoSp.edit()
-                .putString("group_id", groupId)
+                .putString("imeiCode", imeiCode)
                 .commit();
     }
 
-    public void setUserInfo(String username, String password) {
-        userInfoSp.edit()
-                .putString("username", username)
-                .putString("password", password)
-                .commit();
-    }
-
-    public String getUsername() {
-        return userInfoSp.getString("username", null);
-    }
-
-    public String getPassword() {
-        return userInfoSp.getString("password", null);
+    public String getIMEI() {
+        return userInfoSp.getString("imeiCode", null);
     }
 }

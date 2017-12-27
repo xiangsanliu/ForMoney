@@ -36,6 +36,7 @@ public class HttpMethod {
 
     private OkHttpClient client = null;
     private AppApi appApi = null;
+    private UserApi userApi = null;
 
     private HttpMethod() {
         client = new OkHttpClient.Builder()
@@ -48,13 +49,13 @@ public class HttpMethod {
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(JsonParser.getInstance().getGson()))
                 .build();
+        userApi = objRetrofit.create(UserApi.class);
 
         Retrofit strRetrofit = new Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(new StringConverterFactory())
                 .build();
-
         appApi = strRetrofit.create(AppApi.class);
     }
 
@@ -113,7 +114,7 @@ public class HttpMethod {
 
     public Subscription login(String imei, final RequestCallback<HttpResult<Void>> call) {
         call.beforeRequest();
-        return appApi.login(imei).compose(RxJavaCustomTransformer.<HttpResult<Void>>defaultSchedulers())
+        return userApi.login(imei).compose(RxJavaCustomTransformer.<HttpResult<Void>>defaultSchedulers())
                 .subscribe(new Subscriber<HttpResult<Void>>() {
                     @Override
                     public void onCompleted() {

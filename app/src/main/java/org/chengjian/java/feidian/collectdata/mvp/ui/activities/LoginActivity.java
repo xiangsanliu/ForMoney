@@ -3,6 +3,7 @@ package org.chengjian.java.feidian.collectdata.mvp.ui.activities;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 
 import org.chengjian.java.feidian.collectdata.R;
+import org.chengjian.java.feidian.collectdata.databinding.ActivityLoginBinding;
 import org.chengjian.java.feidian.collectdata.mvp.ui.activities.base.BaseActivity;
 import org.chengjian.java.feidian.collectdata.mvp.ui.dialog.ProgressDialogGenerator;
 import org.chengjian.java.feidian.collectdata.network.HttpMethod;
@@ -20,18 +22,17 @@ import org.chengjian.java.feidian.collectdata.network.HttpResult;
 import org.chengjian.java.feidian.collectdata.network.RequestCallback;
 import org.chengjian.java.feidian.collectdata.shared.AppTool;
 import org.chengjian.java.feidian.collectdata.shared.Constants;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 
 public class LoginActivity extends BaseActivity {
     private static final String TAG = LoginActivity.class.getName();
     protected ProgressDialogGenerator submitDialogGenerator;
-    @BindView(R.id.pb_login)
     ProgressBar pbLogin;
-    @BindView(R.id.btn_login)
+    private ActivityLoginBinding binding;
     Button btnLogin;
-    @BindView(R.id.login_bar)
     Toolbar loginBar;
 
     @Override
@@ -45,25 +46,26 @@ public class LoginActivity extends BaseActivity {
 
     protected void initViews() {
         setSupportActionBar(loginBar);
+        binding.btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String imei = AppTool.getIMEI(LoginActivity.this);
+                if (imei == null) {
+                    // 没有获取 IMEI 的权限
+                    ActivityCompat.requestPermissions(LoginActivity.this, new String[]{Manifest.permission.READ_PHONE_STATE}, 100);
+                    return;
+                }
+                login(imei);
+            }
+        });
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(getLayoutId());
+        binding = DataBindingUtil.setContentView(this, getLayoutId());
         initVariables();
         initViews();
-    }
-
-    @OnClick(R.id.btn_login)
-    public void onClick() {
-        String imei = AppTool.getIMEI(this);
-        if (imei == null) {
-            // 没有获取 IMEI 的权限
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_PHONE_STATE}, 100);
-            return;
-        }
-        login(imei);
     }
 
     private void login(String imei) {
@@ -189,6 +191,13 @@ public class LoginActivity extends BaseActivity {
         Intent intent = new Intent(LoginActivity.this, DrawerActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    public void onLogin(String msg) {
+        // 这个函数其实没有什么作用，
+        // 加在这个地方是因为 ... 不加就会报错
+        // 主要原因还是在于 EventBus 这个库
     }
 
     public void register(View view) {

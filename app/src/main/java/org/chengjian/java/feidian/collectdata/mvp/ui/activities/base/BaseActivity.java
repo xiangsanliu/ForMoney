@@ -12,8 +12,6 @@ import com.readystatesoftware.systembartint.SystemBarTintManager;
 import org.chengjian.java.feidian.collectdata.R;
 import org.greenrobot.eventbus.EventBus;
 
-import butterknife.ButterKnife;
-
 /**
  * Created by StormPhoenix on 17-2-25.
  * StormPhoenix is a intelligent Android developer.

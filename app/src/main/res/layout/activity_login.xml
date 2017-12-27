@@ -1,50 +1,55 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center_horizontal"
-    android:orientation="vertical"
-    tools:context=".mvp.ui.activities.LoginActivity">
+<layout>
+    <data>
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/login_bar"
+    </data>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:titleTextColor="@android:color/white"
-        app:popupTheme="@style/AppTheme.PopupOverlay"
-        app:theme="@style/AppTheme.AppBarOverlay"
-        app:title="@string/login"></android.support.v7.widget.Toolbar>
-    <!-- Login progress -->
-    <ProgressBar
-        android:id="@+id/pb_login"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:visibility="gone" />
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        tools:context=".mvp.ui.activities.LoginActivity">
 
-    <LinearLayout
-        android:id="@+id/login_wrapper"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/login_bar"
-        android:orientation="vertical"
-        android:padding="16dp">
-
-        <Button
-            android:id="@+id/btn_login"
-            style="?android:textAppearanceSmall"
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/login_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/action_sign_in"
-            android:textStyle="bold" />
+            android:background="@color/colorPrimary"
+            android:titleTextColor="@android:color/white"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:theme="@style/AppTheme.AppBarOverlay"
+            app:title="@string/login"></android.support.v7.widget.Toolbar>
+        <!-- Login progress -->
+        <ProgressBar
+            android:layout_centerInParent="true"
+            android:id="@+id/pb_login"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:visibility="gone" />
 
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/login_wrapper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/login_bar"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-    <!--<Button-->
+            <Button
+                android:id="@+id/btn_login"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/action_sign_in"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <!--<Button-->
         <!--android:layout_width="wrap_content"-->
         <!--android:layout_height="wrap_content"-->
         <!--android:layout_alignParentBottom="true"-->
@@ -53,4 +58,6 @@
         <!--android:onClick="register"-->
         <!--android:text="@string/register"-->
         <!--android:textColor="@color/colorPrimary" />-->
-</RelativeLayout>
+    </RelativeLayout>
+
+</layout>

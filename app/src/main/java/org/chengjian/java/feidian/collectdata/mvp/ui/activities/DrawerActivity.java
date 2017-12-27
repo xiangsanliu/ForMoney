@@ -157,7 +157,28 @@ public class DrawerActivity extends TabPagerActivity
                 finish();
                 break;
             case R.id.check_update:
-                downloadApk();
+                HttpMethod.getInstance().getApkVersionCode(new RequestCallback<String>() {
+                    @Override
+                    public void beforeRequest() {
+                        // 请求数据发送之前的处理
+                    }
+
+                    @Override
+                    public void success(String data) {
+                        int versionCode = Integer.parseInt(data);
+                        if (versionCode > AppTool.getAppVersionCode(DrawerActivity.this)) {
+                            Toast.makeText(DrawerActivity.this, "Begin updating", Toast.LENGTH_LONG).show();
+                            HttpMethod.getInstance().downloadApk(DrawerActivity.this);
+                        } else {
+                            Toast.makeText(DrawerActivity.this, "No need for updating", Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    @Override
+                    public void onError(String errorMsg) {
+                        Toast.makeText(DrawerActivity.this, errorMsg, Toast.LENGTH_LONG).show();
+                    }
+                });
                 break;
             case R.id.about_imformation:
                 break;
@@ -166,31 +187,6 @@ public class DrawerActivity extends TabPagerActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    private void downloadApk() {
-        HttpMethod.getInstance().getApkVersionCode(new RequestCallback<String>() {
-            @Override
-            public void beforeRequest() {
-                // 请求数据发送之前的处理
-            }
-
-            @Override
-            public void success(String data) {
-                int versionCode = Integer.parseInt(data);
-                if (versionCode > AppTool.getAppVersionCode(DrawerActivity.this)) {
-                    Toast.makeText(DrawerActivity.this, "Begin updating", Toast.LENGTH_LONG).show();
-                    HttpMethod.getInstance().downloadApk(DrawerActivity.this);
-                } else {
-                    Toast.makeText(DrawerActivity.this, "No need for updating", Toast.LENGTH_LONG).show();
-                }
-            }
-
-            @Override
-            public void onError(String errorMsg) {
-                Toast.makeText(DrawerActivity.this, errorMsg, Toast.LENGTH_LONG).show();
-            }
-        });
     }
 
     @Override
