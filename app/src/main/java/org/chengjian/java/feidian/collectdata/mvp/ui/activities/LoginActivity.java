@@ -6,12 +6,12 @@ import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import org.chengjian.java.feidian.collectdata.R;
 import org.chengjian.java.feidian.collectdata.databinding.ActivityLoginBinding;
@@ -80,7 +80,7 @@ public class LoginActivity extends BaseActivity {
 
             @Override
             public void onError(String errorMsg) {
-                Snackbar.make(btnLogin, errorMsg, Snackbar.LENGTH_LONG).show();
+                Toast.makeText(LoginActivity.this, errorMsg, Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -88,7 +88,7 @@ public class LoginActivity extends BaseActivity {
                 if (data.getResultCode() == Constants.USER_LOGIN_FAILED) {
 //                     登录失败
                     hideProgress();
-                    Snackbar.make(btnLogin, data.getResultMessage(), Snackbar.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, data.getResultMessage(), Toast.LENGTH_LONG).show();
                     return;
                 } else if (data.getResultCode() == Constants.USER_LOGIN_SUCCESS) {
 //                     登录成功，并且在组内，保存用户数据
@@ -168,7 +168,7 @@ public class LoginActivity extends BaseActivity {
                 login(AppTool.getIMEI(this));
             } else {
                 // 请求被拒绝
-                Snackbar.make(btnLogin, "请求被禁止，无法登录使用本app", Snackbar.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "请求被禁止，无法登录使用本app", Toast.LENGTH_SHORT).show();
             }
         }
     }
