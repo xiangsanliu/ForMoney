@@ -1,5 +1,5 @@
 # Created by .ignore support plugin (hsz.mobi)
-/.gradle/
+.gradle/*
 app/libs/
 build/
 release/
@@ -17,3 +17,6 @@ release/
 .idea/vcs.xml
 .idea/workspace.xml
 .idea/libraries
+/local.properties
+/ForMoney.iml
+/app/app.iml
