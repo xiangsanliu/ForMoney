@@ -21,11 +21,10 @@ import org.chengjian.java.feidian.collectdata.network.HttpMethod;
 import org.chengjian.java.feidian.collectdata.network.HttpResult;
 import org.chengjian.java.feidian.collectdata.network.RequestCallback;
 import org.chengjian.java.feidian.collectdata.shared.AppTool;
+import org.chengjian.java.feidian.collectdata.shared.ConfigUtils;
 import org.chengjian.java.feidian.collectdata.shared.Constants;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-
-import butterknife.BindView;
 
 public class LoginActivity extends BaseActivity {
     private static final String TAG = LoginActivity.class.getName();
@@ -58,6 +57,10 @@ public class LoginActivity extends BaseActivity {
                 login(imei);
             }
         });
+
+        if (ConfigUtils.getInstance().isUserLogin()) {
+            enterMainPage();
+        }
     }
 
     @Override
@@ -88,11 +91,12 @@ public class LoginActivity extends BaseActivity {
                     Snackbar.make(btnLogin, data.getResultMessage(), Snackbar.LENGTH_SHORT).show();
                     return;
                 } else if (data.getResultCode() == Constants.USER_LOGIN_SUCCESS) {
-                    enterMainPage();
 //                     登录成功，并且在组内，保存用户数据
+                    ConfigUtils.getInstance().setUserLogin();
 //                    ConfigUtils.getInstance().setUserInfo(etUsername.getText().toString().trim(), etPassword.getText().toString().trim());
 //                    ConfigUtils.getInstance().setUserLogin();
 //                    ConfigUtils.getInstance().setUserGroupId(data.getData().group.groupId);
+                    enterMainPage();
 //
 //                    new Thread(new Runnable() {
 //                        @Override
