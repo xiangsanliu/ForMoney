@@ -7,7 +7,6 @@ release/
 .gitignore
 # IDEA
 *.iml
-.idea/
 .idea/.name
 .idea/encodings.xml
 .idea/inspectionProfiles/Project_Default.xml
