@@ -14,6 +14,10 @@ public class Constants {
     public static final int HOUSE_SELL = 2;
     // 住房出租表
     public static final int HOUSE_RENT = 3;
+    // 用户登录失败
+    public static final int USER_LOGIN_SUCCESS = 101;
+    // 用户登录成功
+    public static final int USER_LOGIN_FAILED = 102;
 
     public static final String BASE_URL = "http://119.28.179.36:8080/";
 

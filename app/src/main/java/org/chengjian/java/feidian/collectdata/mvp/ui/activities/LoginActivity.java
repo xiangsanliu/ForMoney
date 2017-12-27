@@ -1,21 +1,25 @@
 package org.chengjian.java.feidian.collectdata.mvp.ui.activities;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ProgressBar;
 
 import org.chengjian.java.feidian.collectdata.R;
 import org.chengjian.java.feidian.collectdata.mvp.ui.activities.base.BaseActivity;
 import org.chengjian.java.feidian.collectdata.mvp.ui.dialog.ProgressDialogGenerator;
-
-import java.util.List;
+import org.chengjian.java.feidian.collectdata.network.HttpMethod;
+import org.chengjian.java.feidian.collectdata.network.HttpResult;
+import org.chengjian.java.feidian.collectdata.network.RequestCallback;
+import org.chengjian.java.feidian.collectdata.shared.AppTool;
+import org.chengjian.java.feidian.collectdata.shared.Constants;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -25,10 +29,6 @@ public class LoginActivity extends BaseActivity {
     protected ProgressDialogGenerator submitDialogGenerator;
     @BindView(R.id.pb_login)
     ProgressBar pbLogin;
-    @BindView(R.id.et_username)
-    EditText etUsername;
-    @BindView(R.id.et_password)
-    EditText etPassword;
     @BindView(R.id.btn_login)
     Button btnLogin;
     @BindView(R.id.login_bar)
@@ -56,32 +56,37 @@ public class LoginActivity extends BaseActivity {
 
     @OnClick(R.id.btn_login)
     public void onClick() {
-        String username = etUsername.getText().toString().trim();
-        String password = etPassword.getText().toString().trim();
-        if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
-            Snackbar.make(btnLogin, getResources().getString(R.string.username_password_is_not_empty), Snackbar.LENGTH_SHORT).show();
+        String imei = AppTool.getIMEI(this);
+        if (imei == null) {
+            // 没有获取 IMEI 的权限
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_PHONE_STATE}, 100);
             return;
         }
-
-        login(username, password);
+        login(imei);
     }
 
-    private void login(String username, String password) {
-//        HttpMethod.getInstance().login(username, password, new RequestCallback<HttpResult<GroupRecord>>() {
-//            @Override
-//            public void beforeRequest() {
-//                showProgress();
-//            }
-//
-//            @Override
-//            public void success(final HttpResult<GroupRecord> data) {
-//                if (data.getResultCode() == Constants.LOGIN_FAILED) {
-//                    // 登录失败
-//                    hideProgress();
-//                    Snackbar.make(btnLogin, data.getResultMessage(), Snackbar.LENGTH_SHORT).show();
-//                    return;
-//                } else if (data.getResultCode() == Constants.LOGIN_SUCCESS_IN_GROUP) {
-//                    // 登录成功，并且在组内，保存用户数据
+    private void login(String imei) {
+        HttpMethod.getInstance().login(imei, new RequestCallback<HttpResult<Void>>() {
+            @Override
+            public void beforeRequest() {
+                showProgress();
+            }
+
+            @Override
+            public void onError(String errorMsg) {
+                Snackbar.make(btnLogin, errorMsg, Snackbar.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void success(HttpResult<Void> data) {
+                if (data.getResultCode() == Constants.USER_LOGIN_FAILED) {
+//                     登录失败
+                    hideProgress();
+                    Snackbar.make(btnLogin, data.getResultMessage(), Snackbar.LENGTH_SHORT).show();
+                    return;
+                } else if (data.getResultCode() == Constants.USER_LOGIN_SUCCESS) {
+                    enterMainPage();
+//                     登录成功，并且在组内，保存用户数据
 //                    ConfigUtils.getInstance().setUserInfo(etUsername.getText().toString().trim(), etPassword.getText().toString().trim());
 //                    ConfigUtils.getInstance().setUserLogin();
 //                    ConfigUtils.getInstance().setUserGroupId(data.getData().group.groupId);
@@ -89,9 +94,9 @@ public class LoginActivity extends BaseActivity {
 //                    new Thread(new Runnable() {
 //                        @Override
 //                        public void run() {
-//                            // 保存信息
+//                             保存信息
 //                            FSManager.getInstance().saveRecordContent(data.getData());
-//                            // 保存完毕后开始下载节点树木数据
+//                             保存完毕后开始下载节点树木数据
 //                            HttpMethod.getInstance().downloadAllModels(ConfigUtils.getInstance().getUsername(),
 //                                    ConfigUtils.getInstance().getPassword(), new RequestCallback<HttpResult<List<MonitoringSite>>>() {
 //                                        @Override
@@ -136,21 +141,29 @@ public class LoginActivity extends BaseActivity {
 //                    new Thread(new Runnable() {
 //                        @Override
 //                        public void run() {
-//                            // 保存信息
+//                             保存信息
 //                            FSManager.getInstance().saveRecordContent(null);
 //                            hideProgress();
-//                            enterMainPage();
 //                        }
 //                    }).start();
 //                }
-//            }
-//
-//            @Override
-//            public void onError(String errorMsg) {
-//                hideProgress();
-//                Snackbar.make(btnLogin, errorMsg, Snackbar.LENGTH_SHORT).show();
-//            }
-//        });
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        if (requestCode == 100) {
+            // 请求获取IMEI码权限
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                login(AppTool.getIMEI(this));
+            } else {
+                // 请求被拒绝
+                Snackbar.make(btnLogin, "请求被禁止，无法登录使用本app", Snackbar.LENGTH_SHORT).show();
+            }
+        }
     }
 
     @Override
