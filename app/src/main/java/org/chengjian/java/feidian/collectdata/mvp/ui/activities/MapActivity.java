@@ -37,6 +37,7 @@ public class MapActivity extends BaseActivity {
     private TextView cancel;
     private TextView save;
     private TextView relocate;
+    private TextView manual;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +49,7 @@ public class MapActivity extends BaseActivity {
         cancel = (TextView) findViewById(R.id.button_cancel);
         save = (TextView) findViewById(R.id.button_save);
         relocate = (TextView) findViewById(R.id.button_relocate);
-
+        manual = (TextView) findViewById(R.id.button_manual);
     }
 
     @Override
@@ -88,6 +89,7 @@ public class MapActivity extends BaseActivity {
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void onLocate(LocationMessage locationMessage) throws InterruptedException {
         if (locationMessage.getLatitude()>3) {
+            manual.setVisibility(View.GONE);
             LatLng latLng = new LatLng(locationMessage.getLatitude(), locationMessage.getLongitude());
             marker = aMap.addMarker(new MarkerOptions().position(latLng).title(locationMessage.getAddress()).snippet("DefaultMarker"));
             CameraUpdate cameraUpdate = CameraUpdateFactory.changeLatLng(latLng);
@@ -118,11 +120,35 @@ public class MapActivity extends BaseActivity {
         relocate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                manual.setVisibility(View.VISIBLE);
                 isNeedSave = true;
                 message.setEditable(true);
                 marker.remove();
                 setUpMap();
                 findViewById(R.id.button_relocate).setVisibility(View.GONE);
+            }
+        });
+        manual.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                manual.setVisibility(View.GONE);
+                enableManualMode();
+            }
+        });
+    }
+
+    private void enableManualMode() {
+        aMapLocationClient.stopLocation();
+        aMap.setOnMapClickListener(new AMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+                if (marker != null) {
+                    marker.remove();
+                }
+                marker = aMap.addMarker(new MarkerOptions().position(latLng).title("undefine").snippet("DefaultMarker"));
+                message.setLatitude(latLng.latitude);
+                message.setLongitude(latLng.longitude);
+                message.setAddress("");
             }
         });
     }
