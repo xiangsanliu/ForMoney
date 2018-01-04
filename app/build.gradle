@@ -2,10 +2,10 @@ apply plugin: 'com.android.application'
 apply plugin: 'org.greenrobot.greendao'
 
 android {
-    compileSdkVersion 25
+    compileSdkVersion 27
     buildToolsVersion '26.0.2'
     defaultConfig {
-        applicationId "org.chengjian.feidian.collectdata"
+        applicationId "org.chengjian.java.feidian.collectdata"
         minSdkVersion 21
         targetSdkVersion 27
         versionCode 1
