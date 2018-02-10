@@ -14,8 +14,15 @@ import rx.Observable;
  */
 
 public interface CityApi {
+    /**
+     * @param userId    用户的IMEI码
+     * @param modelType 　数据类型
+     * @param index     从第几条数据开始请求
+     * @param count     请求多少条数据
+     * @return
+     */
     @GET("/city/get/citysellrents")
-    Observable<List<CitySellRent>> getCitySellRents(@Query("userId") Long userId, @Query("modelType") int modelType);
+    Observable<List<CitySellRent>> getCitySellRents(@Query("userId") Long userId, @Query("modelType") int modelType, @Query("index") int index, @Query("count") int count);
 
     @GET("/city/get/commercial")
     Observable<CommercialHouseTradeModel> getCommercialHouseTradeModel(@Query("id") Long id);
@@ -24,7 +31,7 @@ public interface CityApi {
     Observable<String> deleteCitySellRent(@Query("id") Long id);
 
     @GET("/city/save/city")
-    Observable<String> saveCitySellRent(@Query("content") String content) ;
+    Observable<String> saveCitySellRent(@Query("content") String content);
 
     @GET("/city/save/commercial")
     Observable<String> saveCommercial(@Query("content") String content);

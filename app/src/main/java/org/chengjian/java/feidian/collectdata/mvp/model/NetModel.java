@@ -1,8 +1,8 @@
 package org.chengjian.java.feidian.collectdata.mvp.model;
 
 import org.chengjian.java.feidian.collectdata.beans.CitySellRent;
-import org.chengjian.java.feidian.collectdata.shared.Constants;
 import org.chengjian.java.feidian.collectdata.network.CityApi;
+import org.chengjian.java.feidian.collectdata.shared.Constants;
 
 import java.io.IOException;
 import java.util.List;
@@ -19,7 +19,6 @@ import rx.Subscriber;
 
 /**
  * Created by xiang on 2017/12/5.
- *
  */
 
 public class NetModel {
@@ -38,15 +37,16 @@ public class NetModel {
     }
 
     public static NetModel newInstance() {
-        if (netModel == null ) {
+        if (netModel == null) {
             return new NetModel();
         } else {
             return netModel;
         }
     }
 
-    public Observable<List<CitySellRent>> getCitySellRents(Long userId, int modelType){
-        return service.getCitySellRents(userId, modelType);
+    public Observable<List<CitySellRent>> getCitySellRents(Long userId, int modelType) {
+        // 默认请求20条数据，从第一条数据开始请求
+        return service.getCitySellRents(userId, modelType, 0, 20);
     }
 
     public Observable<String> getModel(final Long id, final String typeUrl) {
@@ -54,7 +54,7 @@ public class NetModel {
             @Override
             public void call(Subscriber<? super String> subscriber) {
                 try {
-                    subscriber.onNext(getContent(id, "city/get/"+typeUrl));
+                    subscriber.onNext(getContent(id, "city/get/" + typeUrl));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -65,11 +65,11 @@ public class NetModel {
     private String getContent(Long id, String url) throws IOException {
         OkHttpClient okHttpClient = new OkHttpClient();
         RequestBody body = new FormBody.Builder()
-                .add("id", id+"")
+                .add("id", id + "")
                 .build();
         Request request = new Request.Builder()
                 .post(body)
-                .url(Constants.BASE_URL +url)
+                .url(Constants.BASE_URL + url)
                 .build();
         return okHttpClient.newCall(request).execute().body().string();
     }
@@ -81,7 +81,7 @@ public class NetModel {
                 .build();
         Request request = new Request.Builder()
                 .post(body)
-                .url(Constants.BASE_URL +url)
+                .url(Constants.BASE_URL + url)
                 .build();
         return okHttpClient.newCall(request).execute().body().string();
     }
@@ -114,7 +114,6 @@ public class NetModel {
     }
 
 
-
     public Integer deleteBody(Long id, String url) throws IOException {
         System.out.println("savein");
         OkHttpClient okHttpClient = new OkHttpClient();
@@ -123,7 +122,7 @@ public class NetModel {
                 .build();
         Request request = new Request.Builder()
                 .post(body)
-                .url(Constants.BASE_URL +url)
+                .url(Constants.BASE_URL + url)
                 .build();
         return okHttpClient.newCall(request).execute().code();
     }

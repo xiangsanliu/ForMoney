@@ -71,6 +71,7 @@ public class LoginActivity extends BaseActivity {
         initViews();
     }
 
+    // 登录服务器代码
     private void login(String imei) {
         HttpMethod.getInstance().login(imei, new RequestCallback<HttpResult<Void>>() {
             @Override
@@ -81,6 +82,7 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onError(String errorMsg) {
                 Toast.makeText(LoginActivity.this, errorMsg, Toast.LENGTH_LONG).show();
+                hideProgress();
             }
 
             @Override
@@ -93,67 +95,7 @@ public class LoginActivity extends BaseActivity {
                 } else if (data.getResultCode() == Constants.USER_LOGIN_SUCCESS) {
 //                     登录成功，并且在组内，保存用户数据
                     ConfigUtils.getInstance().setUserLogin();
-//                    ConfigUtils.getInstance().setUserInfo(etUsername.getText().toString().trim(), etPassword.getText().toString().trim());
-//                    ConfigUtils.getInstance().setUserLogin();
-//                    ConfigUtils.getInstance().setUserGroupId(data.getData().group.groupId);
                     enterMainPage();
-//
-//                    new Thread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                             保存信息
-//                            FSManager.getInstance().saveRecordContent(data.getData());
-//                             保存完毕后开始下载节点树木数据
-//                            HttpMethod.getInstance().downloadAllModels(ConfigUtils.getInstance().getUsername(),
-//                                    ConfigUtils.getInstance().getPassword(), new RequestCallback<HttpResult<List<MonitoringSite>>>() {
-//                                        @Override
-//                                        public void beforeRequest() {
-//                                        }
-//
-//                                        @Override
-//                                        public void success(HttpResult<List<MonitoringSite>> data) {
-//                                            switch (data.getResultCode()) {
-//                                                case Constants.USER_NOT_EXISTS:
-//                                                    Log.e(TAG, "USER_NOT_EXISTS");
-//                                                    finish();
-//                                                    break;
-//                                                case Constants.USER_NOT_IN_GROUP:
-//                                                    Log.e(TAG, "USER_NOT_IN_GROUP");
-//                                                    finish();
-//                                                    break;
-//                                                case Constants.NO_MONITOR_DATA:
-//                                                    hideProgress();
-//                                                    enterMainPage();
-//                                                    break;
-//                                                case Constants.PULL_ALL_DATA_SUCCESS:
-//                                                    hideProgress();
-//                                                    new DbManager(LoginActivity.this).saveModels(data.getData());
-//                                                    enterMainPage();
-//                                                    break;
-//                                            }
-//                                        }
-//
-//                                        @Override
-//                                        public void onError(String errorMsg) {
-//                                            enterMainPage();
-//                                        }
-//                                    });
-//                        }
-//                    }).start();
-//                } else if (data.getResultCode() == Constants.LOGIN_SUCCESS_NOT_IN_GROUP) {
-//                    ConfigUtils.getInstance().setUserInfo(etUsername.getText().toString().trim(), etPassword.getText().toString().trim());
-//                    ConfigUtils.getInstance().setUserLogin();
-//                    ConfigUtils.getInstance().setUserGroupId(null);
-//
-//                    new Thread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                             保存信息
-//                            FSManager.getInstance().saveRecordContent(null);
-//                            hideProgress();
-//                        }
-//                    }).start();
-//                }
                 }
             }
         });
@@ -205,6 +147,5 @@ public class LoginActivity extends BaseActivity {
     }
 
     public void register(View view) {
-
     }
 }
