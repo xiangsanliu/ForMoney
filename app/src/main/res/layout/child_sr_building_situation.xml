@@ -10,7 +10,7 @@
             type="org.chengjian.java.feidian.collectdata.beans.ShopRentModel" />
         <variable
             name="editable"
-            type="Boolean"/>
+            type="boolean"/>
         <variable
             name="citySellRent"
             type="org.chengjian.java.feidian.collectdata.beans.CitySellRent"/>

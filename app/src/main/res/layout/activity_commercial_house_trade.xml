@@ -15,7 +15,7 @@
             type="org.chengjian.java.feidian.collectdata.beans.CommercialHouseTradeModel" />
         <variable
             name="editable"
-            type="Boolean"/>
+            type="boolean"/>
     </data>
 
     <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"

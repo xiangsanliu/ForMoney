@@ -48,13 +48,14 @@ public class LoginActivity extends BaseActivity {
         binding.btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String imei = AppTool.getIMEI(LoginActivity.this);
-                if (imei == null) {
-                    // 没有获取 IMEI 的权限
-                    ActivityCompat.requestPermissions(LoginActivity.this, new String[]{Manifest.permission.READ_PHONE_STATE}, 100);
-                    return;
-                }
-                login(imei);
+                enterMainPage();
+//                String imei = AppTool.getIMEI(LoginActivity.this);
+//                if (imei == null) {
+//                     没有获取 IMEI 的权限
+//                    ActivityCompat.requestPermissions(LoginActivity.this, new String[]{Manifest.permission.READ_PHONE_STATE}, 100);
+//                    return;
+//                }
+//                login(imei);
             }
         });
 

@@ -19,7 +19,7 @@ public class Constants {
     // 用户登录成功
     public static final int USER_LOGIN_FAILED = 102;
 
-    public static final String BASE_URL = "http://119.28.179.36:8081/";
+    public static final String BASE_URL = "http://119.28.179.36:8080/";
 //    public static final String BASE_URL = "http://119.28.179.36:8080/";
 //    public static final String BASE_URL = "http://192.168.3.58:8081/";
 
