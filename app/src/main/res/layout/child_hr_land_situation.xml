@@ -7,7 +7,7 @@
         <import type="android.view.View"/>
         <variable
             name="citySellRent"
-            type="org.chengjian.java.feidian.collectdata.beans.CitySellRent"/>
+            type="org.chengjian.java.feidian.collectdata.beans.CityCommonAttributes"/>
         <variable
             name="editable"
             type="boolean"/>

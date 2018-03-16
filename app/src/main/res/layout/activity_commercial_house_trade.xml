@@ -8,11 +8,11 @@
         <import type="android.view.View" />
         <variable
             name="citySellRent"
-            type="org.chengjian.java.feidian.collectdata.beans.CitySellRent" />
+            type="org.chengjian.java.feidian.collectdata.beans.CityCommonAttributes" />
 
         <variable
-            name="commercialHouseTradeModel"
-            type="org.chengjian.java.feidian.collectdata.beans.CommercialHouseTradeModel" />
+            name="commercialHousingForSale"
+            type="org.chengjian.java.feidian.collectdata.beans.CommercialHousingForSale" />
         <variable
             name="editable"
             type="boolean"/>
@@ -102,7 +102,7 @@
                     android:id="@+id/child_chs_building_situation"
                     bind:editable="@{editable}"
                     bind:citySellRent="@={citySellRent}"
-                    bind:commercialHouseTradeModel="@={commercialHouseTradeModel}"
+                    bind:commercialHousingForSale="@={commercialHousingForSale}"
                     android:layout_marginTop="16dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
@@ -113,7 +113,7 @@
                 <include
                     android:id="@+id/child_chs_trade_situation"
                     bind:editable="@{editable}"
-                    bind:commercialHouseTradeModel="@={commercialHouseTradeModel}"
+                    bind:commercialHousingForSale="@={commercialHousingForSale}"
                     android:layout_marginTop="16dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"

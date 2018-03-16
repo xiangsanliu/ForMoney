@@ -4,9 +4,8 @@ import android.app.Activity;
 
 import com.alibaba.fastjson.JSON;
 
-import org.chengjian.java.feidian.collectdata.beans.CitySellRent;
-import org.chengjian.java.feidian.collectdata.beans.HouseRentModel;
-import org.chengjian.java.feidian.collectdata.beans.ShopRentModel;
+import org.chengjian.java.feidian.collectdata.beans.CityCommonAttributes;
+import org.chengjian.java.feidian.collectdata.beans.CounterRent;
 import org.chengjian.java.feidian.collectdata.mvp.view.base.DetailSRView;
 
 import rx.Observer;
@@ -23,10 +22,10 @@ public class DetailSRPresenter extends DetailBasePresenter<DetailSRView> {
         this.activity = activity;
     }
 
-    public void save(CitySellRent citySellRent, ShopRentModel model) {
+    public void save(CityCommonAttributes cityCommonAttributes, CounterRent model) {
         progressDialog = createProgress("上传中");
         progressDialog.show();
-        saveCity(citySellRent);
+        saveCity(cityCommonAttributes);
         netModel.save(JSON.toJSONString(model), "city/save/shoprent")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

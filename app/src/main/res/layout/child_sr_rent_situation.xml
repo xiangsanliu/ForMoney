@@ -9,7 +9,7 @@
 
         <variable
             name="model"
-            type="org.chengjian.java.feidian.collectdata.beans.ShopRentModel" />
+            type="org.chengjian.java.feidian.collectdata.beans.CounterRent" />
     </data>
 
     <android.support.v7.widget.CardView

@@ -13,7 +13,8 @@ import android.widget.EditText;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
 
-import org.chengjian.java.feidian.collectdata.beans.CitySellRent;
+import org.chengjian.java.feidian.collectdata.beans.CityCommonAttributes;
+import org.chengjian.java.feidian.collectdata.beans.CityCommonAttributes;
 import org.chengjian.java.feidian.collectdata.beans.message.LocationMessage;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.detail.DetailBasePresenter;
 import org.chengjian.java.feidian.collectdata.mvp.ui.activities.MapActivity;
@@ -28,7 +29,7 @@ import java.util.Calendar;
 
 public abstract class DetailBaseActivity extends BaseActivity {
 
-    public CitySellRent citySellRent;
+    public CityCommonAttributes cityCommonAttributes;
     public ViewDataBinding binding;
 
     @Override
@@ -78,7 +79,7 @@ public abstract class DetailBaseActivity extends BaseActivity {
     public abstract void save();
 
     public void delete() {
-        getPresenter().deleteCity(citySellRent.getId());
+        getPresenter().deleteCity(cityCommonAttributes.getId());
 //        if (aMapLocationClient != null) {
 //            aMapLocationClient.stopLocation();
 //        }
@@ -132,7 +133,7 @@ public abstract class DetailBaseActivity extends BaseActivity {
     }
 
     public void locate() {
-        LocationMessage locationMessage = new LocationMessage(citySellRent.getLongitude(), citySellRent.getLatitude(), citySellRent.getLandLoacation());
+        LocationMessage locationMessage = new LocationMessage(cityCommonAttributes.getLongitude(), cityCommonAttributes.getLatitude(), cityCommonAttributes.getLandLoacation());
         EventBus.getDefault().postSticky(locationMessage);
         startActivityForResult(new Intent(this, MapActivity.class), RESULT_OK);
     }

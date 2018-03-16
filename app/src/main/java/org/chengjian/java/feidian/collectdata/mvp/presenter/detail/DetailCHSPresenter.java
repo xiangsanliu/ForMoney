@@ -1,17 +1,13 @@
 package org.chengjian.java.feidian.collectdata.mvp.presenter.detail;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.ProgressDialog;
-import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 
-import org.chengjian.java.feidian.collectdata.beans.CitySellRent;
-import org.chengjian.java.feidian.collectdata.beans.CommercialHouseTradeModel;
-import org.chengjian.java.feidian.collectdata.mvp.model.NetModel;
+import org.chengjian.java.feidian.collectdata.beans.CityCommonAttributes;
+import org.chengjian.java.feidian.collectdata.beans.CityCommonAttributes;
+import org.chengjian.java.feidian.collectdata.beans.CommercialHousingForSale;
 import org.chengjian.java.feidian.collectdata.mvp.view.base.DetailCHSView;
-import org.chengjian.java.feidian.collectdata.shared.TestTask;
 
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
@@ -28,10 +24,10 @@ public class DetailCHSPresenter extends DetailBasePresenter<DetailCHSView> {
         this.activity = activity;
     }
 
-    public void save(CitySellRent citySellRent, CommercialHouseTradeModel model) {
+    public void save(CityCommonAttributes cityCommonAttributes, CommercialHousingForSale model) {
         progressDialog = createProgress("上传中");
         progressDialog.show();
-        saveCity(citySellRent);
+        saveCity(cityCommonAttributes);
         netModel.save(JSON.toJSONString(model), "city/save/commercial")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

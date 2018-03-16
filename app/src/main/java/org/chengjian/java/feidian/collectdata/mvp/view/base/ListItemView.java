@@ -16,5 +16,8 @@ public interface ListItemView<T> extends BaseContract.View {
 
     void loadMoreListItem(List<T> listItems);
 
+    /**
+     * 这个方法会把List里面所有的数据清空
+     */
     void clearAllItems();
 }

@@ -7,13 +7,13 @@
     <data>
         <variable
             name="model"
-            type="org.chengjian.java.feidian.collectdata.beans.HouseRentModel" />
+            type="org.chengjian.java.feidian.collectdata.beans.HouseRent" />
         <variable
             name="editable"
             type="boolean"/>
         <variable
             name="citySellRent"
-            type="org.chengjian.java.feidian.collectdata.beans.CitySellRent"/>
+            type="org.chengjian.java.feidian.collectdata.beans.CityCommonAttributes"/>
     </data>
     <android.support.v7.widget.CardView
         app:cardCornerRadius="10dp"

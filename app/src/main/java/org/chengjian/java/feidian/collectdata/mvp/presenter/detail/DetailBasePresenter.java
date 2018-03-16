@@ -7,7 +7,7 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 
-import org.chengjian.java.feidian.collectdata.beans.CitySellRent;
+import org.chengjian.java.feidian.collectdata.beans.CityCommonAttributes;
 import org.chengjian.java.feidian.collectdata.mvp.model.NetModel;
 import org.chengjian.java.feidian.collectdata.beans.message.ResultMessage;
 import org.chengjian.java.feidian.collectdata.mvp.view.base.DetailBaseView;
@@ -75,8 +75,8 @@ public class DetailBasePresenter <T extends DetailBaseView> {
                 });
     }
 
-    void saveCity(CitySellRent citySellRent) {
-        netModel.save(JSON.toJSONString(citySellRent), "city/save/city")
+    void saveCity(CityCommonAttributes cityCommonAttributes) {
+        netModel.save(JSON.toJSONString(cityCommonAttributes), "city/save/city")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>() {

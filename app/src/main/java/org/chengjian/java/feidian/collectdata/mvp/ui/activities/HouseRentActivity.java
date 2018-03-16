@@ -7,7 +7,7 @@ import android.view.View;
 import com.alibaba.fastjson.JSON;
 
 import org.chengjian.java.feidian.collectdata.R;
-import org.chengjian.java.feidian.collectdata.beans.HouseRentModel;
+import org.chengjian.java.feidian.collectdata.beans.HouseRent;
 import org.chengjian.java.feidian.collectdata.databinding.ActivityHouseRentBinding;
 import org.chengjian.java.feidian.collectdata.beans.message.LocationMessage;
 import org.chengjian.java.feidian.collectdata.beans.message.StickyMessage;
@@ -21,7 +21,7 @@ import org.greenrobot.eventbus.ThreadMode;
 public class HouseRentActivity extends DetailBaseActivity implements View.OnClickListener, DetailHRView {
 
     private ActivityHouseRentBinding binding;
-    private HouseRentModel model;
+    private HouseRent model;
     private DetailHRPresenter presenter;
 
 
@@ -55,15 +55,15 @@ public class HouseRentActivity extends DetailBaseActivity implements View.OnClic
     }
 
     private void initViews(StickyMessage message) {
-        this.citySellRent = message.getCitySellRent();
-        binding.setCitySellRent(citySellRent);
+        this.cityCommonAttributes = message.getCityCommonAttributes();
+        binding.setCitySellRent(cityCommonAttributes);
         binding.setEditable(message.getIsEditable());
         setSpinnerIsEnable(getIsEditable());
         if (!message.getIsEditable()) {
-            presenter.loadModel(citySellRent.getId(), "houserent");
+            presenter.loadModel(cityCommonAttributes.getId(), "houserent");
         } else {
-            model = new HouseRentModel();
-            model.setId(citySellRent.getId());
+            model = new HouseRent();
+            model.setId(cityCommonAttributes.getId());
             initModel(model);
         }
     }
@@ -85,15 +85,15 @@ public class HouseRentActivity extends DetailBaseActivity implements View.OnClic
 
     @Override
     public void initSpinner() {
-        binding.childHrLandSituation.spCrossroadSituation.setSelection(citySellRent.getCrossRoadSituation());
-        binding.childHrLandSituation.spLandShape.setSelection(citySellRent.getLandShape());
-        binding.childHrLandSituation.spLandDevelopingSituation.setSelection(citySellRent.getLandShape());
-        binding.childHrLandSituation.spBuildingDirection.setSelection(citySellRent.getBuildingDirection());
-        binding.childHrLandSituation.spNearbyStreetSituation.setSelection(citySellRent.getNearbyStreetSituation());
-        binding.childHrLandSituation.spIsGore.setSelection(citySellRent.isGore()? 1:0);
+        binding.childHrLandSituation.spCrossroadSituation.setSelection(cityCommonAttributes.getCrossRoadSituation());
+        binding.childHrLandSituation.spLandShape.setSelection(cityCommonAttributes.getLandShape());
+        binding.childHrLandSituation.spLandDevelopingSituation.setSelection(cityCommonAttributes.getLandShape());
+        binding.childHrLandSituation.spBuildingDirection.setSelection(cityCommonAttributes.getBuildingDirection());
+        binding.childHrLandSituation.spNearbyStreetSituation.setSelection(cityCommonAttributes.getNearbyStreetSituation());
+        binding.childHrLandSituation.spIsGore.setSelection(cityCommonAttributes.getGore()? 1:0);
         binding.childHrLandSituation.spNearbyLandType.setSelection(model.getNearByLandType());
-        binding.childHrBuildingSituation.spStructureType.setSelection(citySellRent.getStructureType());
-        binding.childHrBuildingSituation.spQualityLevel.setSelection(citySellRent.getQualityLevel());
+        binding.childHrBuildingSituation.spStructureType.setSelection(cityCommonAttributes.getStructureType());
+        binding.childHrBuildingSituation.spQualityLevel.setSelection(cityCommonAttributes.getQualityLevel());
         binding.childHrBuildingSituation.spLightAirType.setSelection(model.getLightAirType());
 
     }
@@ -101,14 +101,14 @@ public class HouseRentActivity extends DetailBaseActivity implements View.OnClic
 
     @Override
     public void getSpinner() {
-        citySellRent.setCrossRoadSituation(binding.childHrLandSituation.spCrossroadSituation.getSelectedItemPosition());
-        citySellRent.setLandShape(binding.childHrLandSituation.spLandShape.getSelectedItemPosition());
-        citySellRent.setLandDevelopingSituation(binding.childHrLandSituation.spLandDevelopingSituation.getSelectedItemPosition());
-        citySellRent.setBuildingDirection(binding.childHrLandSituation.spBuildingDirection.getSelectedItemPosition());
-        citySellRent.setNearbyStreetSituation(binding.childHrLandSituation.spNearbyStreetSituation.getSelectedItemPosition());
-        citySellRent.setGore(binding.childHrLandSituation.spIsGore.getSelectedItemPosition() == 1);
-        citySellRent.setStructureType(binding.childHrBuildingSituation.spStructureType.getSelectedItemPosition());
-        citySellRent.setQualityLevel(binding.childHrBuildingSituation.spQualityLevel.getSelectedItemPosition());
+        cityCommonAttributes.setCrossRoadSituation(binding.childHrLandSituation.spCrossroadSituation.getSelectedItemPosition());
+        cityCommonAttributes.setLandShape(binding.childHrLandSituation.spLandShape.getSelectedItemPosition());
+        cityCommonAttributes.setLandDevelopingSituation(binding.childHrLandSituation.spLandDevelopingSituation.getSelectedItemPosition());
+        cityCommonAttributes.setBuildingDirection(binding.childHrLandSituation.spBuildingDirection.getSelectedItemPosition());
+        cityCommonAttributes.setNearbyStreetSituation(binding.childHrLandSituation.spNearbyStreetSituation.getSelectedItemPosition());
+        cityCommonAttributes.setGore(binding.childHrLandSituation.spIsGore.getSelectedItemPosition() == 1);
+        cityCommonAttributes.setStructureType(binding.childHrBuildingSituation.spStructureType.getSelectedItemPosition());
+        cityCommonAttributes.setQualityLevel(binding.childHrBuildingSituation.spQualityLevel.getSelectedItemPosition());
         model.setLightAirType(binding.childHrBuildingSituation.spLightAirType.getSelectedItemPosition());
     }
 
@@ -118,7 +118,7 @@ public class HouseRentActivity extends DetailBaseActivity implements View.OnClic
         getSpinner();
         binding.setEditable(false);
         setSpinnerIsEnable(getIsEditable());
-        presenter.save(citySellRent, model);
+        presenter.save(cityCommonAttributes, model);
     }
 
     @Override
@@ -197,13 +197,13 @@ public class HouseRentActivity extends DetailBaseActivity implements View.OnClic
 
     @Override
     public void initModel(String model) {
-        this.model = JSON.parseObject(model,HouseRentModel.class);
+        this.model = JSON.parseObject(model,HouseRent.class);
         binding.setModel(this.model);
         initSpinner();
     }
 
     @Override
-    public void initModel(HouseRentModel model) {
+    public void initModel(HouseRent model) {
         this.model = model;
         binding.setModel(this.model);
         initSpinner();

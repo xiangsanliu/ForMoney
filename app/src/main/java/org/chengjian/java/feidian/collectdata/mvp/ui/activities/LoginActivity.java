@@ -48,14 +48,13 @@ public class LoginActivity extends BaseActivity {
         binding.btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                enterMainPage();
-//                String imei = AppTool.getIMEI(LoginActivity.this);
-//                if (imei == null) {
+                String imei = AppTool.getIMEI(LoginActivity.this);
+                if (imei == null) {
 //                     没有获取 IMEI 的权限
-//                    ActivityCompat.requestPermissions(LoginActivity.this, new String[]{Manifest.permission.READ_PHONE_STATE}, 100);
-//                    return;
-//                }
-//                login(imei);
+                    ActivityCompat.requestPermissions(LoginActivity.this, new String[]{Manifest.permission.READ_PHONE_STATE}, 100);
+                    return;
+                }
+                login(imei);
             }
         });
 
@@ -111,7 +110,7 @@ public class LoginActivity extends BaseActivity {
                 login(AppTool.getIMEI(this));
             } else {
                 // 请求被拒绝
-                Toast.makeText(LoginActivity.this, "请求被禁止，无法登录使用本app", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "由于无法获得手机的IEEE码，你无法使用本软件功能", Toast.LENGTH_SHORT).show();
             }
         }
     }

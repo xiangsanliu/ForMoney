@@ -5,7 +5,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import org.chengjian.java.feidian.collectdata.beans.CitySellRent;
+import org.chengjian.java.feidian.collectdata.beans.CityCommonAttributes;
+import org.chengjian.java.feidian.collectdata.beans.CityCommonAttributes;
 import org.chengjian.java.feidian.collectdata.beans.message.StickyMessage;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.base.BasePresenter;
 import org.chengjian.java.feidian.collectdata.mvp.ui.activities.CommercialHouseSellActivity;
@@ -50,19 +51,19 @@ public class MainPresenter extends BasePresenter<MainView> {
         stickyMessage.setIsEditable(true);
 
         if (currentFragment instanceof CommercialHouseTradeFragment) {
-            stickyMessage.setCitySellRent(initCitySellRent(id, Constants.COMMERCIAL_HOUSE_TRADE));
+            stickyMessage.setCityCommonAttributes(initCitySellRent(id, Constants.COMMERCIAL_HOUSE_TRADE));
             intent = new Intent(mContext, CommercialHouseSellActivity.class);
 
         } else if (currentFragment instanceof HouseRentFragment) {
-            stickyMessage.setCitySellRent(initCitySellRent(id, Constants.HOUSE_RENT));
+            stickyMessage.setCityCommonAttributes(initCitySellRent(id, Constants.HOUSE_RENT));
             intent = new Intent(mContext, HouseRentActivity.class);
 
         } else if (currentFragment instanceof HouseSellFragment) {
-            stickyMessage.setCitySellRent(initCitySellRent(id, Constants.HOUSE_SELL));
+            stickyMessage.setCityCommonAttributes(initCitySellRent(id, Constants.HOUSE_SELL));
             intent = new Intent(mContext, HouseSellActivity.class);
 
         } else {
-            stickyMessage.setCitySellRent(initCitySellRent(id, Constants.SHOP_RENT));
+            stickyMessage.setCityCommonAttributes(initCitySellRent(id, Constants.SHOP_RENT));
             intent = new Intent(mContext, ShopRentActivity.class);
         }
 
@@ -71,12 +72,11 @@ public class MainPresenter extends BasePresenter<MainView> {
     }
 
     @SuppressLint("SimpleDateFormat")
-    private CitySellRent initCitySellRent(Long id, int modelType) {
-        CitySellRent model = new CitySellRent();
+    private CityCommonAttributes initCitySellRent(Long id, int modelType) {
+        CityCommonAttributes model = new CityCommonAttributes();
         model.setResearcherTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(System.currentTimeMillis())));
         model.setId(id);
         model.setUserId(Constants.userId);
-        model.setModelType(modelType);
         return model;
     }
 

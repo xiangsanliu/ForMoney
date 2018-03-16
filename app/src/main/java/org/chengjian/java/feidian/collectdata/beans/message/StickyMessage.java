@@ -1,6 +1,6 @@
 package org.chengjian.java.feidian.collectdata.beans.message;
 
-import org.chengjian.java.feidian.collectdata.beans.CitySellRent;
+import org.chengjian.java.feidian.collectdata.beans.CityCommonAttributes;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,11 +16,11 @@ import lombok.Setter;
 @Getter
 public class StickyMessage {
 
-    private CitySellRent citySellRent;
+    private CityCommonAttributes cityCommonAttributes;
     private Boolean isEditable;
 
-    public StickyMessage(CitySellRent citySellRent, Boolean isEditable) {
-        this.citySellRent = citySellRent;
+    public StickyMessage(CityCommonAttributes cityCommonAttributes, Boolean isEditable) {
+        this.cityCommonAttributes = cityCommonAttributes;
         this.isEditable = isEditable;
     }
 }

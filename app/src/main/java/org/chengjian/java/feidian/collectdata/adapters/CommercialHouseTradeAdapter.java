@@ -9,7 +9,8 @@ import android.widget.TextView;
 
 import org.chengjian.java.feidian.collectdata.R;
 import org.chengjian.java.feidian.collectdata.adapters.base.BaseRecyclerAdapter;
-import org.chengjian.java.feidian.collectdata.beans.CitySellRent;
+import org.chengjian.java.feidian.collectdata.beans.CityCommonAttributes;
+import org.chengjian.java.feidian.collectdata.beans.CityCommonAttributes;
 import org.chengjian.java.feidian.collectdata.beans.message.StickyMessage;
 import org.chengjian.java.feidian.collectdata.mvp.ui.activities.CommercialHouseSellActivity;
 import org.greenrobot.eventbus.EventBus;
@@ -21,7 +22,7 @@ import java.util.List;
  * StormPhoenix is a intelligent Android developer.
  */
 
-public class CommercialHouseTradeAdapter extends BaseRecyclerAdapter<CitySellRent, CommercialHouseTradeAdapter.CommercialHouseSellViewHolder> {
+public class CommercialHouseTradeAdapter extends BaseRecyclerAdapter<CityCommonAttributes, CommercialHouseTradeAdapter.CommercialHouseSellViewHolder> {
 
     @Override
     protected CommercialHouseSellViewHolder createViewHolder(View itemView) {
@@ -37,11 +38,11 @@ public class CommercialHouseTradeAdapter extends BaseRecyclerAdapter<CitySellRen
         super(context);
     }
 
-    public CommercialHouseTradeAdapter(Context context, List<CitySellRent> list) {
+    public CommercialHouseTradeAdapter(Context context, List<CityCommonAttributes> list) {
         super(context, list);
     }
 
-    public class CommercialHouseSellViewHolder extends BaseRecyclerAdapter.ViewHolder<CitySellRent> {
+    public class CommercialHouseSellViewHolder extends BaseRecyclerAdapter.ViewHolder<CityCommonAttributes> {
         TextView reasearchPerson;
         TextView reasearchTime;
         TextView place;
@@ -56,7 +57,7 @@ public class CommercialHouseTradeAdapter extends BaseRecyclerAdapter<CitySellRen
         }
 
         @Override
-        protected void bind(final CitySellRent data) {
+        protected void bind(final CityCommonAttributes data) {
             reasearchPerson.setText(data.getResearcher());
             reasearchTime.setText(data.getResearcherTime());
 

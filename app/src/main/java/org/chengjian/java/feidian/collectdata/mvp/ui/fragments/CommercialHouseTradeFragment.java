@@ -2,7 +2,8 @@ package org.chengjian.java.feidian.collectdata.mvp.ui.fragments;
 
 import org.chengjian.java.feidian.collectdata.adapters.base.BaseRecyclerAdapter;
 import org.chengjian.java.feidian.collectdata.adapters.CommercialHouseTradeAdapter;
-import org.chengjian.java.feidian.collectdata.beans.CitySellRent;
+import org.chengjian.java.feidian.collectdata.beans.CityCommonAttributes;
+import org.chengjian.java.feidian.collectdata.beans.CityCommonAttributes;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.CommercialHouseTradePresenter;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.base.ListItemPresenter;
 import org.chengjian.java.feidian.collectdata.mvp.ui.fragments.base.ListWithPresenterFragment;
@@ -12,7 +13,7 @@ import org.chengjian.java.feidian.collectdata.mvp.ui.fragments.base.ListWithPres
  * StormPhoenix is a intelligent Android developer.
  */
 
-public class CommercialHouseTradeFragment extends ListWithPresenterFragment<CitySellRent> {
+public class CommercialHouseTradeFragment extends ListWithPresenterFragment<CityCommonAttributes> {
     ListItemPresenter listItemPresenter;
 
     @Override
@@ -24,7 +25,7 @@ public class CommercialHouseTradeFragment extends ListWithPresenterFragment<City
     }
 
     @Override
-    public BaseRecyclerAdapter<CitySellRent, BaseRecyclerAdapter.ViewHolder<CitySellRent>> getAdapter() {
+    public BaseRecyclerAdapter<CityCommonAttributes, BaseRecyclerAdapter.ViewHolder<CityCommonAttributes>> getAdapter() {
         mAdapter = new CommercialHouseTradeAdapter(getActivity());
         // 监听事件也是在这里写的
 //        mAdapter.addOnViewClickListener(view 的 id, 监听器);

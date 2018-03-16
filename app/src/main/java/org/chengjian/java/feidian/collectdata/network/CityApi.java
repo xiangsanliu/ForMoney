@@ -1,7 +1,8 @@
 package org.chengjian.java.feidian.collectdata.network;
 
-import org.chengjian.java.feidian.collectdata.beans.CitySellRent;
-import org.chengjian.java.feidian.collectdata.beans.CommercialHouseTradeModel;
+import org.chengjian.java.feidian.collectdata.beans.CityCommonAttributes;
+import org.chengjian.java.feidian.collectdata.beans.CityCommonAttributes;
+import org.chengjian.java.feidian.collectdata.beans.CommercialHousingForSale;
 
 import java.util.List;
 
@@ -22,10 +23,10 @@ public interface CityApi {
      * @return
      */
     @GET("/city/get/citysellrents")
-    Observable<List<CitySellRent>> getCitySellRents(@Query("userId") Long userId, @Query("modelType") int modelType, @Query("index") int index, @Query("count") int count);
+    Observable<List<CityCommonAttributes>> getCitySellRents(@Query("userId") Long userId, @Query("modelType") int modelType, @Query("index") int index, @Query("count") int count);
 
     @GET("/city/get/commercial")
-    Observable<CommercialHouseTradeModel> getCommercialHouseTradeModel(@Query("id") Long id);
+    Observable<CommercialHousingForSale> getCommercialHouseTradeModel(@Query("id") Long id);
 
     @GET("/city/delete/city")
     Observable<String> deleteCitySellRent(@Query("id") Long id);

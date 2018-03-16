@@ -1,6 +1,7 @@
 package org.chengjian.java.feidian.collectdata.mvp.model;
 
-import org.chengjian.java.feidian.collectdata.beans.CitySellRent;
+import org.chengjian.java.feidian.collectdata.beans.CityCommonAttributes;
+import org.chengjian.java.feidian.collectdata.beans.CityCommonAttributes;
 import org.chengjian.java.feidian.collectdata.network.CityApi;
 import org.chengjian.java.feidian.collectdata.shared.Constants;
 
@@ -44,7 +45,7 @@ public class NetModel {
         }
     }
 
-    public Observable<List<CitySellRent>> getCitySellRents(Long userId, int modelType) {
+    public Observable<List<CityCommonAttributes>> getCitySellRents(Long userId, int modelType) {
         // 默认请求20条数据，从第一条数据开始请求
         return service.getCitySellRents(userId, modelType, 0, 20);
     }
@@ -128,7 +129,7 @@ public class NetModel {
     }
 
 
-//    public CommercialHouseTradeModel getCommercialHouseTradeModelById(Long id) {
+//    public CommercialHousingForSale getCommercialHouseTradeModelById(Long id) {
 //
 //    }
 

@@ -2,7 +2,8 @@ package org.chengjian.java.feidian.collectdata.mvp.ui.fragments;
 
 import org.chengjian.java.feidian.collectdata.adapters.base.BaseRecyclerAdapter;
 import org.chengjian.java.feidian.collectdata.adapters.HouseSellAdapter;
-import org.chengjian.java.feidian.collectdata.beans.CitySellRent;
+import org.chengjian.java.feidian.collectdata.beans.CityCommonAttributes;
+import org.chengjian.java.feidian.collectdata.beans.CityCommonAttributes;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.HouseSellPresenter;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.base.ListItemPresenter;
 import org.chengjian.java.feidian.collectdata.mvp.ui.fragments.base.ListWithPresenterFragment;
@@ -12,7 +13,7 @@ import org.chengjian.java.feidian.collectdata.mvp.ui.fragments.base.ListWithPres
  * StormPhoenix is a intelligent Android developer.
  */
 
-public class HouseSellFragment extends ListWithPresenterFragment<CitySellRent> {
+public class HouseSellFragment extends ListWithPresenterFragment<CityCommonAttributes> {
     ListItemPresenter listItemPresenter;
     @Override
     public ListItemPresenter getListItemPresenter() {
@@ -23,7 +24,7 @@ public class HouseSellFragment extends ListWithPresenterFragment<CitySellRent> {
     }
 
     @Override
-    public BaseRecyclerAdapter<CitySellRent, BaseRecyclerAdapter.ViewHolder<CitySellRent>> getAdapter() {
+    public BaseRecyclerAdapter<CityCommonAttributes, BaseRecyclerAdapter.ViewHolder<CityCommonAttributes>> getAdapter() {
         mAdapter = new HouseSellAdapter(getActivity());
         return mAdapter;
     }

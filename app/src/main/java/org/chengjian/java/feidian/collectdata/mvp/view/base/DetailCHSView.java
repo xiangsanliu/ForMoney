@@ -1,6 +1,6 @@
 package org.chengjian.java.feidian.collectdata.mvp.view.base;
 
-import org.chengjian.java.feidian.collectdata.beans.CommercialHouseTradeModel;
+import org.chengjian.java.feidian.collectdata.beans.CommercialHousingForSale;
 
 /**
  * Created by xiang on 2017/12/6.
@@ -8,5 +8,5 @@ import org.chengjian.java.feidian.collectdata.beans.CommercialHouseTradeModel;
  */
 
 public interface DetailCHSView extends DetailBaseView {
-    public void initModel(CommercialHouseTradeModel model);
+    public void initModel(CommercialHousingForSale model);
 }

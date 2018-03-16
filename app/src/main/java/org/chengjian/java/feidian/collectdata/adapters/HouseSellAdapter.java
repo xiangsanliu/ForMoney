@@ -9,7 +9,8 @@ import android.widget.TextView;
 
 import org.chengjian.java.feidian.collectdata.R;
 import org.chengjian.java.feidian.collectdata.adapters.base.BaseRecyclerAdapter;
-import org.chengjian.java.feidian.collectdata.beans.CitySellRent;
+import org.chengjian.java.feidian.collectdata.beans.CityCommonAttributes;
+import org.chengjian.java.feidian.collectdata.beans.CityCommonAttributes;
 import org.chengjian.java.feidian.collectdata.beans.message.StickyMessage;
 import org.chengjian.java.feidian.collectdata.mvp.ui.activities.HouseSellActivity;
 import org.greenrobot.eventbus.EventBus;
@@ -21,13 +22,13 @@ import java.util.List;
  * 
  */
 
-public class HouseSellAdapter extends BaseRecyclerAdapter<CitySellRent, HouseSellAdapter.HouseSellViewHolder> {
+public class HouseSellAdapter extends BaseRecyclerAdapter<CityCommonAttributes, HouseSellAdapter.HouseSellViewHolder> {
 
     public HouseSellAdapter(Context context) {
         super(context);
     }
 
-    public HouseSellAdapter(Context context, List<CitySellRent> list) {
+    public HouseSellAdapter(Context context, List<CityCommonAttributes> list) {
         super(context, list);
     }
 
@@ -41,7 +42,7 @@ public class HouseSellAdapter extends BaseRecyclerAdapter<CitySellRent, HouseSel
         return R.layout.item_list;
     }
 
-    public class HouseSellViewHolder extends BaseRecyclerAdapter.ViewHolder<CitySellRent> {
+    public class HouseSellViewHolder extends BaseRecyclerAdapter.ViewHolder<CityCommonAttributes> {
 
         TextView reasearchPerson;
         TextView reasearchTime;
@@ -58,7 +59,7 @@ public class HouseSellAdapter extends BaseRecyclerAdapter<CitySellRent, HouseSel
         }
 
         @Override
-        protected void bind(final CitySellRent data) {
+        protected void bind(final CityCommonAttributes data) {
             reasearchPerson.setText(data.getResearcher());
             reasearchTime.setText(data.getResearcherTime());
             if (data.getLandLoacation()==null || data.getLandLoacation().length()<=0) {
