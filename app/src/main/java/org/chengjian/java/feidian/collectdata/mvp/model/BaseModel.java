@@ -13,7 +13,7 @@ import java.util.List;
 
 public abstract class BaseModel implements BaseContract.Model {
 
-    public BaseModel(Context context) {
+    BaseModel(Context context) {
     }
 
 
