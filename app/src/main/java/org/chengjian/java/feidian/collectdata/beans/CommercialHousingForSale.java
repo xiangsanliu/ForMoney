@@ -395,7 +395,6 @@ public class CommercialHousingForSale {
     @Generated(hash = 410176059)
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
-        myDao = daoSession != null ? daoSession.getCommercialHousingForSaleDao()
-                : null;
+        myDao = daoSession != null ? daoSession.getCommercialHousingForSaleDao() : null;
     }
 }

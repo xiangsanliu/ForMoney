@@ -9,8 +9,7 @@ import android.widget.TextView;
 
 import org.chengjian.java.feidian.collectdata.R;
 import org.chengjian.java.feidian.collectdata.adapters.base.BaseRecyclerAdapter;
-import org.chengjian.java.feidian.collectdata.beans.CityCommonAttributes;
-import org.chengjian.java.feidian.collectdata.beans.CityCommonAttributes;
+import org.chengjian.java.feidian.collectdata.beans.CommercialHousingForSale;
 import org.chengjian.java.feidian.collectdata.beans.message.StickyMessage;
 import org.chengjian.java.feidian.collectdata.mvp.ui.activities.CommercialHouseSellActivity;
 import org.greenrobot.eventbus.EventBus;
@@ -22,7 +21,7 @@ import java.util.List;
  * StormPhoenix is a intelligent Android developer.
  */
 
-public class CommercialHouseTradeAdapter extends BaseRecyclerAdapter<CityCommonAttributes, CommercialHouseTradeAdapter.CommercialHouseSellViewHolder> {
+public class CommercialHousingForSaleAdapter extends BaseRecyclerAdapter<CommercialHousingForSale, CommercialHousingForSaleAdapter.CommercialHouseSellViewHolder> {
 
     @Override
     protected CommercialHouseSellViewHolder createViewHolder(View itemView) {
@@ -34,15 +33,15 @@ public class CommercialHouseTradeAdapter extends BaseRecyclerAdapter<CityCommonA
         return R.layout.item_list;
     }
 
-    public CommercialHouseTradeAdapter(Context context) {
+    public CommercialHousingForSaleAdapter(Context context) {
         super(context);
     }
 
-    public CommercialHouseTradeAdapter(Context context, List<CityCommonAttributes> list) {
+    public CommercialHousingForSaleAdapter(Context context, List<CommercialHousingForSale> list) {
         super(context, list);
     }
 
-    public class CommercialHouseSellViewHolder extends BaseRecyclerAdapter.ViewHolder<CityCommonAttributes> {
+    public class CommercialHouseSellViewHolder extends BaseRecyclerAdapter.ViewHolder<CommercialHousingForSale> {
         TextView reasearchPerson;
         TextView reasearchTime;
         TextView place;
@@ -57,20 +56,21 @@ public class CommercialHouseTradeAdapter extends BaseRecyclerAdapter<CityCommonA
         }
 
         @Override
-        protected void bind(final CityCommonAttributes data) {
-            reasearchPerson.setText(data.getResearcher());
-            reasearchTime.setText(data.getResearcherTime());
+        protected void bind(final CommercialHousingForSale data) {
+            reasearchPerson.setText(data.getCommonAttributes().getResearcher());
+            reasearchTime.setText(data.getCommonAttributes().getResearcherTime());
 
-            if (data.getLandLoacation()==null || data.getLandLoacation().length()<=0) {
+            if (data.getCommonAttributes().getLandLoacation() == null ||
+                    data.getCommonAttributes().getLandLoacation().length() <= 0) {
                 place.setText("未指定宗地位置");
                 place.setTextColor(Color.GRAY);
             } else {
-                place.setText(data.getLandLoacation());
+                place.setText(data.getCommonAttributes().getLandLoacation());
             }
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    EventBus.getDefault().postSticky(new StickyMessage(data, false));
+                    EventBus.getDefault().postSticky(new StickyMessage(data.getCommonAttributes(), false));
                     mContext.startActivity(new Intent(mContext, CommercialHouseSellActivity.class));
                 }
             });

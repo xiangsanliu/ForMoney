@@ -4,8 +4,6 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.View;
 
-import com.alibaba.fastjson.JSON;
-
 import org.chengjian.java.feidian.collectdata.R;
 import org.chengjian.java.feidian.collectdata.beans.CommercialHousingForSale;
 import org.chengjian.java.feidian.collectdata.databinding.ActivityCommercialHouseTradeBinding;
@@ -14,14 +12,12 @@ import org.chengjian.java.feidian.collectdata.beans.message.StickyMessage;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.detail.DetailBasePresenter;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.detail.DetailCHSPresenter;
 import org.chengjian.java.feidian.collectdata.mvp.ui.activities.base.DetailBaseActivity;
-import org.chengjian.java.feidian.collectdata.mvp.view.base.DetailCHSView;
+import org.chengjian.java.feidian.collectdata.mvp.view.base.DetailBaseView;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 
-public class CommercialHouseSellActivity extends DetailBaseActivity implements View.OnClickListener, DetailCHSView {
-
-
+public class CommercialHouseSellActivity extends DetailBaseActivity implements View.OnClickListener, DetailBaseView<CommercialHousingForSale> {
     private ActivityCommercialHouseTradeBinding binding;
     private CommercialHousingForSale model;
     private DetailCHSPresenter presenter;
@@ -74,10 +70,11 @@ public class CommercialHouseSellActivity extends DetailBaseActivity implements V
         binding.setEditable(message.getIsEditable());
         setSpinnerIsEnable(getIsEditable());
         if (!message.getIsEditable()) {
-            presenter.loadModel(cityCommonAttributes.getId(), "commercial");
+            // 无法编辑
+            presenter.loadModel(cityCommonAttributes.getId());
         } else {
+            // 可以编辑
             model = new CommercialHousingForSale();
-            model.setId(cityCommonAttributes.getId());
             initModel(model);
         }
     }
@@ -195,18 +192,10 @@ public class CommercialHouseSellActivity extends DetailBaseActivity implements V
         }
     }
 
-    //加载CommercialHouseTradeModel
-    @Override
-    public void initModel(String model) {
-        this.model = JSON.parseObject(model, CommercialHousingForSale.class);
-        binding.setCommercialHouseTradeModel(this.model);
-        initSpinner();
-    }
-
     @Override
     public void initModel(CommercialHousingForSale model) {
         this.model = model;
-        binding.setCommercialHouseTradeModel(this.model);
+        binding.setCommercialHousingForSale(this.model);
         initSpinner();
     }
 }

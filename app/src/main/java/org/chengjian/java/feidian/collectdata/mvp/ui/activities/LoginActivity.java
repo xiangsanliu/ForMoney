@@ -73,32 +73,34 @@ public class LoginActivity extends BaseActivity {
 
     // 登录服务器代码
     private void login(String imei) {
-        HttpMethod.getInstance().login(imei, new RequestCallback<HttpResult<Void>>() {
-            @Override
-            public void beforeRequest() {
-                showProgress();
-            }
-
-            @Override
-            public void onError(String errorMsg) {
-                Toast.makeText(LoginActivity.this, errorMsg, Toast.LENGTH_LONG).show();
-                hideProgress();
-            }
-
-            @Override
-            public void success(HttpResult<Void> data) {
-                if (data.getResultCode() == Constants.USER_LOGIN_FAILED) {
-//                     登录失败
-                    hideProgress();
-                    Toast.makeText(LoginActivity.this, data.getResultMessage(), Toast.LENGTH_LONG).show();
-                    return;
-                } else if (data.getResultCode() == Constants.USER_LOGIN_SUCCESS) {
-//                     登录成功，并且在组内，保存用户数据
-                    ConfigUtils.getInstance().setUserLogin();
-                    enterMainPage();
-                }
-            }
-        });
+        enterMainPage();
+        // 暂时屏蔽一下登录
+//        HttpMethod.getInstance().login(imei, new RequestCallback<HttpResult<Void>>() {
+//            @Override
+//            public void beforeRequest() {
+//                showProgress();
+//            }
+//
+//            @Override
+//            public void onError(String errorMsg) {
+//                Toast.makeText(LoginActivity.this, errorMsg, Toast.LENGTH_LONG).show();
+//                hideProgress();
+//            }
+//
+//            @Override
+//            public void success(HttpResult<Void> data) {
+//                if (data.getResultCode() == Constants.USER_LOGIN_FAILED) {
+////                     登录失败
+//                    hideProgress();
+//                    Toast.makeText(LoginActivity.this, data.getResultMessage(), Toast.LENGTH_LONG).show();
+//                    return;
+//                } else if (data.getResultCode() == Constants.USER_LOGIN_SUCCESS) {
+////                     登录成功，并且在组内，保存用户数据
+//                    ConfigUtils.getInstance().setUserLogin();
+//                    enterMainPage();
+//                }
+//            }
+//        });
     }
 
     @Override

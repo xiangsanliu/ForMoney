@@ -2,53 +2,32 @@ package org.chengjian.java.feidian.collectdata.mvp.presenter.detail;
 
 import android.app.Activity;
 
-import com.alibaba.fastjson.JSON;
-
-import org.chengjian.java.feidian.collectdata.beans.CityCommonAttributes;
 import org.chengjian.java.feidian.collectdata.beans.CityCommonAttributes;
 import org.chengjian.java.feidian.collectdata.beans.CommercialHousingForSale;
-import org.chengjian.java.feidian.collectdata.mvp.view.base.DetailCHSView;
+import org.chengjian.java.feidian.collectdata.db.DbManager;
 
-import rx.Observer;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import java.util.List;
 
 /**
  * Created by xiang on 2017/12/6.
- *
  */
 
-public class DetailCHSPresenter extends DetailBasePresenter<DetailCHSView> {
+public class DetailCHSPresenter extends DetailBasePresenter<CommercialHousingForSale> {
 
     public DetailCHSPresenter(Activity activity) {
         this.activity = activity;
     }
 
-    public void save(CityCommonAttributes cityCommonAttributes, CommercialHousingForSale model) {
-        progressDialog = createProgress("上传中");
-        progressDialog.show();
-        saveCity(cityCommonAttributes);
-        netModel.save(JSON.toJSONString(model), "city/save/commercial")
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<String>() {
-                    @Override
-                    public void onCompleted() {
-                        progressDialog.dismiss();
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        progressDialog.dismiss();
-                        showToast("上传失败");
-                    }
-
-                    @Override
-                    public void onNext(String s) {
-                        progressDialog.dismiss();
-                        showToast("上传成功");
-                    }
-                });
+    @Override
+    public void realLoadModel(Long id) {
+        CommercialHousingForSale model = DbManager.getInstance().queryCommercialHousingForSaleByForeignKey(id);
+        view.initModel(model);
     }
 
+    @Override
+    public void save(CityCommonAttributes commonAttrs, CommercialHousingForSale entity) {
+        DbManager.getInstance().saveCityCommonAttributes(commonAttrs);
+        entity.setCommonAttributes(commonAttrs);
+        DbManager.getInstance().saveCommercialHousingForSale(entity);
+    }
 }

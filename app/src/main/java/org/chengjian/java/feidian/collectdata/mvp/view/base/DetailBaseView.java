@@ -7,6 +7,6 @@ import org.greenrobot.eventbus.EventBus;
  *
  */
 
-public interface DetailBaseView {
-    public void initModel(String model);
+public interface DetailBaseView<T> {
+    void initModel(T model);
 }

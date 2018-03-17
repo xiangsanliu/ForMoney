@@ -9,11 +9,10 @@ import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.DaoException;
 
 /**
- * 柜台出租租金调查表
+ * 柜台/商铺出租租金调查表
  */
 @Entity
 public class CounterRent {
-
     @Id
     Long id;
     @Nullable

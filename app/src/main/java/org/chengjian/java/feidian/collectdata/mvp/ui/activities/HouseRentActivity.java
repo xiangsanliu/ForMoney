@@ -4,21 +4,19 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.View;
 
-import com.alibaba.fastjson.JSON;
-
 import org.chengjian.java.feidian.collectdata.R;
 import org.chengjian.java.feidian.collectdata.beans.HouseRent;
-import org.chengjian.java.feidian.collectdata.databinding.ActivityHouseRentBinding;
 import org.chengjian.java.feidian.collectdata.beans.message.LocationMessage;
 import org.chengjian.java.feidian.collectdata.beans.message.StickyMessage;
+import org.chengjian.java.feidian.collectdata.databinding.ActivityHouseRentBinding;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.detail.DetailBasePresenter;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.detail.DetailHRPresenter;
 import org.chengjian.java.feidian.collectdata.mvp.ui.activities.base.DetailBaseActivity;
-import org.chengjian.java.feidian.collectdata.mvp.view.base.DetailHRView;
+import org.chengjian.java.feidian.collectdata.mvp.view.base.DetailBaseView;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-public class HouseRentActivity extends DetailBaseActivity implements View.OnClickListener, DetailHRView {
+public class HouseRentActivity extends DetailBaseActivity implements View.OnClickListener, DetailBaseView<HouseRent> {
 
     private ActivityHouseRentBinding binding;
     private HouseRent model;
@@ -32,7 +30,6 @@ public class HouseRentActivity extends DetailBaseActivity implements View.OnClic
         presenter = new DetailHRPresenter(this);
         presenter.attachView(this);
     }
-
 
 
     @Override
@@ -60,10 +57,9 @@ public class HouseRentActivity extends DetailBaseActivity implements View.OnClic
         binding.setEditable(message.getIsEditable());
         setSpinnerIsEnable(getIsEditable());
         if (!message.getIsEditable()) {
-            presenter.loadModel(cityCommonAttributes.getId(), "houserent");
+            presenter.loadModel(cityCommonAttributes.getId());
         } else {
             model = new HouseRent();
-            model.setId(cityCommonAttributes.getId());
             initModel(model);
         }
     }
@@ -90,7 +86,7 @@ public class HouseRentActivity extends DetailBaseActivity implements View.OnClic
         binding.childHrLandSituation.spLandDevelopingSituation.setSelection(cityCommonAttributes.getLandShape());
         binding.childHrLandSituation.spBuildingDirection.setSelection(cityCommonAttributes.getBuildingDirection());
         binding.childHrLandSituation.spNearbyStreetSituation.setSelection(cityCommonAttributes.getNearbyStreetSituation());
-        binding.childHrLandSituation.spIsGore.setSelection(cityCommonAttributes.getGore()? 1:0);
+        binding.childHrLandSituation.spIsGore.setSelection(cityCommonAttributes.getGore() ? 1 : 0);
         binding.childHrLandSituation.spNearbyLandType.setSelection(model.getNearByLandType());
         binding.childHrBuildingSituation.spStructureType.setSelection(cityCommonAttributes.getStructureType());
         binding.childHrBuildingSituation.spQualityLevel.setSelection(cityCommonAttributes.getQualityLevel());
@@ -196,17 +192,9 @@ public class HouseRentActivity extends DetailBaseActivity implements View.OnClic
     }
 
     @Override
-    public void initModel(String model) {
-        this.model = JSON.parseObject(model,HouseRent.class);
-        binding.setModel(this.model);
-        initSpinner();
-    }
-
-    @Override
     public void initModel(HouseRent model) {
         this.model = model;
         binding.setModel(this.model);
         initSpinner();
-
     }
 }

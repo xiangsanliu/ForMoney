@@ -14,12 +14,12 @@ import org.chengjian.java.feidian.collectdata.beans.message.StickyMessage;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.detail.DetailBasePresenter;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.detail.DetailHSPresenter;
 import org.chengjian.java.feidian.collectdata.mvp.ui.activities.base.DetailBaseActivity;
-import org.chengjian.java.feidian.collectdata.mvp.view.base.DetailHSView;
+import org.chengjian.java.feidian.collectdata.mvp.view.base.DetailBaseView;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 
-public class HouseSellActivity extends DetailBaseActivity implements View.OnClickListener, DetailHSView {
+public class HouseSellActivity extends DetailBaseActivity implements View.OnClickListener, DetailBaseView<HouseSalePrice> {
 
     private ActivityHouseSellBinding binding;
     private DetailHSPresenter presenter;
@@ -58,10 +58,9 @@ public class HouseSellActivity extends DetailBaseActivity implements View.OnClic
         binding.setEditable(message.getIsEditable());
         setSpinnerIsEnable(getIsEditable());
         if (!message.getIsEditable()) {
-            presenter.loadModel(cityCommonAttributes.getId(), "housetrade");
+            presenter.loadModel(cityCommonAttributes.getId());
         } else {
             model = new HouseSalePrice();
-            model.setId(cityCommonAttributes.getId());
             initModel(model);
         }
     }
@@ -198,13 +197,6 @@ public class HouseSellActivity extends DetailBaseActivity implements View.OnClic
                 locate();
                 break;
         }
-    }
-
-    @Override
-    public void initModel(String model) {
-        this.model = JSON.parseObject(model, HouseSalePrice.class);
-        binding.setModel(this.model);
-        initSpinner();
     }
 
     @Override

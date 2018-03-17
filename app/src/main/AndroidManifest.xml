@@ -35,7 +35,7 @@
 
         <activity android:name=".mvp.ui.activities.HouseRentActivity" />
         <activity android:name=".mvp.ui.activities.HouseSellActivity" />
-        <activity android:name=".mvp.ui.activities.ShopRentActivity" />
+        <activity android:name=".mvp.ui.activities.CounterActivity" />
         <activity android:name=".mvp.ui.activities.CommercialHouseSellActivity" />
         <activity
             android:name=".mvp.ui.activities.DrawerActivity"

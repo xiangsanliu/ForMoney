@@ -129,7 +129,7 @@ public class NetModel {
     }
 
 
-//    public CommercialHousingForSale getCommercialHouseTradeModelById(Long id) {
+//    public CommercialHousingForSaleAdapter getCommercialHouseTradeModelById(Long id) {
 //
 //    }
 

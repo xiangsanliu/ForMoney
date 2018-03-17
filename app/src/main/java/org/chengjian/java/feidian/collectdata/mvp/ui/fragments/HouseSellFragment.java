@@ -1,8 +1,7 @@
 package org.chengjian.java.feidian.collectdata.mvp.ui.fragments;
 
 import org.chengjian.java.feidian.collectdata.adapters.base.BaseRecyclerAdapter;
-import org.chengjian.java.feidian.collectdata.adapters.HouseSellAdapter;
-import org.chengjian.java.feidian.collectdata.beans.CityCommonAttributes;
+import org.chengjian.java.feidian.collectdata.adapters.HouseSalePriceAdapter;
 import org.chengjian.java.feidian.collectdata.beans.CityCommonAttributes;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.HouseSellPresenter;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.base.ListItemPresenter;
@@ -25,7 +24,7 @@ public class HouseSellFragment extends ListWithPresenterFragment<CityCommonAttri
 
     @Override
     public BaseRecyclerAdapter<CityCommonAttributes, BaseRecyclerAdapter.ViewHolder<CityCommonAttributes>> getAdapter() {
-        mAdapter = new HouseSellAdapter(getActivity());
+        mAdapter = new HouseSalePriceAdapter(getActivity());
         return mAdapter;
     }
 }

@@ -10,31 +10,32 @@ import android.widget.TextView;
 import org.chengjian.java.feidian.collectdata.R;
 import org.chengjian.java.feidian.collectdata.adapters.base.BaseRecyclerAdapter;
 import org.chengjian.java.feidian.collectdata.beans.CityCommonAttributes;
-import org.chengjian.java.feidian.collectdata.beans.CityCommonAttributes;
+import org.chengjian.java.feidian.collectdata.beans.CounterRent;
 import org.chengjian.java.feidian.collectdata.beans.message.StickyMessage;
-import org.chengjian.java.feidian.collectdata.mvp.ui.activities.HouseSellActivity;
+import org.chengjian.java.feidian.collectdata.mvp.ui.activities.CounterActivity;
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
 /**
  * Created by xiang on 2017/9/12.
- * 
+ *
  */
 
-public class HouseSellAdapter extends BaseRecyclerAdapter<CityCommonAttributes, HouseSellAdapter.HouseSellViewHolder> {
+public class CounterRentAdapter extends BaseRecyclerAdapter<CounterRent, CounterRentAdapter.ShopRentViewHolder> {
 
-    public HouseSellAdapter(Context context) {
+
+    public CounterRentAdapter(Context context) {
         super(context);
     }
 
-    public HouseSellAdapter(Context context, List<CityCommonAttributes> list) {
+    public CounterRentAdapter(Context context, List<CounterRent> list) {
         super(context, list);
     }
 
     @Override
-    protected HouseSellViewHolder createViewHolder(View itemView) {
-        return new HouseSellViewHolder(itemView);
+    protected ShopRentViewHolder createViewHolder(View itemView) {
+        return new ShopRentViewHolder(itemView);
     }
 
     @Override
@@ -42,16 +43,15 @@ public class HouseSellAdapter extends BaseRecyclerAdapter<CityCommonAttributes, 
         return R.layout.item_list;
     }
 
-    public class HouseSellViewHolder extends BaseRecyclerAdapter.ViewHolder<CityCommonAttributes> {
+    public class ShopRentViewHolder extends BaseRecyclerAdapter.ViewHolder<CounterRent> {
 
         TextView reasearchPerson;
         TextView reasearchTime;
         TextView place;
         CardView cardView;
 
-        public HouseSellViewHolder(View itemView) {
+        public ShopRentViewHolder(View itemView) {
             super(itemView);
-
             reasearchPerson = (TextView) itemView.findViewById(R.id.reasearch_person);
             reasearchTime = (TextView) itemView.findViewById(R.id.reasearch_time);
             place = (TextView) itemView.findViewById(R.id.place);
@@ -59,24 +59,23 @@ public class HouseSellAdapter extends BaseRecyclerAdapter<CityCommonAttributes, 
         }
 
         @Override
-        protected void bind(final CityCommonAttributes data) {
-            reasearchPerson.setText(data.getResearcher());
-            reasearchTime.setText(data.getResearcherTime());
-            if (data.getLandLoacation()==null || data.getLandLoacation().length()<=0) {
+        protected void bind(final CounterRent data) {
+            reasearchPerson.setText(data.getCommonAttributes().getResearcher());
+            reasearchTime.setText(data.getCommonAttributes().getResearcherTime());
+            if (data.getCommonAttributes().getLandLoacation()==null || data.getCommonAttributes().getLandLoacation().length()<=0) {
                 place.setText("未指定宗地位置");
                 place.setTextColor(Color.GRAY);
             } else {
-                place.setText(data.getLandLoacation());
+                place.setText(data.getCommonAttributes().getLandLoacation());
             }
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    EventBus.getDefault().postSticky(new StickyMessage(data, false));
-                    mContext.startActivity(new Intent(mContext, HouseSellActivity.class));
+                    EventBus.getDefault().postSticky(new StickyMessage(data.getCommonAttributes(), false));
+                    mContext.startActivity(new Intent(mContext, CounterActivity.class));
                 }
             });
         }
     }
-
 
 }

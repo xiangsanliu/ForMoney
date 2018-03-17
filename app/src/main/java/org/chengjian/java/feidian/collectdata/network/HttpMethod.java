@@ -122,6 +122,7 @@ public class HttpMethod {
 
                     @Override
                     public void onError(Throwable e) {
+
                         call.onError(e.getMessage());
                     }
 

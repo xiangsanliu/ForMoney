@@ -11,6 +11,7 @@ import org.chengjian.java.feidian.collectdata.R;
 import org.chengjian.java.feidian.collectdata.adapters.base.BaseRecyclerAdapter;
 import org.chengjian.java.feidian.collectdata.beans.CityCommonAttributes;
 import org.chengjian.java.feidian.collectdata.beans.CityCommonAttributes;
+import org.chengjian.java.feidian.collectdata.beans.HouseRent;
 import org.chengjian.java.feidian.collectdata.beans.message.StickyMessage;
 import org.chengjian.java.feidian.collectdata.mvp.ui.activities.HouseRentActivity;
 import org.greenrobot.eventbus.EventBus;
@@ -21,14 +22,14 @@ import java.util.List;
  * Created by xiang on 2017/9/12.
  */
 
-public class HouseRentAdapter extends BaseRecyclerAdapter<CityCommonAttributes, HouseRentAdapter.HouseRentViewHolder> {
+public class HouseRentAdapter extends BaseRecyclerAdapter<HouseRent, HouseRentAdapter.HouseRentViewHolder> {
 
 
     public HouseRentAdapter(Context context) {
         super(context);
     }
 
-    public HouseRentAdapter(Context context, List<CityCommonAttributes> list) {
+    public HouseRentAdapter(Context context, List<HouseRent> list) {
         super(context, list);
     }
 
@@ -42,7 +43,7 @@ public class HouseRentAdapter extends BaseRecyclerAdapter<CityCommonAttributes, 
         return R.layout.item_list;
     }
 
-    public class HouseRentViewHolder extends BaseRecyclerAdapter.ViewHolder<CityCommonAttributes> {
+    public class HouseRentViewHolder extends BaseRecyclerAdapter.ViewHolder<HouseRent> {
 
         TextView reasearchPerson;
         TextView reasearchTime;
@@ -60,20 +61,20 @@ public class HouseRentAdapter extends BaseRecyclerAdapter<CityCommonAttributes, 
         }
 
         @Override
-        protected void bind(final CityCommonAttributes data) {
-            reasearchPerson.setText(data.getResearcher());
-            reasearchTime.setText(data.getResearcherTime());
+        protected void bind(final HouseRent data) {
+            reasearchPerson.setText(data.getCommonAttributes().getResearcher());
+            reasearchTime.setText(data.getCommonAttributes().getResearcherTime());
 
-            if (data.getLandLoacation()==null || data.getLandLoacation().length()<=0) {
+            if (data.getCommonAttributes().getLandLoacation()==null || data.getCommonAttributes().getLandLoacation().length()<=0) {
                 place.setText("未指定宗地位置");
                 place.setTextColor(Color.GRAY);
             } else {
-                place.setText(data.getLandLoacation());
+                place.setText(data.getCommonAttributes().getLandLoacation());
             }
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    EventBus.getDefault().postSticky(new StickyMessage(data, false));
+                    EventBus.getDefault().postSticky(new StickyMessage(data.getCommonAttributes(), false));
                     mContext.startActivity(new Intent(mContext, HouseRentActivity.class));
                 }
             });

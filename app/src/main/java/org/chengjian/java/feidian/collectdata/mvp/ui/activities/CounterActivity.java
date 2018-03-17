@@ -4,28 +4,25 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.View;
 
-import com.alibaba.fastjson.JSON;
-
 import org.chengjian.java.feidian.collectdata.R;
 import org.chengjian.java.feidian.collectdata.beans.CounterRent;
-import org.chengjian.java.feidian.collectdata.databinding.ActivityShopRentBinding;
 import org.chengjian.java.feidian.collectdata.beans.message.LocationMessage;
 import org.chengjian.java.feidian.collectdata.beans.message.StickyMessage;
+import org.chengjian.java.feidian.collectdata.databinding.ActivityShopRentBinding;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.detail.DetailBasePresenter;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.detail.DetailSRPresenter;
 import org.chengjian.java.feidian.collectdata.mvp.ui.activities.base.DetailBaseActivity;
-import org.chengjian.java.feidian.collectdata.mvp.view.base.DetailSRView;
+import org.chengjian.java.feidian.collectdata.mvp.view.base.DetailBaseView;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 
-public class ShopRentActivity extends DetailBaseActivity implements View.OnClickListener, DetailSRView {
+public class CounterActivity extends DetailBaseActivity implements View.OnClickListener, DetailBaseView<CounterRent> {
 
     private ActivityShopRentBinding binding;
     private CounterRent model;
     private DetailSRPresenter presenter;
 
-    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,14 +37,13 @@ public class ShopRentActivity extends DetailBaseActivity implements View.OnClick
         binding.setEditable(message.getIsEditable());
         setSpinnerIsEnable(getIsEditable());
         if (!message.getIsEditable()) {
-            presenter.loadModel(cityCommonAttributes.getId(), "shoprent");
+            presenter.loadModel(cityCommonAttributes.getId());
         } else {
             model = new CounterRent();
-            model.setId(cityCommonAttributes.getId());
             initModel(model);
         }
     }
-    
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_shop_rent;
@@ -89,7 +85,7 @@ public class ShopRentActivity extends DetailBaseActivity implements View.OnClick
         binding.childSrLandSituation.spLandDevelopingSituation.setSelection(cityCommonAttributes.getLandShape());
         binding.childSrLandSituation.spBuildingDirection.setSelection(cityCommonAttributes.getBuildingDirection());
         binding.childSrLandSituation.spNearbyStreetSituation.setSelection(cityCommonAttributes.getNearbyStreetSituation());
-        binding.childSrLandSituation.spIsGore.setSelection(cityCommonAttributes.getGore()? 1:0);
+        binding.childSrLandSituation.spIsGore.setSelection(cityCommonAttributes.getGore() ? 1 : 0);
         binding.childSrLandSituation.spNearbyLandType.setSelection(model.getNearByLandType());
         binding.childSrLandSituation.spUsagePlaned.setSelection(model.getUseagePlaned());
         binding.childSrLandSituation.spUsageActucal.setSelection(model.getUseageActual());
@@ -198,13 +194,6 @@ public class ShopRentActivity extends DetailBaseActivity implements View.OnClick
                 locate();
                 break;
         }
-    }
-
-    @Override
-    public void initModel(String model) {
-        this.model = JSON.parseObject(model, CounterRent.class);
-        binding.setModel(this.model);
-        initSpinner();
     }
 
     @Override

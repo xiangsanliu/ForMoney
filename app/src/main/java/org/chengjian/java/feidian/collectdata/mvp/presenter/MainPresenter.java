@@ -6,13 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import org.chengjian.java.feidian.collectdata.beans.CityCommonAttributes;
-import org.chengjian.java.feidian.collectdata.beans.CityCommonAttributes;
 import org.chengjian.java.feidian.collectdata.beans.message.StickyMessage;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.base.BasePresenter;
 import org.chengjian.java.feidian.collectdata.mvp.ui.activities.CommercialHouseSellActivity;
+import org.chengjian.java.feidian.collectdata.mvp.ui.activities.CounterActivity;
 import org.chengjian.java.feidian.collectdata.mvp.ui.activities.HouseRentActivity;
 import org.chengjian.java.feidian.collectdata.mvp.ui.activities.HouseSellActivity;
-import org.chengjian.java.feidian.collectdata.mvp.ui.activities.ShopRentActivity;
 import org.chengjian.java.feidian.collectdata.mvp.ui.fragments.CommercialHouseTradeFragment;
 import org.chengjian.java.feidian.collectdata.mvp.ui.fragments.HouseRentFragment;
 import org.chengjian.java.feidian.collectdata.mvp.ui.fragments.HouseSellFragment;
@@ -47,24 +46,23 @@ public class MainPresenter extends BasePresenter<MainView> {
 
         StickyMessage stickyMessage = new StickyMessage();
         Intent intent;
-        Long id = System.currentTimeMillis();
         stickyMessage.setIsEditable(true);
 
         if (currentFragment instanceof CommercialHouseTradeFragment) {
-            stickyMessage.setCityCommonAttributes(initCitySellRent(id, Constants.COMMERCIAL_HOUSE_TRADE));
+            stickyMessage.setCityCommonAttributes(initCityCommonAttrs());
             intent = new Intent(mContext, CommercialHouseSellActivity.class);
 
         } else if (currentFragment instanceof HouseRentFragment) {
-            stickyMessage.setCityCommonAttributes(initCitySellRent(id, Constants.HOUSE_RENT));
+            stickyMessage.setCityCommonAttributes(initCityCommonAttrs());
             intent = new Intent(mContext, HouseRentActivity.class);
 
         } else if (currentFragment instanceof HouseSellFragment) {
-            stickyMessage.setCityCommonAttributes(initCitySellRent(id, Constants.HOUSE_SELL));
+            stickyMessage.setCityCommonAttributes(initCityCommonAttrs());
             intent = new Intent(mContext, HouseSellActivity.class);
 
         } else {
-            stickyMessage.setCityCommonAttributes(initCitySellRent(id, Constants.SHOP_RENT));
-            intent = new Intent(mContext, ShopRentActivity.class);
+            stickyMessage.setCityCommonAttributes(initCityCommonAttrs());
+            intent = new Intent(mContext, CounterActivity.class);
         }
 
         EventBus.getDefault().postSticky(stickyMessage);
@@ -72,10 +70,9 @@ public class MainPresenter extends BasePresenter<MainView> {
     }
 
     @SuppressLint("SimpleDateFormat")
-    private CityCommonAttributes initCitySellRent(Long id, int modelType) {
+    private CityCommonAttributes initCityCommonAttrs() {
         CityCommonAttributes model = new CityCommonAttributes();
         model.setResearcherTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(System.currentTimeMillis())));
-        model.setId(id);
         model.setUserId(Constants.userId);
         return model;
     }
