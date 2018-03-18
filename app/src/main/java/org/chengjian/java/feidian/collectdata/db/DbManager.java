@@ -68,6 +68,18 @@ public class DbManager {
                 .list();
     }
 
+    public CityCommonAttributes queryCityCommonAttributesByKey(Long id) {
+        CityCommonAttributesDao dao = daoSession.getCityCommonAttributesDao();
+        List<CityCommonAttributes> result = dao.queryBuilder()
+                .where(CityCommonAttributesDao.Properties.Id.eq(id))
+                .list();
+        if (result != null && result.size() != 0) {
+            return result.get(0);
+        } else {
+            return null;
+        }
+    }
+
     /**
      * 通过CounterRent的foreignKey属性查询数据
      *
@@ -168,8 +180,78 @@ public class DbManager {
         HouseRentDao dao = daoSession.getHouseRentDao();
         dao.save(entity);
     }
-// dddd
 
+    /**
+     * Delete all {@link HouseRent}
+     */
+    public void deleteAllHouseRent() {
+        HouseRentDao dao = daoSession.getHouseRentDao();
+        List<HouseRent> modelList = dao.queryBuilder()
+                .list();
+        if (modelList != null) {
+            for (HouseRent model : modelList) {
+                deleteCityCommonAttributesById(model.getForeignKey());
+                dao.deleteByKey(model.getId());
+            }
+        }
+    }
+
+    /**
+     * Delete all {@link CounterRent}
+     */
+    public void deleteAllCounterRent() {
+        CounterRentDao dao = daoSession.getCounterRentDao();
+        List<CounterRent> modelList = dao.queryBuilder()
+                .list();
+        if (modelList != null) {
+            for (CounterRent model : modelList) {
+                deleteCityCommonAttributesById(model.getForeignKey());
+                dao.deleteByKey(model.getId());
+            }
+        }
+    }
+
+    /**
+     * Delete all {@link CommercialHousingForSale}
+     */
+    public void deleteAllCommercialHousingForSale() {
+        CommercialHousingForSaleDao dao = daoSession.getCommercialHousingForSaleDao();
+        List<CommercialHousingForSale> modelList = dao.queryBuilder()
+                .list();
+        if (modelList != null) {
+            for (CommercialHousingForSale model : modelList) {
+                deleteCityCommonAttributesById(model.getForeignKey());
+                dao.deleteByKey(model.getId());
+            }
+        }
+    }
+
+    /**
+     * Delete all {@link HouseSalePrice}
+     */
+    public void deleteAllHouseSalePrice() {
+        HouseSalePriceDao dao = daoSession.getHouseSalePriceDao();
+        List<HouseSalePrice> modelList = dao.queryBuilder()
+                .list();
+        if (modelList != null) {
+            for (HouseSalePrice model : modelList) {
+                deleteCityCommonAttributesById(model.getForeignKey());
+                dao.deleteByKey(model.getId());
+            }
+        }
+    }
+
+    /**
+     * delete {@link CityCommonAttributes} by Key
+     *
+     * @param id
+     */
+    public void deleteCityCommonAttributesById(Long id) {
+        CityCommonAttributesDao dao = daoSession.getCityCommonAttributesDao();
+        dao.deleteByKey(id);
+    }
+
+    // the methods below are for testing, please ignore them :)
     public List<CityCommonAttributes> queryCCA() {
         return daoSession.getCityCommonAttributesDao().queryBuilder().list();
     }

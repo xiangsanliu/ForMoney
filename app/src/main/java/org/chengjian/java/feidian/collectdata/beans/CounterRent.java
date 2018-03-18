@@ -2,6 +2,8 @@ package org.chengjian.java.feidian.collectdata.beans;
 
 import android.support.annotation.Nullable;
 
+import com.google.gson.annotations.Expose;
+
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.ToOne;
@@ -16,73 +18,105 @@ public class CounterRent {
     @Id
     Long id;
     @Nullable
+    @Expose
     private int useageActual;   //实际用途
     @Nullable
+    @Expose
     private int useagePlaned;   //规划用途
     @Nullable
+    @Expose
     private int nearByLandType;     //周围土地类型
-
     //房屋情况
     @Nullable
+    @Expose
     private int decorationType;         //装修标准
     @Nullable
+    @Expose
     private int lightAirType;           //采光通风状况
     @Nullable
+    @Expose
     private String houseStandardPrice;    //房屋标准造价
     @Nullable
+    @Expose
     private String totalArea;            //总占地面积
     @Nullable
+    @Expose
     private String houseResetTotalPrice;      //房屋重置总价
     @Nullable
+    @Expose
     private String subbuildingResetPrice;    //其它附属建筑物重置总价
     @Nullable
+    @Expose
     private String houseTodayValue;      //房屋现值
     @Nullable
+    @Expose
     private String subbuildingTodayValue;    //其它附属建筑物现值
     @Nullable
+    @Expose
     private String yearRobust;             //耐用年限
     @Nullable
+    @Expose
     private String yearUsed;               //已用年限
     //出租情况
     @Nullable
+    @Expose
     private String rentOut;         //出租人
     @Nullable
+    @Expose
     private String rentIn;          //承租人
     @Nullable
+    @Expose
     private String rentTime;        //出租时间
     @Nullable
+    @Expose
     private String rentMethod;      //出租方式
     @Nullable
+    @Expose
     private String useage;          //出租用途
     @Nullable
+    @Expose
     private String rentDeadline;    //出租期限
     @Nullable
+    @Expose
     private String totalTrdeArea;    //总营业面积
     @Nullable
+    @Expose
     private String counterTradeArea; //出租柜台营业面积
     @Nullable
+    @Expose
     private String totalRentPrice;      //出租房地产总费用
     @Nullable
+    @Expose
     private String fixFee;           //其中维修费
     @Nullable
+    @Expose
     private String oldFee;               //折旧费
     @Nullable
+    @Expose
     private String insuranceFee;         //保险费
     @Nullable
+    @Expose
     private String manageFree;           //管理费
     @Nullable
+    @Expose
     private String taxFee;               //税费
     @Nullable
+    @Expose
     private String otherFee;             //其它费用
     @Nullable
+    @Expose
     private String counterSharedLandArea;    //出租柜台分摊土地面积
     @Nullable
+    @Expose
     private String counterSharedLandFee;    //出租柜台分摊总费
     @Nullable
+    @Expose
     private String counterFeeOfYear;         //出租柜台年租金
     @Nullable
+    @Expose
     private String buildinglandPrice;        //楼面地价
     @Nullable
+    @Expose
     private String pricePer;                 //单位地价
     @ToOne(joinProperty = "foreignKey")
     private CityCommonAttributes commonAttributes;

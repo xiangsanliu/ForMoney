@@ -6,9 +6,9 @@ import android.view.View;
 
 import org.chengjian.java.feidian.collectdata.R;
 import org.chengjian.java.feidian.collectdata.beans.CommercialHousingForSale;
-import org.chengjian.java.feidian.collectdata.databinding.ActivityCommercialHouseTradeBinding;
 import org.chengjian.java.feidian.collectdata.beans.message.LocationMessage;
 import org.chengjian.java.feidian.collectdata.beans.message.StickyMessage;
+import org.chengjian.java.feidian.collectdata.databinding.ActivityCommercialHouseTradeBinding;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.detail.DetailBasePresenter;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.detail.DetailCHSPresenter;
 import org.chengjian.java.feidian.collectdata.mvp.ui.activities.base.DetailBaseActivity;
@@ -42,6 +42,7 @@ public class CommercialHouseSellActivity extends DetailBaseActivity implements V
         binding.childChsLandSituation.buttonLandSituation.setOnClickListener(this);
         binding.childChsTradeSituation.buttonTradeSituation.setOnClickListener(this);
         binding.buttonDelete.setOnClickListener(this);
+        binding.buttonUpload.setOnClickListener(this);
         binding.buttonEdit.setOnClickListener(this);
         binding.buttonSave.setOnClickListener(this);
         binding.childChsLandSituation.etAuthorizedTime.setOnClickListener(this);
@@ -53,7 +54,7 @@ public class CommercialHouseSellActivity extends DetailBaseActivity implements V
     public void initSpinner() {
         binding.childChsLandSituation.spBuildingDirection.setSelection(cityCommonAttributes.getBuildingDirection());
         binding.childChsLandSituation.spCrossroadSituation.setSelection(cityCommonAttributes.getCrossRoadSituation());
-        binding.childChsLandSituation.spIsGore.setSelection(cityCommonAttributes.getGore()?0:1);
+        binding.childChsLandSituation.spIsGore.setSelection(cityCommonAttributes.getGore() ? 0 : 1);
         binding.childChsLandSituation.spLandDevelopingSituation.setSelection(cityCommonAttributes.getLandDevelopingSituation());
         binding.childChsLandSituation.spLandShape.setSelection(cityCommonAttributes.getLandShape());
         binding.childChsLandSituation.spNearbyStreetSituation.setSelection(cityCommonAttributes.getNearbyStreetSituation());
@@ -114,6 +115,11 @@ public class CommercialHouseSellActivity extends DetailBaseActivity implements V
         binding.setEditable(false);
         setSpinnerIsEnable(getIsEditable());
         presenter.save(cityCommonAttributes, model);
+    }
+
+    @Override
+    public void upload() {
+        presenter.upload(model);
     }
 
     @Override
@@ -178,6 +184,9 @@ public class CommercialHouseSellActivity extends DetailBaseActivity implements V
                 break;
             case R.id.button_save:
                 save();
+                break;
+            case R.id.button_upload:
+                upload();
                 break;
             case R.id.et_authorized_time:
                 setTime(binding.childChsLandSituation.etAuthorizedTime);

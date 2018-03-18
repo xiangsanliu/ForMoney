@@ -1,8 +1,7 @@
 package org.chengjian.java.feidian.collectdata.mvp.model;
 
 import org.chengjian.java.feidian.collectdata.beans.CityCommonAttributes;
-import org.chengjian.java.feidian.collectdata.beans.CityCommonAttributes;
-import org.chengjian.java.feidian.collectdata.network.CityApi;
+import org.chengjian.java.feidian.collectdata.network.UploadApi;
 import org.chengjian.java.feidian.collectdata.shared.Constants;
 
 import java.io.IOException;
@@ -26,7 +25,7 @@ public class NetModel {
 
     private static NetModel netModel;
 
-    private CityApi service;
+    private UploadApi service;
 
     private NetModel() {
         Retrofit retrofit = new Retrofit.Builder()
@@ -34,7 +33,7 @@ public class NetModel {
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        service = retrofit.create(CityApi.class);
+        service = retrofit.create(UploadApi.class);
     }
 
     public static NetModel newInstance() {

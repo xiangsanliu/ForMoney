@@ -4,13 +4,11 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.View;
 
-import com.alibaba.fastjson.JSON;
-
 import org.chengjian.java.feidian.collectdata.R;
 import org.chengjian.java.feidian.collectdata.beans.HouseSalePrice;
-import org.chengjian.java.feidian.collectdata.databinding.ActivityHouseSellBinding;
 import org.chengjian.java.feidian.collectdata.beans.message.LocationMessage;
 import org.chengjian.java.feidian.collectdata.beans.message.StickyMessage;
+import org.chengjian.java.feidian.collectdata.databinding.ActivityHouseSellBinding;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.detail.DetailBasePresenter;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.detail.DetailHSPresenter;
 import org.chengjian.java.feidian.collectdata.mvp.ui.activities.base.DetailBaseActivity;
@@ -72,6 +70,7 @@ public class HouseSellActivity extends DetailBaseActivity implements View.OnClic
         binding.childHsBuildingSituation.buttonBuildingSituation.setOnClickListener(this);
         binding.childHsTradeSituation.buttonTradeSituation.setOnClickListener(this);
         binding.buttonDelete.setOnClickListener(this);
+        binding.buttonUpload.setOnClickListener(this);
         binding.buttonEdit.setOnClickListener(this);
         binding.buttonSave.setOnClickListener(this);
         binding.childHsTradeSituation.etTradeTime.setOnClickListener(this);
@@ -86,7 +85,7 @@ public class HouseSellActivity extends DetailBaseActivity implements View.OnClic
         binding.childHsLandSituation.spLandDevelopingSituation.setSelection(cityCommonAttributes.getLandShape());
         binding.childHsLandSituation.spBuildingDirection.setSelection(cityCommonAttributes.getBuildingDirection());
         binding.childHsLandSituation.spNearbyStreetSituation.setSelection(cityCommonAttributes.getNearbyStreetSituation());
-        binding.childHsLandSituation.spIsGore.setSelection(cityCommonAttributes.getGore()? 1:0);
+        binding.childHsLandSituation.spIsGore.setSelection(cityCommonAttributes.getGore() ? 1 : 0);
         binding.childHsLandSituation.spNearbyLandType.setSelection(model.getNearByLandType());
         binding.childHsLandSituation.spUsagePlaned.setSelection(model.getUseagePlaned());
         binding.childHsLandSituation.spUsageActucal.setSelection(model.getUseageActual());
@@ -139,6 +138,11 @@ public class HouseSellActivity extends DetailBaseActivity implements View.OnClic
     }
 
     @Override
+    public void upload() {
+        presenter.upload(model);
+    }
+
+    @Override
     public Boolean getIsEditable() {
         return binding.getEditable();
     }
@@ -147,7 +151,6 @@ public class HouseSellActivity extends DetailBaseActivity implements View.OnClic
     public DetailBasePresenter getPresenter() {
         return presenter;
     }
-
 
 
     @Override
@@ -180,6 +183,9 @@ public class HouseSellActivity extends DetailBaseActivity implements View.OnClic
             case R.id.button_edit:
                 binding.setEditable(true);
                 setSpinnerIsEnable(getIsEditable());
+                break;
+            case R.id.button_upload:
+                upload();
                 break;
             case R.id.button_save:
                 save();

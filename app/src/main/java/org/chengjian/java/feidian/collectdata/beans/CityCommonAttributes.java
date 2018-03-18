@@ -3,6 +3,8 @@ package org.chengjian.java.feidian.collectdata.beans;
 
 import android.support.annotation.Nullable;
 
+import com.google.gson.annotations.Expose;
+
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 
@@ -26,59 +28,86 @@ public class CityCommonAttributes {
     private Long id;
     //土地基本信息
     @Nullable
+    @Expose
     private String landLoacation;       //宗地位置
     @Nullable
+    @Expose
     private String landRange;           //土地四至
     @Nullable
+    @Expose
     private String nearbyStreetName;    //所临道路名称
     @Nullable
+    @Expose
     private int crossRoadSituation;  //交叉路口形式
     @Nullable
+    @Expose
     private int landShape;           //宗地形状
     @Nullable
+    @Expose
     private String landLength;          //宗地长度
     @Nullable
+    @Expose
     private String landWidth;           //宗地宽度
     @Nullable
+    @Expose
     private int landDevelopingSituation; //土地开发状况
     @Nullable
+    @Expose
     private int buildingDirection;       //建筑朝向
     @Nullable
+    @Expose
     private int nearbyStreetSituation;      //临界状况
     @Nullable
+    @Expose
     private String distToCornor;             //至拐角距离
     @Nullable
+    @Expose
     private String widthToStreet;             //临街宽度
     @Nullable
+    @Expose
     private String depthToStreet;            //临街深度
     @Nullable
+    @Expose
     private boolean gore;                 //是否是畸零地
     @Nullable
+    @Expose
     private String buildingPlotRate;         //建筑容积率
     @Nullable
+    @Expose
     private String authorizedTime;          //使用权限取得时间
     @Nullable
+    @Expose
     private String landServiceableLife;         //土地使用年限
     //房屋信息
     @Nullable
+    @Expose
     private String houseLocation;        //房屋位置/柜台具体位置
     @Nullable
+    @Expose
     private int structureType;      //房屋结构
     @Nullable
+    @Expose
     private int qualityLevel;       //质量等级
     @Nullable
+    @Expose
     private String buildingArea;     //建筑面积
     @Nullable
+    @Expose
     private String houseArea;             //房屋建筑面积
     @Nullable
+    @Expose
     private String detail;              //详细说明
     @Nullable
+    @Expose
     private double longitude;        //经度
     @Nullable
+    @Expose
     private double latitude;         //维度
     @Nullable
+    @Expose
     private String researcher;      //调查人
     @Nullable
+    @Expose
     private String researcherTime;  //调查时间
     @Nullable
     private Long userId;

@@ -73,6 +73,7 @@ public class CounterActivity extends DetailBaseActivity implements View.OnClickL
         binding.childSrLandSituation.etAuthorizedTime.setOnClickListener(this);
         binding.childSrRentSituation.etRentTime.setOnClickListener(this);
         binding.buttonDelete.setOnClickListener(this);
+        binding.buttonUpload.setOnClickListener(this);
         binding.buttonEdit.setOnClickListener(this);
         binding.buttonSave.setOnClickListener(this);
         binding.childBase.locate.setOnClickListener(this);
@@ -118,6 +119,11 @@ public class CounterActivity extends DetailBaseActivity implements View.OnClickL
         binding.setEditable(false);
         setSpinnerIsEnable(getIsEditable());
         presenter.save(cityCommonAttributes, model);
+    }
+
+    @Override
+    public void upload() {
+        presenter.upload(model);
     }
 
     @Override
@@ -177,6 +183,9 @@ public class CounterActivity extends DetailBaseActivity implements View.OnClickL
             case R.id.button_edit:
                 binding.setEditable(true);
                 setSpinnerIsEnable(getIsEditable());
+                break;
+            case R.id.button_upload:
+                upload();
                 break;
             case R.id.button_save:
                 save();

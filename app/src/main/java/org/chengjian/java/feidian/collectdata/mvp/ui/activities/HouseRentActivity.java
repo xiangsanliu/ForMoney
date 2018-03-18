@@ -22,7 +22,6 @@ public class HouseRentActivity extends DetailBaseActivity implements View.OnClic
     private HouseRent model;
     private DetailHRPresenter presenter;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,10 +72,10 @@ public class HouseRentActivity extends DetailBaseActivity implements View.OnClic
         binding.buttonDelete.setOnClickListener(this);
         binding.buttonEdit.setOnClickListener(this);
         binding.buttonSave.setOnClickListener(this);
+        binding.buttonUpload.setOnClickListener(this);
         binding.childHrLandSituation.etAuthorizedTime.setOnClickListener(this);
         binding.childHrRentSituation.etRentTime.setOnClickListener(this);
         binding.childBase.locate.setOnClickListener(this);
-
     }
 
     @Override
@@ -118,6 +117,11 @@ public class HouseRentActivity extends DetailBaseActivity implements View.OnClic
     }
 
     @Override
+    public void upload() {
+        presenter.upload(model);
+    }
+
+    @Override
     public Boolean getIsEditable() {
         return binding.getEditable();
     }
@@ -139,12 +143,14 @@ public class HouseRentActivity extends DetailBaseActivity implements View.OnClic
         binding.childHrBuildingSituation.spStructureType.setEnabled(isEnable);
         binding.childHrBuildingSituation.spQualityLevel.setEnabled(isEnable);
         binding.childHrBuildingSituation.spLightAirType.setEnabled(isEnable);
-
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.button_upload:
+                upload();
+                break;
             case R.id.button_extra:
                 changeELState(binding.childBase.elExtra);
                 binding.childHrBuildingSituation.elBuildingSituation.collapse();

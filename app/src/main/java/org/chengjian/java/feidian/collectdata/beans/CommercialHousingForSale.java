@@ -2,6 +2,8 @@ package org.chengjian.java.feidian.collectdata.beans;
 
 import android.support.annotation.Nullable;
 
+import com.google.gson.annotations.Expose;
+
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.ToOne;
@@ -16,67 +18,97 @@ public class CommercialHousingForSale {
     @Id
     private Long id;
     @Nullable
+    @Expose
     private int useageActual;   //实际用途
     @Nullable
+    @Expose
     private int useagePlande;   //规划用途
     //房屋情况
     @Nullable
+    @Expose
     private String floorNum;               //楼层数
     //    private String tradeLevel;          //买卖层次
     @Nullable
+    @Expose
     private String houseStandardPrice;    //房屋标准造价
     @Nullable
+    @Expose
     private String buildingProjectPrice;     //建筑工程造价
     @Nullable
+    @Expose
     private String serviceFee;               //小区公共设施配套费
     @Nullable
+    @Expose
     private String otherDirectFee;           //其他建房直接费用
     @Nullable
+    @Expose
     private String manageFeeAndProfit;       //管理费和利润
     @Nullable
+    @Expose
     private String unPredictedFee;           //不可预见费
     @Nullable
+    @Expose
     private String landCompensateFee;        //土地征收补偿费
     @Nullable
+    @Expose
     private String agentFee;                 //代收费用
     @Nullable
+    @Expose
     private String cityBigSuiteFee;          //城市大配套费用
     @Nullable
+    @Expose
     private String otherFee;                     //其他费用
     //买卖情况
     @Nullable
+    @Expose
     private String developer;           //商品房开发单位
     @Nullable
+    @Expose
     private String tradeIn;             //买方
     @Nullable
+    @Expose
     private int tradeType;              //买卖方式
     @Nullable
+    @Expose
     private String loanYear;       //按揭年限
     @Nullable
+    @Expose
     private String tradeLevel;      //买卖层次
     @Nullable
+    @Expose
     private String tradeTime;       //商品房出售时间
     @Nullable
+    @Expose
     private String useage;           //房屋用途
     @Nullable
+    @Expose
     private String plotRatePlaned;  //规划容积率
     @Nullable
+    @Expose
     private String buildingDensity;  //建筑面积
     @Nullable
+    @Expose
     private String wholeBuildingPrice;   //整栋商品楼总售价
     @Nullable
+    @Expose
     private String wholeBuildingFee;     //整栋商品楼总造价
     @Nullable
+    @Expose
     private String interest;             //占用资金应付利息
     @Nullable
+    @Expose
     private String profitOfDeveloper;    //开发公司利润
     @Nullable
+    @Expose
     private String price;       //房屋交易总价格
     @Nullable
+    @Expose
     private String tax;     //房屋交易税费
     @Nullable
+    @Expose
     private String landPricePerSquare;  //单位面积地价
     @Nullable
+    @Expose
     private String shareLandArea;   //分摊土地面积
     @ToOne(joinProperty = "foreignKey")
     private CityCommonAttributes commonAttributes;

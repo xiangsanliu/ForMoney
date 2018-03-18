@@ -9,8 +9,14 @@ import org.chengjian.java.feidian.collectdata.beans.CityCommonAttributes;
 import org.chengjian.java.feidian.collectdata.beans.message.ResultMessage;
 import org.chengjian.java.feidian.collectdata.mvp.model.NetModel;
 import org.chengjian.java.feidian.collectdata.mvp.view.base.DetailBaseView;
+import org.chengjian.java.feidian.collectdata.network.UploadApi;
+import org.chengjian.java.feidian.collectdata.shared.Constants;
+import org.chengjian.java.feidian.collectdata.shared.JsonParser;
 import org.greenrobot.eventbus.EventBus;
 
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -27,12 +33,19 @@ import rx.schedulers.Schedulers;
 public abstract class DetailBasePresenter<T> {
 
     protected DetailBaseView<T> view;
+    protected UploadApi uploadApi = null;
     ProgressDialog progressDialog;
     NetModel netModel;
     Activity activity;
 
     DetailBasePresenter() {
         netModel = NetModel.newInstance();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Constants.BASE_URL)
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(JsonParser.getInstance().getGson()))
+                .build();
+        uploadApi = retrofit.create(UploadApi.class);
     }
 
     public void attachView(DetailBaseView<T> view) {
@@ -77,6 +90,11 @@ public abstract class DetailBasePresenter<T> {
                 });
     }
 
+    /**
+     * 用来显示toast，子类可以复用
+     *
+     * @param content
+     */
     void showToast(String content) {
         Toast.makeText((Context) view, content, Toast.LENGTH_SHORT).show();
     }
@@ -88,6 +106,8 @@ public abstract class DetailBasePresenter<T> {
     public abstract void realLoadModel(Long id);
 
     public abstract void save(CityCommonAttributes commonAttrs, T entity);
+
+    public abstract void upload(T model);
 
     /**
      * 将model中的数据加载到控件上显示。

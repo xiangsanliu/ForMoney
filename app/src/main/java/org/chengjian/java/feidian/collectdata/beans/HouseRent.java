@@ -3,6 +3,8 @@ package org.chengjian.java.feidian.collectdata.beans;
 
 import android.support.annotation.Nullable;
 
+import com.google.gson.annotations.Expose;
+
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.ToOne;
@@ -20,64 +22,91 @@ public class HouseRent {
     @Id
     private Long id;
     @Nullable
+    @Expose
     private int nearByLandType;     //周围土地类型
     //房屋情况
     @Nullable
+    @Expose
     private String floorNum;               //楼层数
     @Nullable
+    @Expose
     private String rentLevel;          //买卖层次
     @Nullable
+    @Expose
     private int lightAirType;           //采光通风状况
     @Nullable
+    @Expose
     private String houseStandardPrice;    //房屋标准造价
     @Nullable
+    @Expose
     private String totalArea;            //总占地面积
     @Nullable
+    @Expose
     private String houseResetToalPrice;      //房屋重置总价
     @Nullable
+    @Expose
     private String houseResetPerPrice;      //房屋重置单价
     @Nullable
+    @Expose
     private String houseTodayValue;      //房屋现值
     @Nullable
+    @Expose
     private String subbuildingTodayValue;    //其它附属建筑物现值
     @Nullable
+    @Expose
     private String yearRobust;             //耐用年限
     @Nullable
+    @Expose
     private String yearUsed;               //已用年限
     //出租情况
     @Nullable
+    @Expose
     private String rentOut;         //出租人
     @Nullable
+    @Expose
     private String rentIn;          //承租人
     @Nullable
+    @Expose
     private String rentTime;        //出租时间
     @Nullable
+    @Expose
     private String rentMethod;      //出租方式
     @Nullable
+    @Expose
     private String houseNormalProfit;    //房屋正常收益
     @Nullable
+    @Expose
     private String houseNormalTotalFee;  //房屋正常总费用
     @Nullable
+    @Expose
     private String priceOfYear;      //其中年租金
     @Nullable
+    @Expose
     private String fixFee;       //其中维修费
     @Nullable
+    @Expose
     private String interestOfDeposit;        //押金利息
     @Nullable
+    @Expose
     private String oldFee;               //折旧费
     @Nullable
+    @Expose
     private String insuranceFee;         //保险费
     @Nullable
+    @Expose
     private String otherProfit;          //其它收益
     @Nullable
+    @Expose
     private String manageFree;           //管理费
     @Nullable
+    @Expose
     private String taxFee;               //税费
     @Nullable
+    @Expose
     private String housePureProfit;      //房地纯收益
     @Nullable
+    @Expose
     private String landNormalPrice;      //土地正常价格
-
     @ToOne(joinProperty = "foreignKey")
     private CityCommonAttributes commonAttributes;
     private Long foreignKey;

@@ -14,7 +14,6 @@ import android.widget.EditText;
 import net.cachapa.expandablelayout.ExpandableLayout;
 
 import org.chengjian.java.feidian.collectdata.beans.CityCommonAttributes;
-import org.chengjian.java.feidian.collectdata.beans.CityCommonAttributes;
 import org.chengjian.java.feidian.collectdata.beans.message.LocationMessage;
 import org.chengjian.java.feidian.collectdata.mvp.presenter.detail.DetailBasePresenter;
 import org.chengjian.java.feidian.collectdata.mvp.ui.activities.MapActivity;
@@ -24,7 +23,6 @@ import java.util.Calendar;
 
 /**
  * Created by xiang on 2017/9/22.
- *
  */
 
 public abstract class DetailBaseActivity extends BaseActivity {
@@ -55,11 +53,11 @@ public abstract class DetailBaseActivity extends BaseActivity {
         Calendar calendar = Calendar.getInstance();
         int year, month, dayOfMonth;
         String dateString = editText.getText().toString();
-        if (dateString.length()>0) {
+        if (dateString.length() > 0) {
             year = Integer.valueOf(dateString.substring(0, 4));
             dateString = dateString.substring(5);
             month = Integer.valueOf(dateString.substring(0, dateString.indexOf('-')));
-            dateString = dateString.substring(dateString.indexOf('-')+1);
+            dateString = dateString.substring(dateString.indexOf('-') + 1);
             dayOfMonth = Integer.valueOf(dateString);
         } else {
             year = calendar.get(Calendar.YEAR);
@@ -70,13 +68,15 @@ public abstract class DetailBaseActivity extends BaseActivity {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 month++;
-                editText.setText(year+"-"+month+"-"+dayOfMonth);
+                editText.setText(year + "-" + month + "-" + dayOfMonth);
             }
-        }, year, month-1, dayOfMonth);
+        }, year, month - 1, dayOfMonth);
         dialog.show();
     }
 
     public abstract void save();
+
+    public abstract void upload();
 
     public void delete() {
         getPresenter().deleteCity(cityCommonAttributes.getId());

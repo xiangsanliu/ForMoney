@@ -62,6 +62,15 @@
                     android:src="@drawable/ic_cloud_upload_white_24dp"
                     android:visibility='@{editable ?  View.VISIBLE: View.GONE}'
                     app:cb_color="@color/colorPrimary" />
+
+                <at.markushi.ui.CircleButton
+                    android:id="@+id/button_upload"
+                    android:layout_width="?actionBarSize"
+                    android:layout_height="?actionBarSize"
+                    android:src="@drawable/ic_cloud_upload_white_24dp"
+                    android:visibility='@{editable ?  View.GONE: View.VISIBLE}'
+                    app:cb_color="@color/colorPrimary" />
+
             </LinearLayout>
         </android.support.v7.widget.Toolbar>
 

@@ -1,12 +1,16 @@
 package org.chengjian.java.feidian.collectdata.network;
 
 import org.chengjian.java.feidian.collectdata.beans.CityCommonAttributes;
-import org.chengjian.java.feidian.collectdata.beans.CityCommonAttributes;
 import org.chengjian.java.feidian.collectdata.beans.CommercialHousingForSale;
 
 import java.util.List;
 
+import okhttp3.RequestBody;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
+import retrofit2.http.POST;
+import retrofit2.http.Part;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rx.Observable;
 
@@ -14,7 +18,7 @@ import rx.Observable;
  * Created by xiang on 2017/12/5.
  */
 
-public interface CityApi {
+public interface UploadApi {
     /**
      * @param userId    用户的IMEI码
      * @param modelType 　数据类型
@@ -37,4 +41,19 @@ public interface CityApi {
     @GET("/city/save/commercial")
     Observable<String> saveCommercial(@Query("content") String content);
 
+    /**
+     * upload data to serve
+     *
+     * @param IMEI
+     * @param modelType it has five types, include {city, commercial, houserent, housetrade, shoprent}
+     * @param modelBody
+     * @return
+     */
+    @Multipart
+    @POST("/city/save/{modelType}")
+    Observable<HttpResult<Void>> uploadModel(
+            @Path("modelType") String modelType,
+            @Query("IMEI") String IMEI,
+            @Part("commonAttrs") RequestBody commonBody,
+            @Part("modelAttrs") RequestBody modelBody);
 }

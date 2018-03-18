@@ -6,15 +6,18 @@
     <data>
 
         <import type="android.view.View" />
+
         <variable
             name="citySellRent"
             type="org.chengjian.java.feidian.collectdata.beans.CityCommonAttributes" />
+
         <variable
             name="model"
             type="org.chengjian.java.feidian.collectdata.beans.HouseRent" />
+
         <variable
             name="editable"
-            type="boolean"/>
+            type="boolean" />
     </data>
 
     <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -55,12 +58,21 @@
                     app:cb_color="@color/colorPrimary" />
 
                 <at.markushi.ui.CircleButton
-                    android:id="@+id/button_save"
+                    android:id="@+id/button_upload"
                     android:layout_width="?actionBarSize"
                     android:layout_height="?actionBarSize"
                     android:src="@drawable/ic_cloud_upload_white_24dp"
+                    android:visibility='@{editable ?  View.GONE: View.VISIBLE}'
+                    app:cb_color="@color/colorPrimary" />
+
+                <at.markushi.ui.CircleButton
+                    android:id="@+id/button_save"
+                    android:layout_width="?actionBarSize"
+                    android:layout_height="?actionBarSize"
+                    android:src="@drawable/ic_save_white_24dp"
                     android:visibility='@{editable ?  View.VISIBLE: View.GONE}'
                     app:cb_color="@color/colorPrimary" />
+
             </LinearLayout>
         </android.support.v7.widget.Toolbar>
 
@@ -71,60 +83,60 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <include
                     android:id="@+id/child_base"
-                    bind:editable="@={editable}"
-                    bind:citySellRent="@={citySellRent}"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="8dp"
                     layout="@layout/child_base"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    bind:citySellRent="@={citySellRent}"
+                    bind:editable="@={editable}" />
+
                 <include
                     android:id="@+id/child_hr_land_situation"
-                    bind:editable="@={editable}"
-                    bind:citySellRent="@={citySellRent}"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="8dp"
                     layout="@layout/child_hr_land_situation"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    bind:citySellRent="@={citySellRent}"
+                    bind:editable="@={editable}" />
+
                 <include
                     android:id="@+id/child_hr_building_situation"
-                    bind:editable="@{editable}"
-                    bind:citySellRent="@={citySellRent}"
-                    bind:model="@={model}"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="8dp"
                     layout="@layout/child_hr_building_situation"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    bind:citySellRent="@={citySellRent}"
+                    bind:editable="@{editable}"
+                    bind:model="@={model}" />
+
                 <include
                     android:id="@+id/child_hr_rent_situation"
-                    bind:editable="@{editable}"
-                    bind:model="@={model}"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="8dp"
                     layout="@layout/child_hr_rent_situation"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    bind:editable="@{editable}"
+                    bind:model="@={model}" />
             </LinearLayout>
-
         </android.support.v4.widget.NestedScrollView>
     </LinearLayout>
-
 </layout>
 

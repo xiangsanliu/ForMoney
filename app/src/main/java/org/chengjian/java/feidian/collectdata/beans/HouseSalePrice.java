@@ -2,6 +2,8 @@ package org.chengjian.java.feidian.collectdata.beans;
 
 import android.support.annotation.Nullable;
 
+import com.google.gson.annotations.Expose;
+
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.ToOne;
@@ -17,60 +19,87 @@ public class HouseSalePrice {
     Long id;
     //土地基本状况
     @Nullable
+    @Expose
     private int useageActual;   //实际用途
     @Nullable
+    @Expose
     private int useagePlaned;   //规划用途
     @Nullable
+    @Expose
     private int nearByLandType;     //周围土地类型
     //房屋情况
     @Nullable
+    @Expose
     private String floorNum;               //楼层数
     @Nullable
+    @Expose
     private String tradeLevel;          //买卖层次
     @Nullable
+    @Expose
     private int decorationType;         //装修标准
     @Nullable
+    @Expose
     private int lightAirType;           //采光通风状况
     @Nullable
+    @Expose
     private String houseStandardPrice;    //房屋标准造价
     @Nullable
+    @Expose
     private String totalArea;            //总占地面积
     @Nullable
+    @Expose
     private String houseResetTotalPrice;      //房屋重置总价
     @Nullable
+    @Expose
     private String subbuildingResetPrice;    //其它附属建筑物重置总价
     @Nullable
+    @Expose
     private String houseTodayValue;      //房屋现值
     @Nullable
+    @Expose
     private String subbuildingTodayValue;    //其它附属建筑物现值
     @Nullable
+    @Expose
     private String yearRobust;             //耐用年限
     @Nullable
+    @Expose
     private String yearUsed;               //已用年限
     //买卖情况
     @Nullable
+    @Expose
     private String tradeOut;            //转让人
     @Nullable
+    @Expose
     private String tradeIn;             //承让人
     @Nullable
+    @Expose
     private String tradeTime;           //买卖时间
     @Nullable
+    @Expose
     private String tradeMethod;         //买卖方式
     @Nullable
+    @Expose
     private String useageBeforeTrade;    //买卖前用途
     @Nullable
+    @Expose
     private String useageAfterTrade;    //买卖后用途
     @Nullable
+    @Expose
     private String tradeBuildingArea;    //出卖建筑面积
     @Nullable
+    @Expose
     private String buildingTradeSharedLandArea;  //出卖建筑分摊土地面积
     @Nullable
+    @Expose
     private String houseTradeTotalPrice;      //房屋交易总价
     @Nullable
+    @Expose
     private String houseTradeTax;             //房屋交易税费
     @Nullable
+    @Expose
     private String landTradeTotalPirce;         //土地交易总价
     @Nullable
+    @Expose
     private String landPricePerSquare;           //单位面积地价
     @ToOne(joinProperty = "foreignKey")
     private CityCommonAttributes commonAttributes;
