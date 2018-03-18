@@ -21,7 +21,8 @@ public class Constants {
 
 //    public static final String BASE_URL = "http://119.28.179.36:8080/";
 //    public static final String BASE_URL = "http://119.28.179.36:8080/";
-    public static final String BASE_URL = "http://192.168.3.58:9000/";
+//    public static final String BASE_URL = "http://192.168.3.58:9000/";
+    public static final String BASE_URL = "http://192.168.43.201:9000/";
 
     public static Long userId = 123456L;
 }

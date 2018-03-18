@@ -61,7 +61,7 @@
                     android:id="@+id/button_save"
                     android:layout_width="?actionBarSize"
                     android:layout_height="?actionBarSize"
-                    android:src="@drawable/ic_cloud_upload_white_24dp"
+                    android:src="@drawable/ic_save_white_24dp"
                     android:visibility='@{editable ?  View.VISIBLE: View.GONE}'
                     app:cb_color="@color/colorPrimary" />
 

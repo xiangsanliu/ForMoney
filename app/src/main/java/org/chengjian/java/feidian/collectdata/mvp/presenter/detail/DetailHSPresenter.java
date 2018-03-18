@@ -75,7 +75,7 @@ public class DetailHSPresenter extends DetailBasePresenter<HouseSalePrice> {
                             case 200:
                                 // upload success
                                 showToast("upload success, local data will all be deleted ... ");
-                                DbManager.getInstance().deleteAllHouseRent();
+                                DbManager.getInstance().deleteAllHouseSalePrice();
                                 break;
                             case 201:
                                 // upload failed

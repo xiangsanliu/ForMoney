@@ -75,7 +75,7 @@ public class DetailSRPresenter extends DetailBasePresenter<CounterRent> {
                             case 200:
                                 // upload success
                                 showToast("upload success, local data will all be deleted ... ");
-                                DbManager.getInstance().deleteAllHouseRent();
+                                DbManager.getInstance().deleteAllCounterRent();
                                 break;
                             case 201:
                                 // upload failed
