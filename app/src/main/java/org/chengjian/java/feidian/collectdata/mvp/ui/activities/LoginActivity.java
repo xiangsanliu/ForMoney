@@ -73,6 +73,7 @@ public class LoginActivity extends BaseActivity {
 
     // 登录服务器代码
     private void login(String imei) {
+        ConfigUtils.getInstance().setUserLogin();
         enterMainPage();
         // 暂时屏蔽一下登录
 //        HttpMethod.getInstance().login(imei, new RequestCallback<HttpResult<Void>>() {
